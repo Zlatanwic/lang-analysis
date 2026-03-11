@@ -1,0 +1,507 @@
+{
+  "metadata": {
+    "description": "Programming Language Type System Feature Matrix",
+    "scoring": {
+      "0": "Not supported",
+      "1": "Partial / limited support",
+      "2": "Full support"
+    },
+    "features": {
+      "parametric_polymorphism": "Generics / parametric polymorphism",
+      "ad_hoc_polymorphism": "Trait / typeclass / interface-based polymorphism",
+      "algebraic_data_types": "Sum types + product types (tagged unions, enums with data)",
+      "pattern_matching": "Exhaustive pattern matching on types",
+      "ownership_lifetime": "Ownership / lifetime / borrow checking",
+      "dependent_types": "Types that depend on values",
+      "gadts": "Generalized algebraic data types",
+      "higher_kinded_types": "Type constructors as parameters (HKT)",
+      "effect_system": "Tracked computational effects in the type system",
+      "refinement_types": "Types refined by predicates",
+      "gradual_typing": "Mix of static and dynamic typing",
+      "type_inference": "Automatic type deduction without annotations",
+      "structural_typing": "Compatibility based on structure, not name",
+      "flow_sensitive_typing": "Type narrowing based on control flow"
+    }
+  },
+  "languages": [
+    {
+      "name": "Rust",
+      "year": 2010,
+      "paradigm": "Systems",
+      "domain": "Systems programming",
+      "features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 2,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
+        "ownership_lifetime": 2,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "type_inference": 2,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 1
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 2012,
+        "ad_hoc_polymorphism": 2012,
+        "algebraic_data_types": 2010,
+        "pattern_matching": 2010,
+        "ownership_lifetime": 2012
+      }
+    },
+    {
+      "name": "Haskell",
+      "year": 1990,
+      "paradigm": "Functional",
+      "domain": "Academic / General",
+      "features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 2,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
+        "ownership_lifetime": 0,
+        "dependent_types": 1,
+        "gadts": 2,
+        "higher_kinded_types": 2,
+        "effect_system": 1,
+        "refinement_types": 1,
+        "gradual_typing": 0,
+        "type_inference": 2,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 1990,
+        "ad_hoc_polymorphism": 1990,
+        "algebraic_data_types": 1990,
+        "pattern_matching": 1990,
+        "gadts": 2006,
+        "higher_kinded_types": 1990
+      }
+    },
+    {
+      "name": "TypeScript",
+      "year": 2012,
+      "paradigm": "Multi-paradigm",
+      "domain": "Web development",
+      "features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 1,
+        "algebraic_data_types": 1,
+        "pattern_matching": 1,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 2,
+        "type_inference": 2,
+        "structural_typing": 2,
+        "flow_sensitive_typing": 2
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 2012,
+        "gradual_typing": 2012,
+        "structural_typing": 2012,
+        "flow_sensitive_typing": 2016,
+        "algebraic_data_types": 2016
+      }
+    },
+    {
+      "name": "Scala",
+      "year": 2004,
+      "paradigm": "Multi-paradigm",
+      "domain": "General / Data",
+      "features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 2,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
+        "ownership_lifetime": 0,
+        "dependent_types": 1,
+        "gadts": 1,
+        "higher_kinded_types": 2,
+        "effect_system": 1,
+        "refinement_types": 1,
+        "gradual_typing": 0,
+        "type_inference": 2,
+        "structural_typing": 1,
+        "flow_sensitive_typing": 0
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 2004,
+        "ad_hoc_polymorphism": 2004,
+        "algebraic_data_types": 2004,
+        "pattern_matching": 2004,
+        "higher_kinded_types": 2004
+      }
+    },
+    {
+      "name": "Kotlin",
+      "year": 2011,
+      "paradigm": "Multi-paradigm",
+      "domain": "Mobile / General",
+      "features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 1,
+        "algebraic_data_types": 1,
+        "pattern_matching": 1,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "type_inference": 2,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 2
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 2011,
+        "algebraic_data_types": 2011,
+        "pattern_matching": 2011,
+        "flow_sensitive_typing": 2011
+      }
+    },
+    {
+      "name": "Go",
+      "year": 2009,
+      "paradigm": "Imperative",
+      "domain": "Systems / Cloud",
+      "features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 1,
+        "algebraic_data_types": 0,
+        "pattern_matching": 0,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "type_inference": 1,
+        "structural_typing": 2,
+        "flow_sensitive_typing": 0
+      },
+      "feature_timeline": {
+        "structural_typing": 2009,
+        "ad_hoc_polymorphism": 2009,
+        "parametric_polymorphism": 2022
+      }
+    },
+    {
+      "name": "C",
+      "year": 1972,
+      "paradigm": "Imperative",
+      "domain": "Systems programming",
+      "features": {
+        "parametric_polymorphism": 0,
+        "ad_hoc_polymorphism": 0,
+        "algebraic_data_types": 0,
+        "pattern_matching": 0,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "type_inference": 0,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0
+      },
+      "feature_timeline": {}
+    },
+    {
+      "name": "Zig",
+      "year": 2016,
+      "paradigm": "Imperative",
+      "domain": "Systems programming",
+      "features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 0,
+        "algebraic_data_types": 1,
+        "pattern_matching": 1,
+        "ownership_lifetime": 0,
+        "dependent_types": 1,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "type_inference": 1,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 2016,
+        "algebraic_data_types": 2016,
+        "pattern_matching": 2016,
+        "dependent_types": 2016
+      }
+    },
+    {
+      "name": "Idris",
+      "year": 2011,
+      "paradigm": "Functional",
+      "domain": "Academic / Research",
+      "features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 2,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
+        "ownership_lifetime": 1,
+        "dependent_types": 2,
+        "gadts": 2,
+        "higher_kinded_types": 2,
+        "effect_system": 2,
+        "refinement_types": 2,
+        "gradual_typing": 0,
+        "type_inference": 2,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 2011,
+        "ad_hoc_polymorphism": 2011,
+        "algebraic_data_types": 2011,
+        "pattern_matching": 2011,
+        "dependent_types": 2011,
+        "gadts": 2011,
+        "higher_kinded_types": 2011,
+        "effect_system": 2011
+      }
+    },
+    {
+      "name": "OCaml",
+      "year": 1996,
+      "paradigm": "Functional",
+      "domain": "Academic / Industry",
+      "features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 1,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 2,
+        "higher_kinded_types": 1,
+        "effect_system": 2,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "type_inference": 2,
+        "structural_typing": 1,
+        "flow_sensitive_typing": 0
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 1996,
+        "algebraic_data_types": 1996,
+        "pattern_matching": 1996,
+        "gadts": 2012,
+        "effect_system": 2024
+      }
+    },
+    {
+      "name": "Swift",
+      "year": 2014,
+      "paradigm": "Multi-paradigm",
+      "domain": "Mobile / General",
+      "features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 2,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
+        "ownership_lifetime": 1,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "type_inference": 2,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 1
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 2014,
+        "ad_hoc_polymorphism": 2014,
+        "algebraic_data_types": 2014,
+        "pattern_matching": 2014,
+        "ownership_lifetime": 2022
+      }
+    },
+    {
+      "name": "Java",
+      "year": 1995,
+      "paradigm": "Object-oriented",
+      "domain": "Enterprise / General",
+      "features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 1,
+        "algebraic_data_types": 1,
+        "pattern_matching": 1,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "type_inference": 1,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 1
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 2004,
+        "pattern_matching": 2021,
+        "algebraic_data_types": 2020,
+        "flow_sensitive_typing": 2020
+      }
+    },
+    {
+      "name": "C++",
+      "year": 1985,
+      "paradigm": "Multi-paradigm",
+      "domain": "Systems / General",
+      "features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 1,
+        "algebraic_data_types": 1,
+        "pattern_matching": 0,
+        "ownership_lifetime": 1,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 1,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "type_inference": 1,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 1998,
+        "algebraic_data_types": 2017,
+        "type_inference": 2011,
+        "higher_kinded_types": 1998
+      }
+    },
+    {
+      "name": "Python",
+      "year": 1991,
+      "paradigm": "Multi-paradigm",
+      "domain": "General / Data science",
+      "features": {
+        "parametric_polymorphism": 1,
+        "ad_hoc_polymorphism": 1,
+        "algebraic_data_types": 1,
+        "pattern_matching": 1,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 2,
+        "type_inference": 1,
+        "structural_typing": 1,
+        "flow_sensitive_typing": 1
+      },
+      "feature_timeline": {
+        "gradual_typing": 2015,
+        "pattern_matching": 2021,
+        "algebraic_data_types": 2021,
+        "parametric_polymorphism": 2015
+      }
+    },
+    {
+      "name": "C#",
+      "year": 2000,
+      "paradigm": "Multi-paradigm",
+      "domain": "Enterprise / Game dev",
+      "features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 1,
+        "algebraic_data_types": 1,
+        "pattern_matching": 2,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "type_inference": 1,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 1
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 2005,
+        "type_inference": 2007,
+        "pattern_matching": 2017,
+        "algebraic_data_types": 2020
+      }
+    },
+    {
+      "name": "F#",
+      "year": 2005,
+      "paradigm": "Functional",
+      "domain": "General / Data",
+      "features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 1,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "type_inference": 2,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 2005,
+        "algebraic_data_types": 2005,
+        "pattern_matching": 2005
+      }
+    },
+    {
+      "name": "Elm",
+      "year": 2012,
+      "paradigm": "Functional",
+      "domain": "Web frontend",
+      "features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 1,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 1,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "type_inference": 2,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 2012,
+        "algebraic_data_types": 2012,
+        "pattern_matching": 2012
+      }
+    }
+  ]
+}
