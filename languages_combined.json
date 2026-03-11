@@ -1,0 +1,1824 @@
+{
+  "metadata": {
+    "generated_at": "2026-03-11T02:32:47.914309",
+    "num_languages": 20,
+    "num_features": 20,
+    "scoring": {
+      "0": "不支持",
+      "1": "部分支持",
+      "2": "完整支持"
+    },
+    "feature_categories": {
+      "基础多态": [
+        "parametric_polymorphism",
+        "ad_hoc_polymorphism",
+        "subtype_polymorphism"
+      ],
+      "数据建模": [
+        "algebraic_data_types",
+        "pattern_matching"
+      ],
+      "类型推断与安全": [
+        "type_inference",
+        "flow_sensitive_typing",
+        "gradual_typing"
+      ],
+      "高级类型特性": [
+        "higher_kinded_types",
+        "dependent_types",
+        "gadt",
+        "existential_types",
+        "rank_n_types",
+        "row_polymorphism"
+      ],
+      "资源与效果": [
+        "linear_affine_types",
+        "effect_system",
+        "refinement_types"
+      ],
+      "类型组织": [
+        "type_classes",
+        "structural_typing",
+        "macro_metaprogramming"
+      ]
+    },
+    "features_list": [
+      "parametric_polymorphism",
+      "ad_hoc_polymorphism",
+      "subtype_polymorphism",
+      "algebraic_data_types",
+      "pattern_matching",
+      "type_inference",
+      "higher_kinded_types",
+      "dependent_types",
+      "linear_affine_types",
+      "effect_system",
+      "gadt",
+      "type_classes",
+      "refinement_types",
+      "gradual_typing",
+      "structural_typing",
+      "flow_sensitive_typing",
+      "existential_types",
+      "rank_n_types",
+      "row_polymorphism",
+      "macro_metaprogramming"
+    ]
+  },
+  "languages": {
+    "C": {
+      "meta": {
+        "year": 1972,
+        "paradigm": "imperative",
+        "domain": "systems",
+        "typing": "static/weak"
+      },
+      "type_features": {
+        "parametric_polymorphism": 0,
+        "ad_hoc_polymorphism": 0,
+        "subtype_polymorphism": 0,
+        "algebraic_data_types": 0,
+        "pattern_matching": 0,
+        "type_inference": 0,
+        "higher_kinded_types": 0,
+        "dependent_types": 0,
+        "linear_affine_types": 0,
+        "effect_system": 0,
+        "gadt": 0,
+        "type_classes": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0,
+        "existential_types": 0,
+        "rank_n_types": 0,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 1
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 0,
+          "max": 6,
+          "ratio": 0.0
+        },
+        "数据建模": {
+          "score": 0,
+          "max": 4,
+          "ratio": 0.0
+        },
+        "类型推断与安全": {
+          "score": 0,
+          "max": 6,
+          "ratio": 0.0
+        },
+        "高级类型特性": {
+          "score": 0,
+          "max": 12,
+          "ratio": 0.0
+        },
+        "资源与效果": {
+          "score": 0,
+          "max": 6,
+          "ratio": 0.0
+        },
+        "类型组织": {
+          "score": 1,
+          "max": 6,
+          "ratio": 0.17
+        }
+      },
+      "total_score": 1,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.03,
+      "popularity": {
+        "github_repos_approx": 1200000,
+        "top_repo_stars": 190000,
+        "top_repo": "linux"
+      }
+    },
+    "C++": {
+      "meta": {
+        "year": 1985,
+        "paradigm": "multi",
+        "domain": "systems",
+        "typing": "static/strong"
+      },
+      "type_features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 1,
+        "subtype_polymorphism": 2,
+        "algebraic_data_types": 1,
+        "pattern_matching": 1,
+        "type_inference": 2,
+        "higher_kinded_types": 0,
+        "dependent_types": 0,
+        "linear_affine_types": 1,
+        "effect_system": 0,
+        "gadt": 0,
+        "type_classes": 1,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "structural_typing": 1,
+        "flow_sensitive_typing": 0,
+        "existential_types": 0,
+        "rank_n_types": 0,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 2
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 5,
+          "max": 6,
+          "ratio": 0.83
+        },
+        "数据建模": {
+          "score": 2,
+          "max": 4,
+          "ratio": 0.5
+        },
+        "类型推断与安全": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        },
+        "高级类型特性": {
+          "score": 0,
+          "max": 12,
+          "ratio": 0.0
+        },
+        "资源与效果": {
+          "score": 1,
+          "max": 6,
+          "ratio": 0.17
+        },
+        "类型组织": {
+          "score": 4,
+          "max": 6,
+          "ratio": 0.67
+        }
+      },
+      "total_score": 14,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.35,
+      "popularity": {
+        "github_repos_approx": 800000,
+        "top_repo_stars": 120000,
+        "top_repo": "tensorflow"
+      }
+    },
+    "Java": {
+      "meta": {
+        "year": 1995,
+        "paradigm": "OOP",
+        "domain": "enterprise",
+        "typing": "static/strong"
+      },
+      "type_features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 2,
+        "subtype_polymorphism": 2,
+        "algebraic_data_types": 1,
+        "pattern_matching": 1,
+        "type_inference": 1,
+        "higher_kinded_types": 0,
+        "dependent_types": 0,
+        "linear_affine_types": 0,
+        "effect_system": 1,
+        "gadt": 0,
+        "type_classes": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0,
+        "existential_types": 1,
+        "rank_n_types": 0,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 0
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 6,
+          "max": 6,
+          "ratio": 1.0
+        },
+        "数据建模": {
+          "score": 2,
+          "max": 4,
+          "ratio": 0.5
+        },
+        "类型推断与安全": {
+          "score": 1,
+          "max": 6,
+          "ratio": 0.17
+        },
+        "高级类型特性": {
+          "score": 1,
+          "max": 12,
+          "ratio": 0.08
+        },
+        "资源与效果": {
+          "score": 1,
+          "max": 6,
+          "ratio": 0.17
+        },
+        "类型组织": {
+          "score": 0,
+          "max": 6,
+          "ratio": 0.0
+        }
+      },
+      "total_score": 11,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.28,
+      "popularity": {
+        "github_repos_approx": 1500000,
+        "top_repo_stars": 75000,
+        "top_repo": "spring-boot"
+      }
+    },
+    "Haskell": {
+      "meta": {
+        "year": 1990,
+        "paradigm": "functional",
+        "domain": "academic",
+        "typing": "static/strong"
+      },
+      "type_features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 2,
+        "subtype_polymorphism": 0,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
+        "type_inference": 2,
+        "higher_kinded_types": 2,
+        "dependent_types": 0,
+        "linear_affine_types": 1,
+        "effect_system": 1,
+        "gadt": 2,
+        "type_classes": 2,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0,
+        "existential_types": 2,
+        "rank_n_types": 2,
+        "row_polymorphism": 1,
+        "macro_metaprogramming": 1
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 4,
+          "max": 6,
+          "ratio": 0.67
+        },
+        "数据建模": {
+          "score": 4,
+          "max": 4,
+          "ratio": 1.0
+        },
+        "类型推断与安全": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        },
+        "高级类型特性": {
+          "score": 9,
+          "max": 12,
+          "ratio": 0.75
+        },
+        "资源与效果": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        },
+        "类型组织": {
+          "score": 3,
+          "max": 6,
+          "ratio": 0.5
+        }
+      },
+      "total_score": 24,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.6,
+      "popularity": {
+        "github_repos_approx": 55000,
+        "top_repo_stars": 30000,
+        "top_repo": "shellcheck"
+      }
+    },
+    "OCaml": {
+      "meta": {
+        "year": 1996,
+        "paradigm": "functional",
+        "domain": "academic",
+        "typing": "static/strong"
+      },
+      "type_features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 1,
+        "subtype_polymorphism": 0,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
+        "type_inference": 2,
+        "higher_kinded_types": 1,
+        "dependent_types": 0,
+        "linear_affine_types": 0,
+        "effect_system": 0,
+        "gadt": 1,
+        "type_classes": 1,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "structural_typing": 1,
+        "flow_sensitive_typing": 0,
+        "existential_types": 1,
+        "rank_n_types": 1,
+        "row_polymorphism": 2,
+        "macro_metaprogramming": 1
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 3,
+          "max": 6,
+          "ratio": 0.5
+        },
+        "数据建模": {
+          "score": 4,
+          "max": 4,
+          "ratio": 1.0
+        },
+        "类型推断与安全": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        },
+        "高级类型特性": {
+          "score": 6,
+          "max": 12,
+          "ratio": 0.5
+        },
+        "资源与效果": {
+          "score": 0,
+          "max": 6,
+          "ratio": 0.0
+        },
+        "类型组织": {
+          "score": 3,
+          "max": 6,
+          "ratio": 0.5
+        }
+      },
+      "total_score": 18,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.45,
+      "popularity": {
+        "github_repos_approx": 15000,
+        "top_repo_stars": 5000,
+        "top_repo": "ocaml/ocaml"
+      }
+    },
+    "Rust": {
+      "meta": {
+        "year": 2015,
+        "paradigm": "multi",
+        "domain": "systems",
+        "typing": "static/strong"
+      },
+      "type_features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 2,
+        "subtype_polymorphism": 0,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
+        "type_inference": 2,
+        "higher_kinded_types": 0,
+        "dependent_types": 0,
+        "linear_affine_types": 2,
+        "effect_system": 0,
+        "gadt": 0,
+        "type_classes": 2,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0,
+        "existential_types": 1,
+        "rank_n_types": 0,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 2
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 4,
+          "max": 6,
+          "ratio": 0.67
+        },
+        "数据建模": {
+          "score": 4,
+          "max": 4,
+          "ratio": 1.0
+        },
+        "类型推断与安全": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        },
+        "高级类型特性": {
+          "score": 1,
+          "max": 12,
+          "ratio": 0.08
+        },
+        "资源与效果": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        },
+        "类型组织": {
+          "score": 4,
+          "max": 6,
+          "ratio": 0.67
+        }
+      },
+      "total_score": 17,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.42,
+      "popularity": {
+        "github_repos_approx": 350000,
+        "top_repo_stars": 100000,
+        "top_repo": "deno"
+      }
+    },
+    "Go": {
+      "meta": {
+        "year": 2009,
+        "paradigm": "imperative",
+        "domain": "systems",
+        "typing": "static/strong"
+      },
+      "type_features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 2,
+        "subtype_polymorphism": 0,
+        "algebraic_data_types": 0,
+        "pattern_matching": 0,
+        "type_inference": 1,
+        "higher_kinded_types": 0,
+        "dependent_types": 0,
+        "linear_affine_types": 0,
+        "effect_system": 0,
+        "gadt": 0,
+        "type_classes": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "structural_typing": 2,
+        "flow_sensitive_typing": 0,
+        "existential_types": 0,
+        "rank_n_types": 0,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 0
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 4,
+          "max": 6,
+          "ratio": 0.67
+        },
+        "数据建模": {
+          "score": 0,
+          "max": 4,
+          "ratio": 0.0
+        },
+        "类型推断与安全": {
+          "score": 1,
+          "max": 6,
+          "ratio": 0.17
+        },
+        "高级类型特性": {
+          "score": 0,
+          "max": 12,
+          "ratio": 0.0
+        },
+        "资源与效果": {
+          "score": 0,
+          "max": 6,
+          "ratio": 0.0
+        },
+        "类型组织": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        }
+      },
+      "total_score": 7,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.17,
+      "popularity": {
+        "github_repos_approx": 700000,
+        "top_repo_stars": 125000,
+        "top_repo": "go"
+      }
+    },
+    "TypeScript": {
+      "meta": {
+        "year": 2012,
+        "paradigm": "multi",
+        "domain": "web",
+        "typing": "static/gradual"
+      },
+      "type_features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 1,
+        "subtype_polymorphism": 2,
+        "algebraic_data_types": 2,
+        "pattern_matching": 1,
+        "type_inference": 2,
+        "higher_kinded_types": 1,
+        "dependent_types": 0,
+        "linear_affine_types": 0,
+        "effect_system": 0,
+        "gadt": 0,
+        "type_classes": 0,
+        "refinement_types": 0,
+        "gradual_typing": 2,
+        "structural_typing": 2,
+        "flow_sensitive_typing": 2,
+        "existential_types": 0,
+        "rank_n_types": 0,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 2
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 5,
+          "max": 6,
+          "ratio": 0.83
+        },
+        "数据建模": {
+          "score": 3,
+          "max": 4,
+          "ratio": 0.75
+        },
+        "类型推断与安全": {
+          "score": 6,
+          "max": 6,
+          "ratio": 1.0
+        },
+        "高级类型特性": {
+          "score": 1,
+          "max": 12,
+          "ratio": 0.08
+        },
+        "资源与效果": {
+          "score": 0,
+          "max": 6,
+          "ratio": 0.0
+        },
+        "类型组织": {
+          "score": 4,
+          "max": 6,
+          "ratio": 0.67
+        }
+      },
+      "total_score": 19,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.47,
+      "popularity": {
+        "github_repos_approx": 1000000,
+        "top_repo_stars": 100000,
+        "top_repo": "vscode"
+      }
+    },
+    "Python": {
+      "meta": {
+        "year": 1991,
+        "paradigm": "multi",
+        "domain": "general",
+        "typing": "dynamic/gradual"
+      },
+      "type_features": {
+        "parametric_polymorphism": 1,
+        "ad_hoc_polymorphism": 1,
+        "subtype_polymorphism": 1,
+        "algebraic_data_types": 0,
+        "pattern_matching": 1,
+        "type_inference": 0,
+        "higher_kinded_types": 0,
+        "dependent_types": 0,
+        "linear_affine_types": 0,
+        "effect_system": 0,
+        "gadt": 0,
+        "type_classes": 0,
+        "refinement_types": 0,
+        "gradual_typing": 2,
+        "structural_typing": 1,
+        "flow_sensitive_typing": 0,
+        "existential_types": 0,
+        "rank_n_types": 0,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 1
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 3,
+          "max": 6,
+          "ratio": 0.5
+        },
+        "数据建模": {
+          "score": 1,
+          "max": 4,
+          "ratio": 0.25
+        },
+        "类型推断与安全": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        },
+        "高级类型特性": {
+          "score": 0,
+          "max": 12,
+          "ratio": 0.0
+        },
+        "资源与效果": {
+          "score": 0,
+          "max": 6,
+          "ratio": 0.0
+        },
+        "类型组织": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        }
+      },
+      "total_score": 8,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.2,
+      "popularity": {
+        "github_repos_approx": 2500000,
+        "top_repo_stars": 65000,
+        "top_repo": "cpython"
+      }
+    },
+    "Scala": {
+      "meta": {
+        "year": 2004,
+        "paradigm": "multi",
+        "domain": "enterprise",
+        "typing": "static/strong"
+      },
+      "type_features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 2,
+        "subtype_polymorphism": 2,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
+        "type_inference": 2,
+        "higher_kinded_types": 2,
+        "dependent_types": 1,
+        "linear_affine_types": 0,
+        "effect_system": 1,
+        "gadt": 1,
+        "type_classes": 2,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "structural_typing": 1,
+        "flow_sensitive_typing": 0,
+        "existential_types": 2,
+        "rank_n_types": 1,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 1
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 6,
+          "max": 6,
+          "ratio": 1.0
+        },
+        "数据建模": {
+          "score": 4,
+          "max": 4,
+          "ratio": 1.0
+        },
+        "类型推断与安全": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        },
+        "高级类型特性": {
+          "score": 7,
+          "max": 12,
+          "ratio": 0.58
+        },
+        "资源与效果": {
+          "score": 1,
+          "max": 6,
+          "ratio": 0.17
+        },
+        "类型组织": {
+          "score": 4,
+          "max": 6,
+          "ratio": 0.67
+        }
+      },
+      "total_score": 24,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.6,
+      "popularity": {
+        "github_repos_approx": 120000,
+        "top_repo_stars": 40000,
+        "top_repo": "spark"
+      }
+    },
+    "Kotlin": {
+      "meta": {
+        "year": 2011,
+        "paradigm": "multi",
+        "domain": "mobile",
+        "typing": "static/strong"
+      },
+      "type_features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 2,
+        "subtype_polymorphism": 2,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
+        "type_inference": 2,
+        "higher_kinded_types": 0,
+        "dependent_types": 0,
+        "linear_affine_types": 0,
+        "effect_system": 0,
+        "gadt": 0,
+        "type_classes": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 2,
+        "existential_types": 0,
+        "rank_n_types": 0,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 0
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 6,
+          "max": 6,
+          "ratio": 1.0
+        },
+        "数据建模": {
+          "score": 4,
+          "max": 4,
+          "ratio": 1.0
+        },
+        "类型推断与安全": {
+          "score": 4,
+          "max": 6,
+          "ratio": 0.67
+        },
+        "高级类型特性": {
+          "score": 0,
+          "max": 12,
+          "ratio": 0.0
+        },
+        "资源与效果": {
+          "score": 0,
+          "max": 6,
+          "ratio": 0.0
+        },
+        "类型组织": {
+          "score": 0,
+          "max": 6,
+          "ratio": 0.0
+        }
+      },
+      "total_score": 14,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.35,
+      "popularity": {
+        "github_repos_approx": 250000,
+        "top_repo_stars": 50000,
+        "top_repo": "kotlin"
+      }
+    },
+    "Swift": {
+      "meta": {
+        "year": 2014,
+        "paradigm": "multi",
+        "domain": "mobile",
+        "typing": "static/strong"
+      },
+      "type_features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 2,
+        "subtype_polymorphism": 2,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
+        "type_inference": 2,
+        "higher_kinded_types": 0,
+        "dependent_types": 0,
+        "linear_affine_types": 1,
+        "effect_system": 0,
+        "gadt": 0,
+        "type_classes": 2,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0,
+        "existential_types": 1,
+        "rank_n_types": 0,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 1
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 6,
+          "max": 6,
+          "ratio": 1.0
+        },
+        "数据建模": {
+          "score": 4,
+          "max": 4,
+          "ratio": 1.0
+        },
+        "类型推断与安全": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        },
+        "高级类型特性": {
+          "score": 1,
+          "max": 12,
+          "ratio": 0.08
+        },
+        "资源与效果": {
+          "score": 1,
+          "max": 6,
+          "ratio": 0.17
+        },
+        "类型组织": {
+          "score": 3,
+          "max": 6,
+          "ratio": 0.5
+        }
+      },
+      "total_score": 17,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.42,
+      "popularity": {
+        "github_repos_approx": 250000,
+        "top_repo_stars": 67000,
+        "top_repo": "swift"
+      }
+    },
+    "Zig": {
+      "meta": {
+        "year": 2016,
+        "paradigm": "imperative",
+        "domain": "systems",
+        "typing": "static/strong"
+      },
+      "type_features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 0,
+        "subtype_polymorphism": 0,
+        "algebraic_data_types": 1,
+        "pattern_matching": 1,
+        "type_inference": 1,
+        "higher_kinded_types": 0,
+        "dependent_types": 0,
+        "linear_affine_types": 0,
+        "effect_system": 1,
+        "gadt": 0,
+        "type_classes": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0,
+        "existential_types": 0,
+        "rank_n_types": 0,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 2
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        },
+        "数据建模": {
+          "score": 2,
+          "max": 4,
+          "ratio": 0.5
+        },
+        "类型推断与安全": {
+          "score": 1,
+          "max": 6,
+          "ratio": 0.17
+        },
+        "高级类型特性": {
+          "score": 0,
+          "max": 12,
+          "ratio": 0.0
+        },
+        "资源与效果": {
+          "score": 1,
+          "max": 6,
+          "ratio": 0.17
+        },
+        "类型组织": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        }
+      },
+      "total_score": 8,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.2,
+      "popularity": {
+        "github_repos_approx": 15000,
+        "top_repo_stars": 35000,
+        "top_repo": "zig"
+      }
+    },
+    "Idris": {
+      "meta": {
+        "year": 2007,
+        "paradigm": "functional",
+        "domain": "academic",
+        "typing": "static/strong"
+      },
+      "type_features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 2,
+        "subtype_polymorphism": 0,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
+        "type_inference": 2,
+        "higher_kinded_types": 2,
+        "dependent_types": 2,
+        "linear_affine_types": 1,
+        "effect_system": 2,
+        "gadt": 2,
+        "type_classes": 2,
+        "refinement_types": 2,
+        "gradual_typing": 0,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0,
+        "existential_types": 2,
+        "rank_n_types": 2,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 1
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 4,
+          "max": 6,
+          "ratio": 0.67
+        },
+        "数据建模": {
+          "score": 4,
+          "max": 4,
+          "ratio": 1.0
+        },
+        "类型推断与安全": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        },
+        "高级类型特性": {
+          "score": 10,
+          "max": 12,
+          "ratio": 0.83
+        },
+        "资源与效果": {
+          "score": 5,
+          "max": 6,
+          "ratio": 0.83
+        },
+        "类型组织": {
+          "score": 3,
+          "max": 6,
+          "ratio": 0.5
+        }
+      },
+      "total_score": 28,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.7,
+      "popularity": {
+        "github_repos_approx": 2000,
+        "top_repo_stars": 3800,
+        "top_repo": "Idris2"
+      }
+    },
+    "Agda": {
+      "meta": {
+        "year": 2007,
+        "paradigm": "functional",
+        "domain": "academic",
+        "typing": "static/strong"
+      },
+      "type_features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 1,
+        "subtype_polymorphism": 0,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
+        "type_inference": 2,
+        "higher_kinded_types": 2,
+        "dependent_types": 2,
+        "linear_affine_types": 0,
+        "effect_system": 0,
+        "gadt": 2,
+        "type_classes": 1,
+        "refinement_types": 2,
+        "gradual_typing": 0,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0,
+        "existential_types": 2,
+        "rank_n_types": 2,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 0
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 3,
+          "max": 6,
+          "ratio": 0.5
+        },
+        "数据建模": {
+          "score": 4,
+          "max": 4,
+          "ratio": 1.0
+        },
+        "类型推断与安全": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        },
+        "高级类型特性": {
+          "score": 10,
+          "max": 12,
+          "ratio": 0.83
+        },
+        "资源与效果": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        },
+        "类型组织": {
+          "score": 1,
+          "max": 6,
+          "ratio": 0.17
+        }
+      },
+      "total_score": 22,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.55,
+      "popularity": {
+        "github_repos_approx": 1500,
+        "top_repo_stars": 2500,
+        "top_repo": "agda"
+      }
+    },
+    "Elixir": {
+      "meta": {
+        "year": 2011,
+        "paradigm": "functional",
+        "domain": "web",
+        "typing": "dynamic"
+      },
+      "type_features": {
+        "parametric_polymorphism": 0,
+        "ad_hoc_polymorphism": 1,
+        "subtype_polymorphism": 0,
+        "algebraic_data_types": 0,
+        "pattern_matching": 2,
+        "type_inference": 0,
+        "higher_kinded_types": 0,
+        "dependent_types": 0,
+        "linear_affine_types": 0,
+        "effect_system": 0,
+        "gadt": 0,
+        "type_classes": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "structural_typing": 1,
+        "flow_sensitive_typing": 0,
+        "existential_types": 0,
+        "rank_n_types": 0,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 1
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 1,
+          "max": 6,
+          "ratio": 0.17
+        },
+        "数据建模": {
+          "score": 2,
+          "max": 4,
+          "ratio": 0.5
+        },
+        "类型推断与安全": {
+          "score": 0,
+          "max": 6,
+          "ratio": 0.0
+        },
+        "高级类型特性": {
+          "score": 0,
+          "max": 12,
+          "ratio": 0.0
+        },
+        "资源与效果": {
+          "score": 0,
+          "max": 6,
+          "ratio": 0.0
+        },
+        "类型组织": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        }
+      },
+      "total_score": 5,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.12,
+      "popularity": {
+        "github_repos_approx": 80000,
+        "top_repo_stars": 25000,
+        "top_repo": "elixir"
+      }
+    },
+    "F#": {
+      "meta": {
+        "year": 2005,
+        "paradigm": "functional",
+        "domain": "enterprise",
+        "typing": "static/strong"
+      },
+      "type_features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 1,
+        "subtype_polymorphism": 1,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
+        "type_inference": 2,
+        "higher_kinded_types": 1,
+        "dependent_types": 0,
+        "linear_affine_types": 0,
+        "effect_system": 0,
+        "gadt": 0,
+        "type_classes": 1,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "structural_typing": 1,
+        "flow_sensitive_typing": 1,
+        "existential_types": 1,
+        "rank_n_types": 0,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 1
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 4,
+          "max": 6,
+          "ratio": 0.67
+        },
+        "数据建模": {
+          "score": 4,
+          "max": 4,
+          "ratio": 1.0
+        },
+        "类型推断与安全": {
+          "score": 3,
+          "max": 6,
+          "ratio": 0.5
+        },
+        "高级类型特性": {
+          "score": 2,
+          "max": 12,
+          "ratio": 0.17
+        },
+        "资源与效果": {
+          "score": 0,
+          "max": 6,
+          "ratio": 0.0
+        },
+        "类型组织": {
+          "score": 3,
+          "max": 6,
+          "ratio": 0.5
+        }
+      },
+      "total_score": 16,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.4,
+      "popularity": {
+        "github_repos_approx": 20000,
+        "top_repo_stars": 4000,
+        "top_repo": "fsharp"
+      }
+    },
+    "Nim": {
+      "meta": {
+        "year": 2008,
+        "paradigm": "multi",
+        "domain": "systems",
+        "typing": "static/strong"
+      },
+      "type_features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 1,
+        "subtype_polymorphism": 1,
+        "algebraic_data_types": 1,
+        "pattern_matching": 1,
+        "type_inference": 2,
+        "higher_kinded_types": 0,
+        "dependent_types": 0,
+        "linear_affine_types": 0,
+        "effect_system": 1,
+        "gadt": 0,
+        "type_classes": 1,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0,
+        "existential_types": 0,
+        "rank_n_types": 0,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 2
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 4,
+          "max": 6,
+          "ratio": 0.67
+        },
+        "数据建模": {
+          "score": 2,
+          "max": 4,
+          "ratio": 0.5
+        },
+        "类型推断与安全": {
+          "score": 2,
+          "max": 6,
+          "ratio": 0.33
+        },
+        "高级类型特性": {
+          "score": 0,
+          "max": 12,
+          "ratio": 0.0
+        },
+        "资源与效果": {
+          "score": 1,
+          "max": 6,
+          "ratio": 0.17
+        },
+        "类型组织": {
+          "score": 3,
+          "max": 6,
+          "ratio": 0.5
+        }
+      },
+      "total_score": 12,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.3,
+      "popularity": {
+        "github_repos_approx": 12000,
+        "top_repo_stars": 16000,
+        "top_repo": "Nim"
+      }
+    },
+    "Dart": {
+      "meta": {
+        "year": 2011,
+        "paradigm": "OOP",
+        "domain": "mobile",
+        "typing": "static/strong"
+      },
+      "type_features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 1,
+        "subtype_polymorphism": 2,
+        "algebraic_data_types": 1,
+        "pattern_matching": 2,
+        "type_inference": 2,
+        "higher_kinded_types": 0,
+        "dependent_types": 0,
+        "linear_affine_types": 0,
+        "effect_system": 0,
+        "gadt": 0,
+        "type_classes": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 1,
+        "existential_types": 0,
+        "rank_n_types": 0,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 0
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 5,
+          "max": 6,
+          "ratio": 0.83
+        },
+        "数据建模": {
+          "score": 3,
+          "max": 4,
+          "ratio": 0.75
+        },
+        "类型推断与安全": {
+          "score": 3,
+          "max": 6,
+          "ratio": 0.5
+        },
+        "高级类型特性": {
+          "score": 0,
+          "max": 12,
+          "ratio": 0.0
+        },
+        "资源与效果": {
+          "score": 0,
+          "max": 6,
+          "ratio": 0.0
+        },
+        "类型组织": {
+          "score": 0,
+          "max": 6,
+          "ratio": 0.0
+        }
+      },
+      "total_score": 11,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.28,
+      "popularity": {
+        "github_repos_approx": 200000,
+        "top_repo_stars": 165000,
+        "top_repo": "flutter"
+      }
+    },
+    "Julia": {
+      "meta": {
+        "year": 2012,
+        "paradigm": "multi",
+        "domain": "scientific",
+        "typing": "dynamic/strong"
+      },
+      "type_features": {
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 2,
+        "subtype_polymorphism": 1,
+        "algebraic_data_types": 0,
+        "pattern_matching": 0,
+        "type_inference": 0,
+        "higher_kinded_types": 0,
+        "dependent_types": 0,
+        "linear_affine_types": 0,
+        "effect_system": 0,
+        "gadt": 0,
+        "type_classes": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "structural_typing": 1,
+        "flow_sensitive_typing": 0,
+        "existential_types": 0,
+        "rank_n_types": 0,
+        "row_polymorphism": 0,
+        "macro_metaprogramming": 2
+      },
+      "feature_scores_by_category": {
+        "基础多态": {
+          "score": 5,
+          "max": 6,
+          "ratio": 0.83
+        },
+        "数据建模": {
+          "score": 0,
+          "max": 4,
+          "ratio": 0.0
+        },
+        "类型推断与安全": {
+          "score": 0,
+          "max": 6,
+          "ratio": 0.0
+        },
+        "高级类型特性": {
+          "score": 0,
+          "max": 12,
+          "ratio": 0.0
+        },
+        "资源与效果": {
+          "score": 0,
+          "max": 6,
+          "ratio": 0.0
+        },
+        "类型组织": {
+          "score": 3,
+          "max": 6,
+          "ratio": 0.5
+        }
+      },
+      "total_score": 8,
+      "max_possible_score": 40,
+      "type_richness_ratio": 0.2,
+      "popularity": {
+        "github_repos_approx": 50000,
+        "top_repo_stars": 46000,
+        "top_repo": "julia"
+      }
+    }
+  },
+  "timeline": {
+    "C++": [
+      {
+        "feature": "parametric_polymorphism",
+        "version": "C++98 Templates",
+        "year": 1998,
+        "source": "ISO/IEC 14882:1998"
+      },
+      {
+        "feature": "type_inference",
+        "version": "C++11 auto",
+        "year": 2011,
+        "source": "N2546"
+      },
+      {
+        "feature": "pattern_matching",
+        "version": "C++17 structured bindings",
+        "year": 2017,
+        "source": "P0144R2"
+      },
+      {
+        "feature": "ad_hoc_polymorphism",
+        "version": "C++20 Concepts",
+        "year": 2020,
+        "source": "P0734R0"
+      },
+      {
+        "feature": "linear_affine_types",
+        "version": "C++11 move semantics",
+        "year": 2011,
+        "source": "N2027"
+      }
+    ],
+    "Java": [
+      {
+        "feature": "parametric_polymorphism",
+        "version": "JDK 5 Generics",
+        "year": 2004,
+        "source": "JSR 14"
+      },
+      {
+        "feature": "type_inference",
+        "version": "JDK 10 var",
+        "year": 2018,
+        "source": "JEP 286"
+      },
+      {
+        "feature": "pattern_matching",
+        "version": "JDK 16 instanceof patterns",
+        "year": 2021,
+        "source": "JEP 394"
+      },
+      {
+        "feature": "algebraic_data_types",
+        "version": "JDK 17 sealed classes",
+        "year": 2021,
+        "source": "JEP 409"
+      },
+      {
+        "feature": "effect_system",
+        "version": "JDK 1.0 checked exceptions",
+        "year": 1996,
+        "source": "JLS"
+      }
+    ],
+    "Rust": [
+      {
+        "feature": "linear_affine_types",
+        "version": "1.0 ownership/borrowing",
+        "year": 2015,
+        "source": "Rust Reference"
+      },
+      {
+        "feature": "type_classes",
+        "version": "1.0 traits",
+        "year": 2015,
+        "source": "RFC 0000"
+      },
+      {
+        "feature": "pattern_matching",
+        "version": "1.0 match",
+        "year": 2015,
+        "source": "Rust Reference"
+      },
+      {
+        "feature": "macro_metaprogramming",
+        "version": "1.0 macro_rules!",
+        "year": 2015,
+        "source": "Rust Reference"
+      },
+      {
+        "feature": "macro_metaprogramming",
+        "version": "1.15 proc macros (derive)",
+        "year": 2017,
+        "source": "RFC 1681"
+      }
+    ],
+    "TypeScript": [
+      {
+        "feature": "parametric_polymorphism",
+        "version": "0.9 Generics",
+        "year": 2013,
+        "source": "TS Spec"
+      },
+      {
+        "feature": "flow_sensitive_typing",
+        "version": "1.4 Type Guards",
+        "year": 2014,
+        "source": "TS 1.4 Release"
+      },
+      {
+        "feature": "gradual_typing",
+        "version": "1.0 any type",
+        "year": 2012,
+        "source": "TS Spec"
+      },
+      {
+        "feature": "macro_metaprogramming",
+        "version": "2.1 Mapped Types",
+        "year": 2016,
+        "source": "TS 2.1 Release"
+      },
+      {
+        "feature": "macro_metaprogramming",
+        "version": "2.8 Conditional Types",
+        "year": 2018,
+        "source": "TS 2.8 Release"
+      },
+      {
+        "feature": "algebraic_data_types",
+        "version": "2.0 Discriminated Unions",
+        "year": 2016,
+        "source": "TS 2.0 Release"
+      },
+      {
+        "feature": "structural_typing",
+        "version": "1.0",
+        "year": 2012,
+        "source": "TS Spec"
+      }
+    ],
+    "Go": [
+      {
+        "feature": "parametric_polymorphism",
+        "version": "1.18 Generics",
+        "year": 2022,
+        "source": "Go Spec"
+      },
+      {
+        "feature": "structural_typing",
+        "version": "1.0 interfaces",
+        "year": 2009,
+        "source": "Go Spec"
+      }
+    ],
+    "Haskell": [
+      {
+        "feature": "type_classes",
+        "version": "Haskell 98",
+        "year": 1998,
+        "source": "Haskell Report"
+      },
+      {
+        "feature": "gadt",
+        "version": "GHC 6.4 GADTs",
+        "year": 2005,
+        "source": "GHC docs"
+      },
+      {
+        "feature": "rank_n_types",
+        "version": "GHC 6.6 RankNTypes",
+        "year": 2006,
+        "source": "GHC docs"
+      },
+      {
+        "feature": "higher_kinded_types",
+        "version": "Haskell 98",
+        "year": 1998,
+        "source": "Haskell Report"
+      },
+      {
+        "feature": "effect_system",
+        "version": "GHC IO Monad",
+        "year": 1998,
+        "source": "Peyton Jones 2001"
+      },
+      {
+        "feature": "linear_affine_types",
+        "version": "GHC 9.0 LinearTypes",
+        "year": 2021,
+        "source": "GHC Proposal #111"
+      },
+      {
+        "feature": "dependent_types",
+        "version": "GHC 9.x DependentHaskell (partial)",
+        "year": 2023,
+        "source": "GHC proposals"
+      }
+    ],
+    "Scala": [
+      {
+        "feature": "higher_kinded_types",
+        "version": "Scala 2",
+        "year": 2004,
+        "source": "Scala Spec"
+      },
+      {
+        "feature": "dependent_types",
+        "version": "Scala 3 match types",
+        "year": 2021,
+        "source": "Scala 3 Spec"
+      },
+      {
+        "feature": "type_classes",
+        "version": "Scala 2 implicits",
+        "year": 2004,
+        "source": "Scala Spec"
+      },
+      {
+        "feature": "type_classes",
+        "version": "Scala 3 given/using",
+        "year": 2021,
+        "source": "Scala 3 Spec"
+      },
+      {
+        "feature": "effect_system",
+        "version": "Scala 3 CanThrow",
+        "year": 2021,
+        "source": "SIP-47"
+      }
+    ],
+    "Swift": [
+      {
+        "feature": "type_classes",
+        "version": "1.0 Protocols",
+        "year": 2014,
+        "source": "Swift Docs"
+      },
+      {
+        "feature": "algebraic_data_types",
+        "version": "1.0 enum with associated values",
+        "year": 2014,
+        "source": "Swift Docs"
+      },
+      {
+        "feature": "pattern_matching",
+        "version": "1.0",
+        "year": 2014,
+        "source": "Swift Docs"
+      },
+      {
+        "feature": "linear_affine_types",
+        "version": "5.9 ~Copyable",
+        "year": 2023,
+        "source": "SE-0390"
+      }
+    ],
+    "Kotlin": [
+      {
+        "feature": "flow_sensitive_typing",
+        "version": "1.0 smart casts",
+        "year": 2016,
+        "source": "Kotlin Docs"
+      },
+      {
+        "feature": "pattern_matching",
+        "version": "2.0 when guards",
+        "year": 2024,
+        "source": "KT-13626"
+      }
+    ],
+    "Python": [
+      {
+        "feature": "gradual_typing",
+        "version": "3.5 typing module",
+        "year": 2015,
+        "source": "PEP 484"
+      },
+      {
+        "feature": "pattern_matching",
+        "version": "3.10 match statement",
+        "year": 2021,
+        "source": "PEP 634"
+      }
+    ],
+    "Idris": [
+      {
+        "feature": "dependent_types",
+        "version": "1.0",
+        "year": 2013,
+        "source": "Idris docs"
+      },
+      {
+        "feature": "effect_system",
+        "version": "2.0 Effects",
+        "year": 2020,
+        "source": "Idris 2 docs"
+      }
+    ],
+    "F#": [
+      {
+        "feature": "algebraic_data_types",
+        "version": "1.0 Discriminated Unions",
+        "year": 2005,
+        "source": "F# Spec"
+      },
+      {
+        "feature": "type_inference",
+        "version": "1.0 Hindley-Milner",
+        "year": 2005,
+        "source": "F# Spec"
+      },
+      {
+        "feature": "pattern_matching",
+        "version": "1.0",
+        "year": 2005,
+        "source": "F# Spec"
+      }
+    ],
+    "Dart": [
+      {
+        "feature": "pattern_matching",
+        "version": "3.0 Patterns",
+        "year": 2023,
+        "source": "Dart Enhancement"
+      },
+      {
+        "feature": "algebraic_data_types",
+        "version": "3.0 sealed classes",
+        "year": 2023,
+        "source": "Dart Enhancement"
+      },
+      {
+        "feature": "flow_sensitive_typing",
+        "version": "2.12 null safety promotion",
+        "year": 2021,
+        "source": "Dart Docs"
+      }
+    ],
+    "Julia": [
+      {
+        "feature": "macro_metaprogramming",
+        "version": "1.0 @generated",
+        "year": 2018,
+        "source": "Julia Docs"
+      },
+      {
+        "feature": "ad_hoc_polymorphism",
+        "version": "1.0 multiple dispatch",
+        "year": 2018,
+        "source": "Julia Docs"
+      }
+    ]
+  }
+}

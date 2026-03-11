@@ -1,0 +1,55 @@
+language,feature,version_or_name,year,source
+Java,effect_system,JDK 1.0 checked exceptions,1996,JLS
+C++,parametric_polymorphism,C++98 Templates,1998,ISO/IEC 14882:1998
+Haskell,type_classes,Haskell 98,1998,Haskell Report
+Haskell,higher_kinded_types,Haskell 98,1998,Haskell Report
+Haskell,effect_system,GHC IO Monad,1998,Peyton Jones 2001
+Java,parametric_polymorphism,JDK 5 Generics,2004,JSR 14
+Scala,higher_kinded_types,Scala 2,2004,Scala Spec
+Scala,type_classes,Scala 2 implicits,2004,Scala Spec
+F#,algebraic_data_types,1.0 Discriminated Unions,2005,F# Spec
+F#,type_inference,1.0 Hindley-Milner,2005,F# Spec
+F#,pattern_matching,1.0,2005,F# Spec
+Haskell,gadt,GHC 6.4 GADTs,2005,GHC docs
+Haskell,rank_n_types,GHC 6.6 RankNTypes,2006,GHC docs
+Go,structural_typing,1.0 interfaces,2009,Go Spec
+C++,type_inference,C++11 auto,2011,N2546
+C++,linear_affine_types,C++11 move semantics,2011,N2027
+TypeScript,gradual_typing,1.0 any type,2012,TS Spec
+TypeScript,structural_typing,1.0,2012,TS Spec
+Idris,dependent_types,1.0,2013,Idris docs
+TypeScript,parametric_polymorphism,0.9 Generics,2013,TS Spec
+Swift,type_classes,1.0 Protocols,2014,Swift Docs
+Swift,algebraic_data_types,1.0 enum with associated values,2014,Swift Docs
+Swift,pattern_matching,1.0,2014,Swift Docs
+TypeScript,flow_sensitive_typing,1.4 Type Guards,2014,TS 1.4 Release
+Python,gradual_typing,3.5 typing module,2015,PEP 484
+Rust,linear_affine_types,1.0 ownership/borrowing,2015,Rust Reference
+Rust,type_classes,1.0 traits,2015,RFC 0000
+Rust,pattern_matching,1.0 match,2015,Rust Reference
+Rust,macro_metaprogramming,1.0 macro_rules!,2015,Rust Reference
+Kotlin,flow_sensitive_typing,1.0 smart casts,2016,Kotlin Docs
+TypeScript,macro_metaprogramming,2.1 Mapped Types,2016,TS 2.1 Release
+TypeScript,algebraic_data_types,2.0 Discriminated Unions,2016,TS 2.0 Release
+C++,pattern_matching,C++17 structured bindings,2017,P0144R2
+Rust,macro_metaprogramming,1.15 proc macros (derive),2017,RFC 1681
+Java,type_inference,JDK 10 var,2018,JEP 286
+Julia,macro_metaprogramming,1.0 @generated,2018,Julia Docs
+Julia,ad_hoc_polymorphism,1.0 multiple dispatch,2018,Julia Docs
+TypeScript,macro_metaprogramming,2.8 Conditional Types,2018,TS 2.8 Release
+C++,ad_hoc_polymorphism,C++20 Concepts,2020,P0734R0
+Idris,effect_system,2.0 Effects,2020,Idris 2 docs
+Dart,flow_sensitive_typing,2.12 null safety promotion,2021,Dart Docs
+Haskell,linear_affine_types,GHC 9.0 LinearTypes,2021,GHC Proposal #111
+Java,pattern_matching,JDK 16 instanceof patterns,2021,JEP 394
+Java,algebraic_data_types,JDK 17 sealed classes,2021,JEP 409
+Python,pattern_matching,3.10 match statement,2021,PEP 634
+Scala,dependent_types,Scala 3 match types,2021,Scala 3 Spec
+Scala,type_classes,Scala 3 given/using,2021,Scala 3 Spec
+Scala,effect_system,Scala 3 CanThrow,2021,SIP-47
+Go,parametric_polymorphism,1.18 Generics,2022,Go Spec
+Dart,pattern_matching,3.0 Patterns,2023,Dart Enhancement
+Dart,algebraic_data_types,3.0 sealed classes,2023,Dart Enhancement
+Haskell,dependent_types,GHC 9.x DependentHaskell (partial),2023,GHC proposals
+Swift,linear_affine_types,5.9 ~Copyable,2023,SE-0390
+Kotlin,pattern_matching,2.0 when guards,2024,KT-13626

@@ -65,47 +65,289 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
   .card p.desc { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 16px; }
 
   /* Heatmap */
-  #heatmap-container { overflow-x: auto; }
-  .heatmap-table { border-collapse: separate; border-spacing: 2px; }
+  #heatmap-container {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background:
+      linear-gradient(180deg, rgba(108,140,255,0.08), rgba(108,140,255,0.01)),
+      var(--card);
+    overflow: hidden;
+  }
+  .matrix-shell { padding: 18px; }
+  .matrix-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .matrix-toolbar-copy {
+    color: var(--text-dim);
+    font-size: 0.82rem;
+    max-width: 720px;
+  }
+  .matrix-toolbar-copy strong { color: var(--text); }
+  .matrix-summary {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .summary-pill {
+    min-width: 112px;
+    padding: 10px 12px;
+    border: 1px solid rgba(108,140,255,0.14);
+    border-radius: 12px;
+    background: rgba(15,17,23,0.42);
+  }
+  .summary-pill strong {
+    display: block;
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.2;
+  }
+  .summary-pill span {
+    color: var(--text-dim);
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .heatmap-scroll {
+    overflow: auto;
+    padding-bottom: 10px;
+    scrollbar-color: rgba(108,140,255,0.45) rgba(255,255,255,0.04);
+  }
+  .heatmap-table {
+    width: max-content;
+    min-width: 100%;
+    border-collapse: separate;
+    border-spacing: 6px;
+    table-layout: fixed;
+  }
   .heatmap-table th, .heatmap-table td {
-    padding: 0; text-align: center; font-size: 0.7rem; border: none;
+    padding: 0;
+    text-align: center;
+    font-size: 0.7rem;
+    border: none;
+    vertical-align: middle;
   }
   .heatmap-table thead th {
-    color: var(--text-dim); font-weight: 600; font-size: 0.65rem;
-    width: 34px; min-width: 34px; padding: 4px 0; cursor: default;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    color: var(--text-dim);
+    font-weight: 600;
+    font-size: 0.65rem;
+    cursor: default;
   }
   .heatmap-table thead th:hover { color: var(--accent); }
-  .heatmap-table th.lang-name { text-align: left; width: auto; min-width: 120px; padding-left: 8px; font-size: 0.75rem; }
-  .heatmap-table th.score-col { width: auto; min-width: 56px; font-size: 0.7rem; }
+  .heatmap-table th.lang-name,
   .heatmap-table td.lang-name {
-    text-align: left; padding: 2px 8px; font-weight: 600; font-size: 0.75rem;
-    white-space: nowrap; position: sticky; left: 0; background: var(--card); z-index: 1;
+    position: sticky;
+    left: 0;
+    z-index: 4;
+  }
+  .heatmap-table th.lang-name {
+    min-width: 196px;
+    padding-left: 0;
+    text-align: left;
+    font-size: 0.74rem;
+  }
+  .heatmap-table th.score-col,
+  .heatmap-table td.score-col {
+    position: sticky;
+    right: 0;
+    z-index: 4;
+  }
+  .heatmap-table th.score-col {
+    min-width: 92px;
+    font-size: 0.68rem;
+  }
+  .corner-card,
+  .score-head-card,
+  .feature-head-card,
+  .lang-cell-card,
+  .score-cell-card {
+    border: 1px solid rgba(108,140,255,0.12);
+    border-radius: 12px;
+    background: rgba(15,17,23,0.76);
+    backdrop-filter: blur(8px);
+  }
+  .corner-card,
+  .score-head-card {
+    min-height: 72px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .corner-card strong,
+  .score-head-card strong {
+    color: var(--text);
+    font-size: 0.78rem;
+    line-height: 1.2;
+  }
+  .corner-card span,
+  .score-head-card span {
+    color: var(--text-dim);
+    font-size: 0.65rem;
+    margin-top: 4px;
+  }
+  .feature-col {
+    width: 64px;
+    min-width: 64px;
+  }
+  .feature-head-card {
+    min-height: 72px;
+    padding: 8px 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: border-color 0.18s ease, transform 0.18s ease, background 0.18s ease;
+  }
+  .feature-head-card:hover {
+    border-color: rgba(108,140,255,0.36);
+    transform: translateY(-1px);
+  }
+  .feature-head-index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 20px;
+    border-radius: 999px;
+    background: rgba(108,140,255,0.16);
+    color: var(--accent);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .feature-head-short {
+    color: var(--text);
+    font-size: 0.62rem;
+    line-height: 1.15;
+    text-align: center;
+    text-wrap: balance;
+  }
+  .heatmap-table td.lang-name {
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+  .lang-cell-card {
+    min-height: 46px;
+    padding: 10px 12px;
+  }
+  .lang-title {
+    color: var(--text);
+    font-size: 0.75rem;
+    font-weight: 650;
+  }
+  .lang-meta {
+    display: block;
+    margin-top: 2px;
+    color: var(--text-dim);
+    font-size: 0.62rem;
   }
   .heatmap-cell {
-    width: 34px; height: 28px; display: block; margin: 0 auto;
-    border-radius: 5px; transition: all 0.15s; cursor: pointer;
-    line-height: 28px; text-align: center; font-size: 0.7rem;
-    color: rgba(255,255,255,0.45); font-weight: 600;
+    width: 100%;
+    min-width: 42px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    transition: transform 0.16s ease, box-shadow 0.16s ease, color 0.16s ease;
+    cursor: pointer;
+    text-align: center;
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.5);
+    font-weight: 700;
   }
-  .heatmap-cell:hover { transform: scale(1.15); color: #fff; box-shadow: 0 0 8px rgba(108,140,255,0.5); }
+  .heatmap-cell:hover {
+    transform: translateY(-1px) scale(1.04);
+    color: #fff;
+    box-shadow: 0 8px 18px rgba(108,140,255,0.28);
+  }
   .heatmap-score-td { padding: 2px 6px !important; }
+  .score-cell-card {
+    min-height: 46px;
+    padding: 8px 10px;
+    display: flex;
+    justify-content: center;
+  }
   .heatmap-score-bar {
-    display: inline-flex; align-items: center; gap: 4px; font-size: 0.72rem; font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text);
   }
   /* Feature index legend */
   .feat-index-legend {
-    display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 14px;
-    font-size: 0.72rem; color: var(--text-dim); padding: 10px 0;
-    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.06);
   }
-  .feat-index-legend span { white-space: nowrap; }
+  .feat-legend-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px 12px;
+    border: 1px solid rgba(108,140,255,0.12);
+    border-radius: 12px;
+    background: rgba(15,17,23,0.38);
+  }
+  .feat-legend-copy {
+    min-width: 0;
+  }
+  .feat-legend-copy strong {
+    display: block;
+    color: var(--text);
+    font-size: 0.75rem;
+    line-height: 1.25;
+    margin-bottom: 2px;
+  }
+  .feat-legend-copy small {
+    display: block;
+    color: var(--text-dim);
+    font-size: 0.66rem;
+    line-height: 1.35;
+    white-space: normal;
+  }
   .feat-index-legend .feat-idx {
-    display: inline-block; width: 18px; height: 18px; line-height: 18px;
-    text-align: center; border-radius: 4px; font-size: 0.6rem; font-weight: 700;
-    background: rgba(108,140,255,0.15); color: var(--accent); margin-right: 3px;
+    flex: 0 0 auto;
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    background: rgba(108,140,255,0.15);
+    color: var(--accent);
   }
   /* Column highlight on hover */
-  .heatmap-table td.col-hover { background: rgba(108,140,255,0.06); }
+  .heatmap-table td.col-hover .heatmap-cell {
+    box-shadow: inset 0 0 0 1px rgba(108,140,255,0.35);
+    transform: translateY(-1px);
+  }
+  .heatmap-table th.col-hover .feature-head-card {
+    border-color: rgba(108,140,255,0.42);
+    background: rgba(108,140,255,0.12);
+  }
+  .heatmap-table tbody tr:hover .lang-cell-card,
+  .heatmap-table tbody tr:hover .score-cell-card {
+    border-color: rgba(108,140,255,0.28);
+  }
 
   /* Scoring legend */
   .score-legend {
@@ -178,6 +420,20 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
     .header h1 { font-size: 1.4rem; }
     .tabs { gap: 6px; }
     .tab { padding: 8px 16px; font-size: 0.8rem; }
+    .matrix-shell { padding: 14px; }
+    .matrix-toolbar { align-items: stretch; }
+    .summary-pill { min-width: 96px; flex: 1 1 96px; }
+    .heatmap-table { border-spacing: 4px; }
+    .heatmap-table th.lang-name { min-width: 148px; }
+    .heatmap-table th.score-col { min-width: 76px; }
+    .feature-col { width: 52px; min-width: 52px; }
+    .feature-head-card { min-height: 68px; padding: 8px 4px; }
+    .feature-head-short { font-size: 0.58rem; }
+    .heatmap-cell { min-width: 36px; height: 30px; font-size: 0.68rem; }
+    .lang-cell-card { padding: 8px 10px; }
+    .lang-title { font-size: 0.7rem; }
+    .lang-meta { font-size: 0.58rem; }
+    .feat-index-legend { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -272,13 +528,30 @@ tabs.forEach(tab => {
 
 // ====== TOOLTIP ======
 const tooltip = document.getElementById('tooltip');
+function positionTip(evt) {
+  const offset = 14;
+  const maxLeft = Math.max(12, window.innerWidth - tooltip.offsetWidth - 12);
+  const maxTop = Math.max(12, window.innerHeight - tooltip.offsetHeight - 12);
+  tooltip.style.left = Math.min(evt.clientX + offset, maxLeft) + 'px';
+  tooltip.style.top = Math.min(evt.clientY + offset, maxTop) + 'px';
+}
 function showTip(evt, html) {
   tooltip.innerHTML = html;
   tooltip.style.display = 'block';
-  tooltip.style.left = (evt.clientX + 14) + 'px';
-  tooltip.style.top = (evt.clientY + 14) + 'px';
+  positionTip(evt);
 }
 function hideTip() { tooltip.style.display = 'none'; }
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+function escapeAttr(value) {
+  return escapeHtml(value);
+}
 
 // ====== COLORS ======
 const maxScore = DATA.max_score || 5;
@@ -321,46 +594,56 @@ const paradigmColors = {
 (function initHeatmap() {
   const features = DATA.features;
   const labels = DATA.feature_labels;
+  const shortLabels = DATA.feature_short_labels || {};
   const langs = DATA.heatmap;
   const totalMax = features.length * maxScore;
 
   // Build table — headers are just column indices (1-based)
-  let html = '<table class="heatmap-table"><thead><tr><th class="lang-name">Language</th>';
+  let html = '<div class="matrix-shell">';
+  html += '<div class="matrix-toolbar">';
+  html += '<div class="matrix-toolbar-copy"><strong>Dense comparison matrix.</strong> The table stays compact by default. Hover any column header or score cell to inspect the full feature name and rationale.</div>';
+  html += '<div class="matrix-summary">';
+  html += `<div class="summary-pill"><strong>${langs.length}</strong><span>Languages</span></div>`;
+  html += `<div class="summary-pill"><strong>${features.length}</strong><span>Features</span></div>`;
+  html += `<div class="summary-pill"><strong>${totalMax}</strong><span>Max score</span></div>`;
+  html += '</div></div>';
+  html += '<div class="heatmap-scroll">';
+  html += '<table class="heatmap-table"><thead><tr>';
+  html += '<th class="lang-name"><div class="corner-card"><strong>Language</strong><span>Sorted by total type-system complexity</span></div></th>';
   features.forEach((f, i) => {
-    html += `<th data-col="${i}" title="${labels[f]}" `
-          + `onmouseenter="showTip(event,'<b>#${i+1}</b> ${labels[f]}')" `
-          + `onmouseleave="hideTip()">${i+1}</th>`;
+    const shortLabel = shortLabels[f] || labels[f];
+    const featureTip = escapeAttr(`<b>#${i+1}</b> ${escapeHtml(labels[f])}`);
+    html += `<th class="feature-col" data-col="${i}" data-tip-html="${featureTip}"><div class="feature-head-card"><span class="feature-head-index">${String(i + 1).padStart(2, '0')}</span><span class="feature-head-short">${shortLabel}</span></div></th>`;
   });
-  html += '<th class="score-col">Total</th></tr></thead><tbody>';
+  html += '<th class="score-col"><div class="score-head-card"><strong>Total</strong><span>Aggregate feature score</span></div></th></tr></thead><tbody>';
 
   langs.forEach(lang => {
-    html += `<tr><td class="lang-name">${lang.name} <span style="color:var(--text-dim);font-size:0.6rem">${lang.year}</span></td>`;
+    html += `<tr><td class="lang-name"><div class="lang-cell-card"><span class="lang-title">${lang.name}</span><span class="lang-meta">${lang.year} / ${lang.paradigm}</span></div></td>`;
     lang.scores.forEach((s, i) => {
       const fl = labels[features[i]];
       const rationale = lang.rationale && lang.rationale[features[i]]
-        ? '<br><em style="color:#aab">' + lang.rationale[features[i]] + '</em>'
+        ? '<br><em style="color:#aab">' + escapeHtml(lang.rationale[features[i]]) + '</em>'
         : '';
-      html += `<td data-col="${i}"><span class="heatmap-cell" style="background:${scoreColor(s)}" `
-            + `onmouseenter="showTip(event,'<b>${lang.name}</b> &mdash; ${fl}<br>Score: ${s}/5 (${scoreLabel(s)})${rationale}')" `
-            + `onmouseleave="hideTip()">${s}</span></td>`;
+      const cellTip = escapeAttr(`<b>${escapeHtml(lang.name)}</b> &mdash; ${escapeHtml(fl)}<br>Score: ${s}/5 (${scoreLabel(s)})${rationale}`);
+      html += `<td data-col="${i}"><span class="heatmap-cell" data-tip-html="${cellTip}" style="background:${scoreColor(s)}">${s}</span></td>`;
     });
     const pct = Math.round(lang.complexity / totalMax * 100);
-    html += `<td class="heatmap-score-td"><span class="heatmap-score-bar">`
-          + `<span class="complexity-bar" style="width:${pct}px"></span>${lang.complexity}</span></td>`;
+    html += `<td class="heatmap-score-td score-col"><div class="score-cell-card"><span class="heatmap-score-bar">`
+          + `<span class="complexity-bar" style="width:${pct}px"></span>${lang.complexity}</span></div></td>`;
     html += '</tr>';
   });
-  html += '</tbody></table>';
+  html += '</tbody></table></div>';
 
-  // Feature index legend below table
-  html += '<div class="feat-index-legend">';
-  features.forEach((f, i) => {
-    html += `<span><span class="feat-idx">${i+1}</span>${labels[f]}</span>`;
-  });
   html += '</div>';
 
   document.getElementById('heatmap-container').innerHTML = html;
 
-  // Column highlight on hover
+  document.querySelectorAll('#heatmap-container [data-tip-html]').forEach(node => {
+    node.addEventListener('mouseenter', e => showTip(e, node.dataset.tipHtml));
+    node.addEventListener('mousemove', e => positionTip(e));
+    node.addEventListener('mouseleave', hideTip);
+  });
+
   const table = document.querySelector('.heatmap-table');
   table.addEventListener('mouseover', e => {
     const td = e.target.closest('[data-col]');

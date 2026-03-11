@@ -23,6 +23,26 @@ def get_feature_labels(data: dict) -> dict[str, str]:
     return data["metadata"]["features"]
 
 
+def get_feature_short_labels() -> dict[str, str]:
+    """Return compact labels for dense dashboard table headers."""
+    return {
+        "parametric_polymorphism": "Generics",
+        "ad_hoc_polymorphism": "Traits",
+        "algebraic_data_types": "ADTs",
+        "pattern_matching": "Matching",
+        "ownership_lifetime": "Ownership",
+        "dependent_types": "Dep Types",
+        "gadts": "GADTs",
+        "higher_kinded_types": "HKT",
+        "effect_system": "Effects",
+        "refinement_types": "Refinement",
+        "gradual_typing": "Gradual",
+        "type_inference": "Inference",
+        "structural_typing": "Structural",
+        "flow_sensitive_typing": "Flow",
+    }
+
+
 def get_scoring_scale(data: dict) -> dict[str, str]:
     """Return the scoring scale descriptions."""
     return data["metadata"]["scoring"]
@@ -131,6 +151,7 @@ def prepare_dashboard_data(data: dict) -> dict:
     """Prepare all data needed by the frontend dashboard."""
     features = get_feature_names(data)
     labels = get_feature_labels(data)
+    short_labels = get_feature_short_labels()
     scoring = get_scoring_scale(data)
     max_score = max(int(k) for k in scoring.keys())
 
@@ -169,6 +190,10 @@ def prepare_dashboard_data(data: dict) -> dict:
     return {
         "features": features,
         "feature_labels": labels,
+        "feature_short_labels": {
+            feature: short_labels.get(feature, labels.get(feature, feature))
+            for feature in features
+        },
         "scoring": scoring,
         "max_score": max_score,
         "heatmap": heatmap_languages,
