@@ -66,25 +66,42 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
 
   /* Heatmap */
   #heatmap-container { overflow-x: auto; }
-  .heatmap-table { border-collapse: collapse; width: 100%; min-width: 900px; }
+  .heatmap-table { border-collapse: collapse; min-width: 800px; }
   .heatmap-table th, .heatmap-table td {
-    padding: 6px 4px;
+    padding: 4px 2px;
     text-align: center;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     border: 1px solid var(--border);
   }
-  .heatmap-table th { color: var(--text-dim); font-weight: 500; white-space: nowrap; }
-  .heatmap-table th.lang-name { text-align: left; padding-left: 12px; min-width: 100px; }
+  .heatmap-table thead th {
+    color: var(--text-dim); font-weight: 500;
+    height: 120px; width: 40px; min-width: 40px; max-width: 40px;
+    vertical-align: bottom; padding-bottom: 8px; position: relative;
+  }
+  .heatmap-table thead th .rot-header {
+    display: block; transform: rotate(-55deg); transform-origin: bottom left;
+    white-space: nowrap; position: absolute; bottom: 10px; left: 50%;
+    font-size: 0.7rem;
+  }
+  .heatmap-table th.lang-name,
+  .heatmap-table th.score-col {
+    height: auto; width: auto; min-width: auto; max-width: none;
+    vertical-align: middle; padding: 6px 8px;
+  }
+  .heatmap-table th.lang-name { text-align: left; min-width: 110px; }
+  .heatmap-table th.score-col { min-width: 70px; }
   .heatmap-table td.lang-name {
-    text-align: left; padding-left: 12px; font-weight: 600;
+    text-align: left; padding-left: 10px; font-weight: 600;
     white-space: nowrap; position: sticky; left: 0; background: var(--card); z-index: 1;
   }
+  .heatmap-table td.feat-cell { padding: 3px 1px; }
   .heatmap-cell {
-    width: 36px; height: 36px; display: inline-block; border-radius: 4px;
-    transition: transform 0.15s;
-    cursor: pointer;
+    width: 32px; height: 32px; display: block; margin: 0 auto;
+    border-radius: 4px; transition: transform 0.15s; cursor: pointer;
+    line-height: 32px; text-align: center; font-size: 0.65rem;
+    color: rgba(255,255,255,0.5);
   }
-  .heatmap-cell:hover { transform: scale(1.3); }
+  .heatmap-cell:hover { transform: scale(1.2); color: rgba(255,255,255,0.9); }
 
   /* Scoring legend */
   .score-legend {
@@ -305,22 +322,22 @@ const paradigmColors = {
   let html = '<table class="heatmap-table"><thead><tr><th class="lang-name">Language</th>';
   features.forEach(f => {
     const short = labels[f].split('/')[0].split('(')[0].trim();
-    html += `<th title="${labels[f]}">${short.length > 16 ? short.slice(0, 15) + '\u2026' : short}</th>`;
+    html += `<th title="${labels[f]}"><span class="rot-header">${short}</span></th>`;
   });
-  html += '<th>Score</th></tr></thead><tbody>';
+  html += '<th class="score-col">Score</th></tr></thead><tbody>';
   langs.forEach(lang => {
-    html += `<tr><td class="lang-name">${lang.name} <span style="color:var(--text-dim);font-size:0.7rem">(${lang.year})</span></td>`;
+    html += `<tr><td class="lang-name">${lang.name} <span style="color:var(--text-dim);font-size:0.65rem">(${lang.year})</span></td>`;
     lang.scores.forEach((s, i) => {
       const fl = labels[features[i]];
       const rationale = lang.rationale && lang.rationale[features[i]]
         ? '<br><em style="color:#aab">' + lang.rationale[features[i]] + '</em>'
         : '';
-      html += `<td><span class="heatmap-cell" style="background:${scoreColor(s)}" `
+      html += `<td class="feat-cell"><span class="heatmap-cell" style="background:${scoreColor(s)}" `
             + `onmouseenter="showTip(event,'<b>${lang.name}</b> &mdash; ${fl}<br>Score: ${s}/5 (${scoreLabel(s)})${rationale}')" `
-            + `onmouseleave="hideTip()"></span></td>`;
+            + `onmouseleave="hideTip()">${s}</span></td>`;
     });
     const pct = Math.round(lang.complexity / totalMax * 100);
-    html += `<td><span class="complexity-bar" style="width:${pct}px"></span> ${lang.complexity}/${totalMax}</td>`;
+    html += `<td><span class="complexity-bar" style="width:${pct}px"></span> ${lang.complexity}</td>`;
     html += '</tr>';
   });
   html += '</tbody></table>';
