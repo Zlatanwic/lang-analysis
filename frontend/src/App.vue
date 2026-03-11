@@ -3,8 +3,10 @@ import { computed } from 'vue'
 import { useLocalStorage } from '@vueuse/core'
 import { useDashboardData } from './composables/useDashboardData'
 import FeatureMatrixPanel from './components/panels/FeatureMatrixPanel.vue'
+import FeatureCooccurrencePanel from './components/panels/FeatureCooccurrencePanel.vue'
 import RadarComparisonPanel from './components/panels/RadarComparisonPanel.vue'
 import FeatureTimelinePanel from './components/panels/FeatureTimelinePanel.vue'
+import ArmsRacePanel from './components/panels/ArmsRacePanel.vue'
 import SimilarityNetworkPanel from './components/panels/SimilarityNetworkPanel.vue'
 import PopularityAnalysisPanel from './components/panels/PopularityAnalysisPanel.vue'
 import FeatureDiffusionPanel from './components/panels/FeatureDiffusionPanel.vue'
@@ -16,8 +18,10 @@ const { data, error, isFetching } = useDashboardData()
 
 const tabs = [
   { key: 'matrix', label: 'Feature Matrix', kicker: 'Compare', summary: 'Dense scorecard for deep side-by-side language comparison.' },
+  { key: 'cooccurrence', label: 'Feature Co-occurrence', kicker: 'Correlate', summary: 'See which capabilities consistently reinforce each other across the language set.' },
   { key: 'radar', label: 'Radar', kicker: 'Shape', summary: 'Contrast overall type-system profiles across a small hand-picked set.' },
   { key: 'timeline', label: 'Timeline', kicker: 'Sequence', summary: 'See when specific capabilities appeared and how feature eras overlapped.' },
+  { key: 'arms-race', label: 'Arms Race Index', kicker: 'Accelerate', summary: 'Aggregate yearly feature arrivals to reveal how fast type-system complexity compounds.' },
   { key: 'network', label: 'Similarity Network', kicker: 'Map', summary: 'Reveal language neighborhoods based on shared feature vectors.' },
   { key: 'popularity', label: 'Popularity', kicker: 'Signal', summary: 'Balance type complexity against ecosystem interest and visibility.' },
   { key: 'diffusion', label: 'Feature Diffusion', kicker: 'Trace', summary: 'Follow one capability as it spreads across domains and families.' },
@@ -113,8 +117,10 @@ const topStats = computed(() => {
     </div>
     <template v-else-if="data">
       <FeatureMatrixPanel v-if="activeTab === 'matrix'" :data="data" />
+      <FeatureCooccurrencePanel v-else-if="activeTab === 'cooccurrence'" :data="data" />
       <RadarComparisonPanel v-else-if="activeTab === 'radar'" :data="data" />
       <FeatureTimelinePanel v-else-if="activeTab === 'timeline'" :data="data" />
+      <ArmsRacePanel v-else-if="activeTab === 'arms-race'" :data="data" />
       <SimilarityNetworkPanel v-else-if="activeTab === 'network'" :data="data" />
       <PopularityAnalysisPanel v-else-if="activeTab === 'popularity'" :data="data" />
       <FeatureDiffusionPanel v-else-if="activeTab === 'diffusion'" :data="data" />

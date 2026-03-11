@@ -5,6 +5,17 @@ export interface TimelineEvent {
   feature_label: string
 }
 
+export interface ArmsRaceSeries {
+  years: number[]
+  yearly_counts: number[]
+  cumulative_counts: number[]
+  moving_average: number[]
+  acceleration: number[]
+  total_events: number
+  peak_year: number | null
+  peak_count: number
+}
+
 export interface HeatmapLanguage {
   name: string
   year: number
@@ -81,6 +92,26 @@ export interface LineageEdge {
   reason: string
 }
 
+export interface CooccurrenceCell {
+  x: string
+  y: string
+  x_index: number
+  y_index: number
+  correlation: number
+  cooccurrence: number
+  support_x: number
+  support_y: number
+}
+
+export interface CooccurrenceTopPair {
+  feature_a: string
+  feature_b: string
+  label_a: string
+  label_b: string
+  correlation: number
+  cooccurrence: number
+}
+
 export interface DashboardData {
   features: string[]
   feature_labels: Record<string, string>
@@ -93,6 +124,7 @@ export interface DashboardData {
     edges: NetworkEdge[]
   }
   timeline: TimelineEvent[]
+  arms_race: ArmsRaceSeries
   popularity: PopularityPoint[]
   diffusion: {
     default_feature: string
@@ -105,5 +137,11 @@ export interface DashboardData {
   clusters: {
     cluster_labels: Record<string, string>
     points: ClusterPoint[]
+  }
+  cooccurrence: {
+    features: string[]
+    prevalence: Record<string, number>
+    cells: CooccurrenceCell[]
+    top_pairs: CooccurrenceTopPair[]
   }
 }

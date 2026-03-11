@@ -67,6 +67,23 @@ def cosine_similarity(a: list[int], b: list[int]) -> float:
     return dot / (mag_a * mag_b)
 
 
+def pearson_correlation(a: list[float], b: list[float]) -> float:
+    """Compute Pearson correlation between two equal-length vectors."""
+    if not a or not b or len(a) != len(b):
+        return 0.0
+
+    mean_a = sum(a) / len(a)
+    mean_b = sum(b) / len(b)
+    centered_a = [value - mean_a for value in a]
+    centered_b = [value - mean_b for value in b]
+    numerator = sum(x * y for x, y in zip(centered_a, centered_b))
+    denom_a = math.sqrt(sum(value * value for value in centered_a))
+    denom_b = math.sqrt(sum(value * value for value in centered_b))
+    if denom_a == 0 or denom_b == 0:
+        return 0.0
+    return numerator / (denom_a * denom_b)
+
+
 def compute_similarity_matrix(data: dict) -> dict:
     """Compute pairwise cosine similarity between all languages."""
     vectors = get_feature_vectors(data)
@@ -124,6 +141,60 @@ def build_timeline_events(data: dict) -> list[dict]:
             })
     events.sort(key=lambda e: e["year"])
     return events
+
+
+def build_arms_race_index(data: dict) -> dict:
+    """Aggregate yearly feature arrivals into an acceleration-focused trend series."""
+    events = build_timeline_events(data)
+    if not events:
+        return {
+            "years": [],
+            "yearly_counts": [],
+            "cumulative_counts": [],
+            "moving_average": [],
+            "acceleration": [],
+            "total_events": 0,
+            "peak_year": None,
+            "peak_count": 0,
+        }
+
+    years = list(range(events[0]["year"], events[-1]["year"] + 1))
+    yearly_totals = {year: 0 for year in years}
+    for event in events:
+        yearly_totals[event["year"]] += 1
+
+    yearly_counts = [yearly_totals[year] for year in years]
+    cumulative_counts = []
+    running_total = 0
+    for count in yearly_counts:
+        running_total += count
+        cumulative_counts.append(running_total)
+
+    moving_average = []
+    for idx in range(len(yearly_counts)):
+        start_idx = max(0, idx - 4)
+        window = yearly_counts[start_idx : idx + 1]
+        moving_average.append(round(sum(window) / len(window), 2))
+
+    acceleration = []
+    previous = 0
+    for count in yearly_counts:
+        acceleration.append(count - previous)
+        previous = count
+
+    peak_count = max(yearly_counts)
+    peak_year = years[yearly_counts.index(peak_count)]
+
+    return {
+        "years": years,
+        "yearly_counts": yearly_counts,
+        "cumulative_counts": cumulative_counts,
+        "moving_average": moving_average,
+        "acceleration": acceleration,
+        "total_events": len(events),
+        "peak_year": peak_year,
+        "peak_count": peak_count,
+    }
 
 
 def build_popularity_data(data: dict) -> list[dict]:
@@ -431,6 +502,63 @@ def build_domain_clusters(data: dict) -> dict:
     }
 
 
+def build_feature_cooccurrence(data: dict) -> dict:
+    """Measure how strongly features travel together across the language set."""
+    features = get_feature_names(data)
+    labels = get_feature_labels(data)
+    feature_scores = {
+        feature: [lang["features"].get(feature, 0) for lang in data["languages"]]
+        for feature in features
+    }
+    prevalence = {
+        feature: sum(1 for score in scores if score > 0)
+        for feature, scores in feature_scores.items()
+    }
+
+    cells = []
+    top_pairs = []
+    for y_index, feature_y in enumerate(features):
+        scores_y = feature_scores[feature_y]
+        for x_index, feature_x in enumerate(features):
+            scores_x = feature_scores[feature_x]
+            correlation = 1.0 if feature_x == feature_y else pearson_correlation(scores_x, scores_y)
+            cooccurrence = sum(
+                1 for score_x, score_y in zip(scores_x, scores_y)
+                if score_x > 0 and score_y > 0
+            )
+            cells.append({
+                "x": feature_x,
+                "y": feature_y,
+                "x_index": x_index,
+                "y_index": y_index,
+                "correlation": round(correlation, 3),
+                "cooccurrence": cooccurrence,
+                "support_x": prevalence[feature_x],
+                "support_y": prevalence[feature_y],
+            })
+            if x_index < y_index:
+                top_pairs.append({
+                    "feature_a": feature_x,
+                    "feature_b": feature_y,
+                    "label_a": labels.get(feature_x, feature_x),
+                    "label_b": labels.get(feature_y, feature_y),
+                    "correlation": round(correlation, 3),
+                    "cooccurrence": cooccurrence,
+                })
+
+    top_pairs.sort(
+        key=lambda pair: (pair["correlation"], pair["cooccurrence"]),
+        reverse=True,
+    )
+
+    return {
+        "features": features,
+        "prevalence": prevalence,
+        "cells": cells,
+        "top_pairs": top_pairs[:6],
+    }
+
+
 def prepare_dashboard_data(data: dict) -> dict:
     """Prepare all data needed by the frontend dashboard."""
     features = get_feature_names(data)
@@ -467,14 +595,16 @@ def prepare_dashboard_data(data: dict) -> dict:
 
     # Timeline
     timeline = build_timeline_events(data)
+    arms_race = build_arms_race_index(data)
 
     # Popularity
     popularity = build_popularity_data(data)
 
-    # Diffusion, lineage, and clustering
+    # Diffusion, lineage, clustering, and co-occurrence
     diffusion = build_feature_diffusion(data)
     lineage = build_language_lineage(data)
     clusters = build_domain_clusters(data)
+    cooccurrence = build_feature_cooccurrence(data)
 
     return {
         "features": features,
@@ -488,8 +618,10 @@ def prepare_dashboard_data(data: dict) -> dict:
         "heatmap": heatmap_languages,
         "network": {"nodes": nodes, "edges": edges},
         "timeline": timeline,
+        "arms_race": arms_race,
         "popularity": popularity,
         "diffusion": diffusion,
         "lineage": lineage,
         "clusters": clusters,
+        "cooccurrence": cooccurrence,
     }
