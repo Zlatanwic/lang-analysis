@@ -1,0 +1,26 @@
+{
+  "name": "lang-analysis-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "vue-tsc --noEmit",
+    "sync:data": "python ../main.py --json-output public/dashboard-data.json",
+    "dev:sync": "pnpm run sync:data && pnpm dev"
+  },
+  "dependencies": {
+    "@vueuse/core": "^13.6.0",
+    "d3": "^7.9.0",
+    "echarts": "^5.6.0",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.0",
+    "vue-tsc": "^2.2.8"
+  }
+}

@@ -1,4 +1,33 @@
-output/
+# Python
 __pycache__/
 *.pyc
 .venv/
+
+# Generated dashboard data
+output/
+frontend/public/dashboard-data.json
+
+# Frontend dependencies and build outputs
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.pnpm-debug.log*
+*.tsbuildinfo
+
+# Local package manager / tool caches
+.corepack/
+.pnpm/
+.pnpm-store/
+.pnpm-store-2/
+
+# Local AI / agent workspace artifacts
+.agent/
+.agents/
+.claude/
+skills-lock.json
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

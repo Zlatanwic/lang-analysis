@@ -1,93 +1,65 @@
 """Programming Language Type System Knowledge Graph.
 
-Generates an interactive HTML dashboard for exploring type system features
-across programming languages. Run this script to build the dashboard, then
-open the generated HTML file in a browser.
+Generates structured dashboard data for the Vue frontend.
 
 Usage:
-    python main.py              # Generate dashboard and open in browser
-    python main.py --serve      # Generate and start a local HTTP server
-    python main.py --output X   # Write dashboard to custom path
+    python main.py
+    python main.py --json-output custom/path/dashboard-data.json
 """
 
 import argparse
-import http.server
 import json
-import os
-import sys
-import threading
-import webbrowser
 from pathlib import Path
 
 from src.data_processing import load_data, prepare_dashboard_data
-from src.dashboard_template import DASHBOARD_HTML
 
-OUTPUT_DIR = Path(__file__).parent / "output"
-DEFAULT_OUTPUT = OUTPUT_DIR / "dashboard.html"
+FRONTEND_DIR = Path(__file__).parent / "frontend"
+DEFAULT_JSON_OUTPUT = FRONTEND_DIR / "public" / "dashboard-data.json"
 
 
-def generate_dashboard(output_path: Path | None = None) -> Path:
-    """Generate the interactive dashboard HTML file."""
+def generate_dashboard_json(output_path: Path | None = None) -> Path:
+    """Generate frontend-consumable dashboard data JSON."""
     if output_path is None:
-        output_path = DEFAULT_OUTPUT
+        output_path = DEFAULT_JSON_OUTPUT
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     data = load_data()
     dashboard_data = prepare_dashboard_data(data)
-    data_json = json.dumps(dashboard_data, ensure_ascii=False)
-
-    html = DASHBOARD_HTML.replace("__DASHBOARD_DATA__", data_json)
-    output_path.write_text(html, encoding="utf-8")
-    print(f"Dashboard generated: {output_path}")
+    output_path.write_text(
+        json.dumps(dashboard_data, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    print(f"Dashboard JSON generated: {output_path}")
     return output_path
-
-
-def serve(output_path: Path, port: int = 8080):
-    """Start a local HTTP server for the dashboard."""
-    os.chdir(output_path.parent)
-    handler = http.server.SimpleHTTPRequestHandler
-    server = http.server.HTTPServer(("", port), handler)
-    url = f"http://localhost:{port}/{output_path.name}"
-    print(f"Serving at {url}")
-    threading.Timer(0.5, lambda: webbrowser.open(url)).start()
-    try:
-        server.serve_forever()
-    except KeyboardInterrupt:
-        print("\nServer stopped.")
-        server.server_close()
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate a type system knowledge graph dashboard"
+        description="Generate Vue frontend dashboard data"
     )
     parser.add_argument(
-        "--output", "-o",
+        "--output",
         type=str,
         default=None,
-        help="Output path for the HTML file",
+        help="Output path for the generated dashboard JSON file",
     )
     parser.add_argument(
-        "--serve", "-s",
-        action="store_true",
-        help="Start a local HTTP server after generating",
-    )
-    parser.add_argument(
-        "--port", "-p",
-        type=int,
-        default=8080,
-        help="Port for the HTTP server (default: 8080)",
+        "--json-output",
+        type=str,
+        default=None,
+        help="Optional JSON output path for the Vue frontend data bundle",
     )
     args = parser.parse_args()
 
-    output_path = Path(args.output) if args.output else None
-    path = generate_dashboard(output_path)
-
-    if args.serve:
-        serve(path, args.port)
+    if args.output and not args.json_output:
+        json_output_path = Path(args.output)
     else:
-        print(f"Open {path} in your browser to view the dashboard.")
-        print("Or run with --serve to start a local server.")
+        json_output_path = Path(args.json_output) if args.json_output else None
+
+    generated_json_path = generate_dashboard_json(json_output_path)
+    print(f"Vue frontend data ready at {generated_json_path}.")
+    print("Run `cd frontend && pnpm dev` for local development.")
+    print("Run `cd frontend && pnpm build` for a production bundle.")
 
 
 if __name__ == "__main__":
