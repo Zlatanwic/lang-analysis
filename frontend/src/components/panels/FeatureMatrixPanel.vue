@@ -42,6 +42,7 @@ const topLanguage = props.data.heatmap[0]
 
 <template>
   <PanelCard
+    eyebrow="Compare"
     title="Feature Matrix"
     description="The matrix stays compact by default. Long feature names and scoring rationale only surface inside the hover card."
   >

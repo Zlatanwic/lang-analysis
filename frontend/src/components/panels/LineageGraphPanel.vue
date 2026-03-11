@@ -86,6 +86,7 @@ const chartOption = computed<EChartsOption>(() => {
 
 <template>
   <PanelCard
+    eyebrow="Lineage"
     title="Language Evolution Lineage"
     description="Directed influence map showing how ideas moved across families, runtimes, and programming eras."
   >

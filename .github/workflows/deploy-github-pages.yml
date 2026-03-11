@@ -43,15 +43,6 @@ jobs:
       - name: Generate dashboard data
         run: python main.py --json-output frontend/public/dashboard-data.json
 
-      - name: Debug generated data bundle
-        run: |
-          echo "Repository: $GITHUB_REPOSITORY"
-          echo "Working directory: $(pwd)"
-          echo "--- frontend/public ---"
-          ls -la frontend/public
-          echo "--- dashboard-data.json head ---"
-          head -n 20 frontend/public/dashboard-data.json
-
       - name: Install frontend dependencies
         working-directory: frontend
         run: pnpm install --frozen-lockfile
@@ -68,17 +59,6 @@ jobs:
 
       - name: Copy generated dashboard data into Pages artifact
         run: cp frontend/public/dashboard-data.json frontend/dist/dashboard-data.json
-
-      - name: Debug built artifact
-        run: |
-          echo "--- frontend/dist ---"
-          ls -la frontend/dist
-          echo "--- frontend/dist file tree ---"
-          find frontend/dist -maxdepth 3 -type f | sort
-          echo "--- index.html references ---"
-          grep -n "dashboard-data.json\|assets/" frontend/dist/index.html || true
-          echo "--- copied dashboard-data.json head ---"
-          head -n 20 frontend/dist/dashboard-data.json
 
       - name: Verify generated Pages artifact
         run: |

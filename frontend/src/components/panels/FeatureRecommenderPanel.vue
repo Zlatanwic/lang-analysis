@@ -70,6 +70,7 @@ function reset() {
 
 <template>
   <PanelCard
+    eyebrow="Configure"
     title="Interactive Feature Recommender"
     description="Turn the dataset into a configuration tool: select the capabilities you care about and surface the closest language matches."
   >

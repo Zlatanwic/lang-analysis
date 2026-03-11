@@ -68,6 +68,7 @@ const chartOption = computed<EChartsOption>(() => {
 
 <template>
   <PanelCard
+    eyebrow="Cluster"
     title="Domain Clusters"
     description="K-means groups languages by the full feature vector, then PCA compresses the space into a readable scatter plot."
   >

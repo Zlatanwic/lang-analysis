@@ -65,6 +65,7 @@ const chartOption = computed<EChartsOption>(() => ({
 
 <template>
   <PanelCard
+    eyebrow="Signal"
     title="Popularity Analysis"
     description="Cross-check type complexity against external popularity and affinity signals."
   >

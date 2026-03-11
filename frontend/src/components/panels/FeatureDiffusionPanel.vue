@@ -99,6 +99,7 @@ const chartOption = computed<EChartsOption>(() => {
 
 <template>
   <PanelCard
+    eyebrow="Trace"
     title="Feature Diffusion"
     description="Pick a capability and scrub through its adoption path, from earliest lineage roots to later mainstream uptake."
   >

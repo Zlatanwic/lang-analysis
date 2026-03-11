@@ -2,6 +2,7 @@
 defineProps<{
   title: string
   description: string
+  eyebrow?: string
 }>()
 </script>
 
@@ -9,6 +10,7 @@ defineProps<{
   <section class="panel-card">
     <header class="panel-head">
       <div>
+        <span v-if="eyebrow" class="panel-eyebrow">{{ eyebrow }}</span>
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
       </div>

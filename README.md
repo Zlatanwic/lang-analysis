@@ -1,5 +1,8 @@
 # Lang Analysis Dashboard
 
+[![Deploy GitHub Pages](https://github.com/Zlatanwic/lang-analysis/actions/workflows/deploy-github-pages.yml/badge.svg)](https://github.com/Zlatanwic/lang-analysis/actions/workflows/deploy-github-pages.yml)
+[Live Site](https://zlatanwic.github.io/lang-analysis/)
+
 A Vue 3 + Vite dashboard for exploring programming language type-system features, similarity, adoption timelines, lineage, and recommendation scenarios.
 
 Python is responsible for turning the source dataset into frontend-ready JSON. Vue is responsible for the UI, charts, interactions, and layout.

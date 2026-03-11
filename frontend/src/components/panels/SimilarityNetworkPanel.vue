@@ -71,6 +71,7 @@ const chartOption = computed<EChartsOption>(() => ({
 
 <template>
   <PanelCard
+    eyebrow="Map"
     title="Similarity Network"
     description="Force-directed view of languages that cluster together once you compare their feature profiles."
   >

@@ -15,18 +15,19 @@ import FeatureRecommenderPanel from './components/panels/FeatureRecommenderPanel
 const { data, error, isFetching } = useDashboardData()
 
 const tabs = [
-  { key: 'matrix', label: 'Feature Matrix' },
-  { key: 'radar', label: 'Radar' },
-  { key: 'timeline', label: 'Timeline' },
-  { key: 'network', label: 'Similarity Network' },
-  { key: 'popularity', label: 'Popularity' },
-  { key: 'diffusion', label: 'Feature Diffusion' },
-  { key: 'clusters', label: 'Domain Clusters' },
-  { key: 'lineage', label: 'Lineage Graph' },
-  { key: 'recommender', label: 'Recommender' },
+  { key: 'matrix', label: 'Feature Matrix', kicker: 'Compare', summary: 'Dense scorecard for deep side-by-side language comparison.' },
+  { key: 'radar', label: 'Radar', kicker: 'Shape', summary: 'Contrast overall type-system profiles across a small hand-picked set.' },
+  { key: 'timeline', label: 'Timeline', kicker: 'Sequence', summary: 'See when specific capabilities appeared and how feature eras overlapped.' },
+  { key: 'network', label: 'Similarity Network', kicker: 'Map', summary: 'Reveal language neighborhoods based on shared feature vectors.' },
+  { key: 'popularity', label: 'Popularity', kicker: 'Signal', summary: 'Balance type complexity against ecosystem interest and visibility.' },
+  { key: 'diffusion', label: 'Feature Diffusion', kicker: 'Trace', summary: 'Follow one capability as it spreads across domains and families.' },
+  { key: 'clusters', label: 'Domain Clusters', kicker: 'Cluster', summary: 'Project feature profiles into groups that expose hidden affinities.' },
+  { key: 'lineage', label: 'Lineage Graph', kicker: 'Lineage', summary: 'Track influence paths between research roots and modern languages.' },
+  { key: 'recommender', label: 'Recommender', kicker: 'Configure', summary: 'Turn the dataset into a language chooser driven by actual constraints.' },
 ] as const
 
 const activeTab = useLocalStorage<(typeof tabs)[number]['key']>('dashboard-active-tab', 'matrix')
+const activeTabMeta = computed(() => tabs.find((tab) => tab.key === activeTab.value) ?? tabs[0])
 
 const topStats = computed(() => {
   if (!data.value) return []
@@ -43,35 +44,66 @@ const topStats = computed(() => {
   <main class="app-shell">
     <section class="hero">
       <span class="hero-eyebrow">Vue dashboard refactor</span>
-      <h1>Programming Language Type System Knowledge Graph</h1>
-      <p>
-        The frontend is now organized as a Vue 3 application instead of a monolithic HTML string.
-        Python prepares the dataset, Vue owns the interaction model, and every analytical surface now has a real component boundary.
-      </p>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1>Programming Language Type System Knowledge Graph</h1>
+          <p>
+            Explore how advanced type-system capabilities cluster, diffuse, and shape language design through a Vue-driven analytical dashboard.
+          </p>
 
-      <div class="top-stats">
-        <div
-          v-for="item in topStats"
-          :key="item.label"
-          class="stat-card"
-        >
-          <strong>{{ item.value }}</strong>
-          <span>{{ item.label }}</span>
+          <div class="hero-support">
+            <span class="info-pill">Vue 3 interface</span>
+            <span class="info-pill">Python data pipeline</span>
+            <span class="info-pill">GitHub Pages deployed</span>
+          </div>
+
+          <div class="top-stats">
+            <div
+              v-for="item in topStats"
+              :key="item.label"
+              class="stat-card"
+            >
+              <strong>{{ item.value }}</strong>
+              <span>{{ item.label }}</span>
+            </div>
+          </div>
         </div>
+
+        <aside class="hero-side">
+          <div class="hero-focus-card">
+            <span class="hero-focus-kicker">Current lens</span>
+            <strong>{{ activeTabMeta.label }}</strong>
+            <p>{{ activeTabMeta.summary }}</p>
+          </div>
+          <div class="hero-focus-card subtle">
+            <span class="hero-focus-kicker">Reading mode</span>
+            <strong>{{ activeTabMeta.kicker }}</strong>
+            <p>Each panel is tuned for a different analysis style, from dense comparison to exploratory graph reading.</p>
+          </div>
+        </aside>
       </div>
     </section>
 
-    <div class="tab-row">
-      <button
-        v-for="tab in tabs"
-        :key="tab.key"
-        class="tab-button"
-        :class="{ active: activeTab === tab.key }"
-        @click="activeTab = tab.key"
-      >
-        {{ tab.label }}
-      </button>
-    </div>
+    <section class="view-rail">
+      <div class="tab-row">
+        <button
+          v-for="tab in tabs"
+          :key="tab.key"
+          class="tab-button"
+          :class="{ active: activeTab === tab.key }"
+          @click="activeTab = tab.key"
+        >
+          <small>{{ tab.kicker }}</small>
+          <span>{{ tab.label }}</span>
+        </button>
+      </div>
+
+      <div class="view-context">
+        <span class="view-context-kicker">{{ activeTabMeta.kicker }}</span>
+        <strong>{{ activeTabMeta.label }}</strong>
+        <p>{{ activeTabMeta.summary }}</p>
+      </div>
+    </section>
 
     <div v-if="isFetching && !data" class="loading">
       Loading dashboard data...

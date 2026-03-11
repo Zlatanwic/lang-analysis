@@ -58,6 +58,7 @@ const chartOption = computed<EChartsOption>(() => {
 
 <template>
   <PanelCard
+    eyebrow="Shape"
     title="Radar Comparison"
     description="Compare up to four languages across the full type-system surface without losing the compact matrix context."
   >
