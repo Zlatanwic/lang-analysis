@@ -82,8 +82,21 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
   .heatmap-cell {
     width: 36px; height: 36px; display: inline-block; border-radius: 4px;
     transition: transform 0.15s;
+    cursor: pointer;
   }
   .heatmap-cell:hover { transform: scale(1.3); }
+
+  /* Scoring legend */
+  .score-legend {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px;
+    font-size: 0.8rem; color: var(--text-dim);
+  }
+  .score-legend-item {
+    display: flex; align-items: center; gap: 4px;
+  }
+  .score-legend-swatch {
+    width: 16px; height: 16px; border-radius: 3px; display: inline-block;
+  }
 
   /* Radar selectors */
   .radar-controls { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
@@ -101,11 +114,22 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
 
   /* Network */
   #network-svg { width: 100%; background: var(--card); border-radius: 12px; }
-  .node-label { font-size: 12px; fill: var(--text); pointer-events: none; font-weight: 600; }
+  .node-label { font-size: 11px; fill: var(--text); pointer-events: none; font-weight: 600; }
   .link { stroke-opacity: 0.4; }
 
   /* Timeline */
-  #timeline-chart { width: 100%; height: 600px; }
+  #timeline-chart { width: 100%; height: 700px; }
+
+  /* Popularity */
+  #popularity-chart { width: 100%; height: 600px; }
+  .pop-metric-btns { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .pop-metric-btn {
+    padding: 6px 16px; border: 1px solid var(--border); border-radius: 8px;
+    cursor: pointer; font-size: 0.8rem; background: var(--card); color: var(--text-dim);
+    transition: all 0.2s;
+  }
+  .pop-metric-btn:hover { border-color: var(--accent); color: var(--text); }
+  .pop-metric-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
   /* Tooltip */
   .tooltip {
@@ -117,7 +141,7 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
     font-size: 0.8rem;
     pointer-events: none;
     z-index: 999;
-    max-width: 280px;
+    max-width: 350px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.4);
     display: none;
   }
@@ -140,7 +164,7 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
 
 <div class="header">
   <h1>Programming Language Type System Knowledge Graph</h1>
-  <p>An interactive exploration of type system features across 17 programming languages — covering generics, ADTs, dependent types, effect systems, and more.</p>
+  <p>An interactive exploration of type system features across <strong>25</strong> programming languages — featuring 0-5 fine-grained scoring, popularity analysis, and scoring rationale.</p>
 </div>
 
 <div class="tabs">
@@ -148,6 +172,7 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
   <div class="tab" data-panel="radar">Radar Comparison</div>
   <div class="tab" data-panel="timeline">Feature Timeline</div>
   <div class="tab" data-panel="network">Similarity Network</div>
+  <div class="tab" data-panel="popularity">Popularity Analysis</div>
 </div>
 
 <div class="tooltip" id="tooltip"></div>
@@ -156,7 +181,8 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
 <div class="panel active" id="panel-heatmap">
   <div class="card">
     <h2>Type System Feature Matrix</h2>
-    <p class="desc">Rows sorted by total type system complexity score. Colors: dark = not supported, medium = partial, bright = full support.</p>
+    <p class="desc">Rows sorted by total type system complexity score. Scoring: 0 (not supported) to 5 (full/reference implementation). Click cells to see scoring rationale.</p>
+    <div class="score-legend" id="score-legend"></div>
     <div id="heatmap-container"></div>
   </div>
 </div>
@@ -165,7 +191,7 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
 <div class="panel" id="panel-radar">
   <div class="card">
     <h2>Radar Chart Comparison</h2>
-    <p class="desc">Select 2-4 languages to overlay their type system "shapes" on a radar chart.</p>
+    <p class="desc">Select 2-4 languages to overlay their type system "shapes" on a radar chart. Scale: 0-5.</p>
     <div class="radar-controls" id="radar-chips"></div>
     <div id="radar-chart" style="width:100%;height:550px;"></div>
   </div>
@@ -189,6 +215,20 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
   </div>
 </div>
 
+<!-- Panel 5: Popularity -->
+<div class="panel" id="panel-popularity">
+  <div class="card">
+    <h2>Type Complexity vs. Popularity</h2>
+    <p class="desc">Does a richer type system correlate with popularity? Explore the trade-off between type system complexity (sum of feature scores) and language popularity metrics. Bubble size = StackOverflow "loved" percentage.</p>
+    <div class="pop-metric-btns" id="pop-metric-btns">
+      <div class="pop-metric-btn active" data-metric="tiobe_rank">TIOBE Rank</div>
+      <div class="pop-metric-btn" data-metric="github_stars_rank">GitHub Stars Rank</div>
+      <div class="pop-metric-btn" data-metric="stackoverflow_loved_pct">SO Loved %</div>
+    </div>
+    <div id="popularity-chart"></div>
+  </div>
+</div>
+
 <script>
 // ====== DATA (injected by Python) ======
 const DATA = __DASHBOARD_DATA__;
@@ -205,6 +245,7 @@ tabs.forEach(tab => {
     if (tab.dataset.panel === 'network') initNetwork();
     if (tab.dataset.panel === 'timeline') initTimeline();
     if (tab.dataset.panel === 'radar') initRadar();
+    if (tab.dataset.panel === 'popularity') initPopularity();
   });
 });
 
@@ -219,9 +260,22 @@ function showTip(evt, html) {
 function hideTip() { tooltip.style.display = 'none'; }
 
 // ====== COLORS ======
+const maxScore = DATA.max_score || 5;
 function scoreColor(score) {
-  const colors = ['#1a1d27', '#3b5998', '#6c8cff'];
-  return colors[score] || colors[0];
+  // 0-5 color scale: dark -> blue -> bright
+  const colors = [
+    '#1a1d27',  // 0: not supported
+    '#2a3050',  // 1: minimal
+    '#3b5998',  // 2: basic
+    '#5070c0',  // 3: moderate
+    '#6c8cff',  // 4: strong
+    '#8eb4ff',  // 5: full
+  ];
+  return colors[Math.min(score, 5)] || colors[0];
+}
+function scoreLabel(score) {
+  const labels = ['Not supported', 'Minimal', 'Basic', 'Moderate', 'Strong', 'Full'];
+  return labels[Math.min(score, 5)] || labels[0];
 }
 const paradigmColors = {
   'Systems': '#ff6c8c',
@@ -231,28 +285,42 @@ const paradigmColors = {
   'Object-oriented': '#c96cff',
 };
 
+// ====== SCORING LEGEND ======
+(function buildLegend() {
+  const container = document.getElementById('score-legend');
+  for (let i = 0; i <= 5; i++) {
+    const item = document.createElement('span');
+    item.className = 'score-legend-item';
+    item.innerHTML = `<span class="score-legend-swatch" style="background:${scoreColor(i)}"></span>${i} — ${scoreLabel(i)}`;
+    container.appendChild(item);
+  }
+})();
+
 // ====== 1. HEATMAP ======
 (function initHeatmap() {
   const features = DATA.features;
   const labels = DATA.feature_labels;
   const langs = DATA.heatmap;
+  const totalMax = features.length * maxScore;
   let html = '<table class="heatmap-table"><thead><tr><th class="lang-name">Language</th>';
   features.forEach(f => {
     const short = labels[f].split('/')[0].split('(')[0].trim();
-    html += `<th title="${labels[f]}">${short.length > 16 ? short.slice(0, 15) + '…' : short}</th>`;
+    html += `<th title="${labels[f]}">${short.length > 16 ? short.slice(0, 15) + '\u2026' : short}</th>`;
   });
   html += '<th>Score</th></tr></thead><tbody>';
   langs.forEach(lang => {
     html += `<tr><td class="lang-name">${lang.name} <span style="color:var(--text-dim);font-size:0.7rem">(${lang.year})</span></td>`;
     lang.scores.forEach((s, i) => {
       const fl = labels[features[i]];
+      const rationale = lang.rationale && lang.rationale[features[i]]
+        ? '<br><em style="color:#aab">' + lang.rationale[features[i]] + '</em>'
+        : '';
       html += `<td><span class="heatmap-cell" style="background:${scoreColor(s)}" `
-            + `onmouseenter="showTip(event,'<b>${lang.name}</b> — ${fl}<br>Support: ${['None','Partial','Full'][s]}')" `
+            + `onmouseenter="showTip(event,'<b>${lang.name}</b> &mdash; ${fl}<br>Score: ${s}/5 (${scoreLabel(s)})${rationale}')" `
             + `onmouseleave="hideTip()"></span></td>`;
     });
-    const maxScore = features.length * 2;
-    const pct = Math.round(lang.complexity / maxScore * 100);
-    html += `<td><span class="complexity-bar" style="width:${pct}px"></span> ${lang.complexity}</td>`;
+    const pct = Math.round(lang.complexity / totalMax * 100);
+    html += `<td><span class="complexity-bar" style="width:${pct}px"></span> ${lang.complexity}/${totalMax}</td>`;
     html += '</tr>';
   });
   html += '</tbody></table>';
@@ -276,7 +344,7 @@ function updateRadar() {
   if (!radarChart) return;
   const features = DATA.features;
   const labels = DATA.feature_labels;
-  const indicator = features.map(f => ({ name: labels[f].split('/')[0].split('(')[0].trim(), max: 2 }));
+  const indicator = features.map(f => ({ name: labels[f].split('/')[0].split('(')[0].trim(), max: maxScore }));
 
   const selected = Array.from(radarSelected);
   const series = selected.map((name, i) => {
@@ -416,13 +484,13 @@ function initNetwork() {
   }));
 
   const maxComplexity = d3.max(nodes, d => d.complexity);
-  const rScale = d3.scaleSqrt().domain([0, maxComplexity]).range([8, 28]);
+  const rScale = d3.scaleSqrt().domain([0, maxComplexity]).range([6, 24]);
 
   const sim = d3.forceSimulation(nodes)
     .force('link', d3.forceLink(links).id(d => d.id).distance(d => (1 - d.value) * 250))
-    .force('charge', d3.forceManyBody().strength(-300))
+    .force('charge', d3.forceManyBody().strength(-200))
     .force('center', d3.forceCenter(width / 2, height / 2))
-    .force('collision', d3.forceCollide().radius(d => rScale(d.complexity) + 5));
+    .force('collision', d3.forceCollide().radius(d => rScale(d.complexity) + 4));
 
   const link = svg.append('g')
     .selectAll('line')
@@ -466,6 +534,90 @@ function initNetwork() {
     nodeG.attr('transform', d => `translate(${d.x},${d.y})`);
   });
 }
+
+// ====== 5. POPULARITY ANALYSIS ======
+let popChart = null;
+let currentMetric = 'tiobe_rank';
+
+function initPopularity() {
+  if (!popChart) {
+    popChart = echarts.init(document.getElementById('popularity-chart'));
+    window.addEventListener('resize', () => popChart && popChart.resize());
+  }
+  updatePopularity();
+}
+
+function updatePopularity() {
+  if (!popChart) return;
+  const popData = DATA.popularity;
+
+  const metricConfig = {
+    tiobe_rank: { name: 'TIOBE Rank', invert: true, axisLabel: 'Rank (lower = more popular)' },
+    github_stars_rank: { name: 'GitHub Stars Rank', invert: true, axisLabel: 'Rank (lower = more popular)' },
+    stackoverflow_loved_pct: { name: 'SO Loved %', invert: false, axisLabel: 'Loved % (higher = more loved)' },
+  };
+  const cfg = metricConfig[currentMetric];
+
+  const seriesData = popData.map(d => {
+    const yVal = d[currentMetric] || 0;
+    return {
+      value: [d.complexity, yVal],
+      name: d.name,
+      paradigm: d.paradigm,
+      notes: d.notes,
+      symbolSize: Math.max(10, (d.stackoverflow_loved_pct || 50) / 3),
+      itemStyle: { color: paradigmColors[d.paradigm] || '#6c8cff' },
+    };
+  });
+
+  popChart.setOption({
+    tooltip: {
+      formatter: p => {
+        const d = p.data;
+        return `<b>${d.name}</b><br>Paradigm: ${d.paradigm}<br>Complexity: ${d.value[0]}<br>${cfg.name}: ${d.value[1]}<br><em style="color:#aab">${d.notes}</em>`;
+      },
+    },
+    grid: { left: 80, right: 40, top: 40, bottom: 60 },
+    xAxis: {
+      type: 'value',
+      name: 'Type Complexity Score',
+      nameLocation: 'center',
+      nameGap: 35,
+      axisLabel: { color: '#8b8fa3' },
+      splitLine: { lineStyle: { color: '#2a2d3a' } },
+    },
+    yAxis: {
+      type: 'value',
+      name: cfg.axisLabel,
+      nameLocation: 'center',
+      nameGap: 55,
+      inverse: cfg.invert,
+      axisLabel: { color: '#8b8fa3' },
+      splitLine: { lineStyle: { color: '#2a2d3a' } },
+    },
+    series: [{
+      type: 'scatter',
+      data: seriesData,
+      label: {
+        show: true,
+        formatter: p => p.data.name,
+        position: 'right',
+        color: '#8b8fa3',
+        fontSize: 10,
+      },
+    }],
+  }, true);
+}
+
+// Popularity metric buttons
+document.querySelectorAll('.pop-metric-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.pop-metric-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentMetric = btn.dataset.metric;
+    updatePopularity();
+  });
+});
 </script>
 </body>
 </html>

@@ -1,10 +1,14 @@
 {
   "metadata": {
     "description": "Programming Language Type System Feature Matrix",
+    "version": "2.0",
     "scoring": {
-      "0": "Not supported",
-      "1": "Partial / limited support",
-      "2": "Full support"
+      "0": "Not supported — feature completely absent",
+      "1": "Minimal — very limited or unofficial/third-party support only",
+      "2": "Basic — feature present but with significant limitations",
+      "3": "Moderate — usable implementation covering common cases",
+      "4": "Strong — well-integrated feature with minor gaps",
+      "5": "Full — best-in-class or reference implementation"
     },
     "features": {
       "parametric_polymorphism": "Generics / parametric polymorphism",
@@ -30,20 +34,30 @@
       "paradigm": "Systems",
       "domain": "Systems programming",
       "features": {
-        "parametric_polymorphism": 2,
-        "ad_hoc_polymorphism": 2,
-        "algebraic_data_types": 2,
-        "pattern_matching": 2,
-        "ownership_lifetime": 2,
+        "parametric_polymorphism": 5,
+        "ad_hoc_polymorphism": 5,
+        "algebraic_data_types": 5,
+        "pattern_matching": 5,
+        "ownership_lifetime": 5,
         "dependent_types": 0,
         "gadts": 0,
-        "higher_kinded_types": 0,
+        "higher_kinded_types": 1,
         "effect_system": 0,
         "refinement_types": 0,
         "gradual_typing": 0,
-        "type_inference": 2,
+        "type_inference": 4,
         "structural_typing": 0,
-        "flow_sensitive_typing": 1
+        "flow_sensitive_typing": 2
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Full monomorphized generics with trait bounds, where clauses, const generics",
+        "ad_hoc_polymorphism": "Trait system is reference-grade; supports associated types, default impls, supertraits",
+        "algebraic_data_types": "enum with data is canonical ADT; widely used (Option, Result)",
+        "pattern_matching": "Exhaustive, nested, with guards; compiler-enforced completeness",
+        "ownership_lifetime": "Defines the category — borrow checker, lifetimes, move semantics",
+        "higher_kinded_types": "No direct HKT; workarounds via GATs (generic associated types) since 1.65",
+        "type_inference": "Strong local inference (Hindley-Milner inspired) but requires annotations on fn signatures",
+        "flow_sensitive_typing": "if-let, while-let, match arms narrow types"
       },
       "feature_timeline": {
         "parametric_polymorphism": 2012,
@@ -51,6 +65,12 @@
         "algebraic_data_types": 2010,
         "pattern_matching": 2010,
         "ownership_lifetime": 2012
+      },
+      "popularity": {
+        "tiobe_rank": 14,
+        "github_stars_rank": 8,
+        "stackoverflow_loved_pct": 87,
+        "notes": "Most loved language on SO for 8 consecutive years"
       }
     },
     {
@@ -59,20 +79,32 @@
       "paradigm": "Functional",
       "domain": "Academic / General",
       "features": {
-        "parametric_polymorphism": 2,
-        "ad_hoc_polymorphism": 2,
-        "algebraic_data_types": 2,
-        "pattern_matching": 2,
+        "parametric_polymorphism": 5,
+        "ad_hoc_polymorphism": 5,
+        "algebraic_data_types": 5,
+        "pattern_matching": 5,
         "ownership_lifetime": 0,
-        "dependent_types": 1,
-        "gadts": 2,
-        "higher_kinded_types": 2,
-        "effect_system": 1,
-        "refinement_types": 1,
+        "dependent_types": 3,
+        "gadts": 5,
+        "higher_kinded_types": 5,
+        "effect_system": 3,
+        "refinement_types": 2,
         "gradual_typing": 0,
-        "type_inference": 2,
+        "type_inference": 5,
         "structural_typing": 0,
         "flow_sensitive_typing": 0
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Parametric polymorphism is foundational; System F + extensions",
+        "ad_hoc_polymorphism": "Type classes are the original design; multi-param, functional dependencies, associated types",
+        "algebraic_data_types": "Canonical definition of ADTs in programming",
+        "pattern_matching": "Exhaustive, nested, as-patterns, view patterns via extensions",
+        "dependent_types": "Singletons, DataKinds, TypeFamilies approximate but not full pi-types",
+        "gadts": "Full GADT support with GHC extensions",
+        "higher_kinded_types": "First-class HKT; Functor/Monad hierarchy depends on it",
+        "effect_system": "Monadic effects (IO monad) track side effects; not algebraic effect handlers natively",
+        "refinement_types": "LiquidHaskell provides refinement types as external tool",
+        "type_inference": "Full Hindley-Milner (Damas-Milner) with let-polymorphism; reference implementation"
       },
       "feature_timeline": {
         "parametric_polymorphism": 1990,
@@ -81,6 +113,12 @@
         "pattern_matching": 1990,
         "gadts": 2006,
         "higher_kinded_types": 1990
+      },
+      "popularity": {
+        "tiobe_rank": 30,
+        "github_stars_rank": 22,
+        "stackoverflow_loved_pct": 58,
+        "notes": "Dominant in PL research; strong influence on modern language design"
       }
     },
     {
@@ -89,20 +127,32 @@
       "paradigm": "Multi-paradigm",
       "domain": "Web development",
       "features": {
-        "parametric_polymorphism": 2,
-        "ad_hoc_polymorphism": 1,
-        "algebraic_data_types": 1,
-        "pattern_matching": 1,
+        "parametric_polymorphism": 4,
+        "ad_hoc_polymorphism": 2,
+        "algebraic_data_types": 3,
+        "pattern_matching": 2,
         "ownership_lifetime": 0,
         "dependent_types": 0,
         "gadts": 0,
-        "higher_kinded_types": 0,
+        "higher_kinded_types": 1,
         "effect_system": 0,
-        "refinement_types": 0,
-        "gradual_typing": 2,
-        "type_inference": 2,
-        "structural_typing": 2,
-        "flow_sensitive_typing": 2
+        "refinement_types": 1,
+        "gradual_typing": 5,
+        "type_inference": 4,
+        "structural_typing": 5,
+        "flow_sensitive_typing": 5
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Full generics with constraints, conditional types, mapped types; very expressive",
+        "ad_hoc_polymorphism": "Interfaces exist but no typeclass dispatch; relies on structural matching",
+        "algebraic_data_types": "Discriminated unions via literal types; no built-in match syntax",
+        "pattern_matching": "Type narrowing via typeof/instanceof/in guards; no dedicated match expression",
+        "higher_kinded_types": "No native HKT; encoding via generic type aliases is limited",
+        "refinement_types": "Template literal types and branded types provide limited refinement",
+        "gradual_typing": "Designed for gradual adoption — any, unknown, strict mode",
+        "type_inference": "Strong inference with contextual typing, control flow analysis",
+        "structural_typing": "Core design principle — duck typing at the type level",
+        "flow_sensitive_typing": "Best-in-class narrowing via control flow analysis, type guards, assertion functions"
       },
       "feature_timeline": {
         "parametric_polymorphism": 2012,
@@ -110,6 +160,12 @@
         "structural_typing": 2012,
         "flow_sensitive_typing": 2016,
         "algebraic_data_types": 2016
+      },
+      "popularity": {
+        "tiobe_rank": 7,
+        "github_stars_rank": 3,
+        "stackoverflow_loved_pct": 73,
+        "notes": "Fastest-growing typed language; dominant in web ecosystem"
       }
     },
     {
@@ -118,20 +174,33 @@
       "paradigm": "Multi-paradigm",
       "domain": "General / Data",
       "features": {
-        "parametric_polymorphism": 2,
-        "ad_hoc_polymorphism": 2,
-        "algebraic_data_types": 2,
-        "pattern_matching": 2,
+        "parametric_polymorphism": 5,
+        "ad_hoc_polymorphism": 5,
+        "algebraic_data_types": 5,
+        "pattern_matching": 5,
         "ownership_lifetime": 0,
-        "dependent_types": 1,
-        "gadts": 1,
-        "higher_kinded_types": 2,
-        "effect_system": 1,
-        "refinement_types": 1,
+        "dependent_types": 3,
+        "gadts": 3,
+        "higher_kinded_types": 5,
+        "effect_system": 2,
+        "refinement_types": 2,
         "gradual_typing": 0,
-        "type_inference": 2,
-        "structural_typing": 1,
-        "flow_sensitive_typing": 0
+        "type_inference": 4,
+        "structural_typing": 3,
+        "flow_sensitive_typing": 1
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Full generics with variance annotations, bounds, context bounds",
+        "ad_hoc_polymorphism": "Implicits (Scala 2) / given-using (Scala 3) provide typeclass pattern natively",
+        "algebraic_data_types": "sealed trait + case class (Scala 2), enum (Scala 3)",
+        "pattern_matching": "Exhaustive match with extractors, guards, sealed hierarchies",
+        "dependent_types": "Path-dependent types, match types (Scala 3), not full pi-types",
+        "gadts": "Supported via sealed hierarchies with type parameters; compiler support improved in Scala 3",
+        "higher_kinded_types": "First-class HKT support; type lambdas in Scala 3",
+        "effect_system": "Library-level (ZIO, Cats Effect) not language-level",
+        "refinement_types": "Opaque types + compiletime ops provide limited refinement",
+        "type_inference": "Good local inference, improved in Scala 3; still needs annotations for complex cases",
+        "structural_typing": "Structural types via Selectable (Scala 3); compound types"
       },
       "feature_timeline": {
         "parametric_polymorphism": 2004,
@@ -139,6 +208,12 @@
         "algebraic_data_types": 2004,
         "pattern_matching": 2004,
         "higher_kinded_types": 2004
+      },
+      "popularity": {
+        "tiobe_rank": 32,
+        "github_stars_rank": 18,
+        "stackoverflow_loved_pct": 54,
+        "notes": "Strong in data engineering (Spark); Scala 3 modernized the type system"
       }
     },
     {
@@ -147,10 +222,10 @@
       "paradigm": "Multi-paradigm",
       "domain": "Mobile / General",
       "features": {
-        "parametric_polymorphism": 2,
-        "ad_hoc_polymorphism": 1,
-        "algebraic_data_types": 1,
-        "pattern_matching": 1,
+        "parametric_polymorphism": 4,
+        "ad_hoc_polymorphism": 3,
+        "algebraic_data_types": 3,
+        "pattern_matching": 3,
         "ownership_lifetime": 0,
         "dependent_types": 0,
         "gadts": 0,
@@ -158,15 +233,29 @@
         "effect_system": 0,
         "refinement_types": 0,
         "gradual_typing": 0,
-        "type_inference": 2,
+        "type_inference": 4,
         "structural_typing": 0,
-        "flow_sensitive_typing": 2
+        "flow_sensitive_typing": 5
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Reified generics (inline), variance annotations, type projections",
+        "ad_hoc_polymorphism": "Interfaces with default methods; no typeclass dispatch but extension functions help",
+        "algebraic_data_types": "Sealed classes/interfaces; not as ergonomic as Rust/Haskell enums",
+        "pattern_matching": "when expression with smart casts; exhaustive for sealed hierarchies",
+        "type_inference": "Strong local inference; nullable types well-integrated",
+        "flow_sensitive_typing": "Smart casts are best-in-class — automatic narrowing after null/type checks"
       },
       "feature_timeline": {
         "parametric_polymorphism": 2011,
         "algebraic_data_types": 2011,
         "pattern_matching": 2011,
         "flow_sensitive_typing": 2011
+      },
+      "popularity": {
+        "tiobe_rank": 15,
+        "github_stars_rank": 12,
+        "stackoverflow_loved_pct": 68,
+        "notes": "Google's preferred language for Android; growing server-side adoption"
       }
     },
     {
@@ -175,8 +264,8 @@
       "paradigm": "Imperative",
       "domain": "Systems / Cloud",
       "features": {
-        "parametric_polymorphism": 2,
-        "ad_hoc_polymorphism": 1,
+        "parametric_polymorphism": 3,
+        "ad_hoc_polymorphism": 2,
         "algebraic_data_types": 0,
         "pattern_matching": 0,
         "ownership_lifetime": 0,
@@ -186,14 +275,26 @@
         "effect_system": 0,
         "refinement_types": 0,
         "gradual_typing": 0,
-        "type_inference": 1,
-        "structural_typing": 2,
+        "type_inference": 2,
+        "structural_typing": 5,
         "flow_sensitive_typing": 0
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Added in Go 1.18 (2022); type parameter constraints, but no variance or HKT",
+        "ad_hoc_polymorphism": "Interfaces are implicit (structural); no explicit typeclass/trait dispatch",
+        "type_inference": "Short variable declarations (:=); limited — no inference on function signatures",
+        "structural_typing": "Core design principle — interfaces satisfied implicitly by structure"
       },
       "feature_timeline": {
         "structural_typing": 2009,
         "ad_hoc_polymorphism": 2009,
         "parametric_polymorphism": 2022
+      },
+      "popularity": {
+        "tiobe_rank": 8,
+        "github_stars_rank": 5,
+        "stackoverflow_loved_pct": 62,
+        "notes": "Dominant in cloud infrastructure (Docker, Kubernetes)"
       }
     },
     {
@@ -214,10 +315,19 @@
         "refinement_types": 0,
         "gradual_typing": 0,
         "type_inference": 0,
-        "structural_typing": 0,
+        "structural_typing": 1,
         "flow_sensitive_typing": 0
       },
-      "feature_timeline": {}
+      "scoring_rationale": {
+        "structural_typing": "Struct layout compatibility / void pointer conventions give minimal structural typing"
+      },
+      "feature_timeline": {},
+      "popularity": {
+        "tiobe_rank": 2,
+        "github_stars_rank": 7,
+        "stackoverflow_loved_pct": 40,
+        "notes": "Foundation of systems programming; still #2 on TIOBE"
+      }
     },
     {
       "name": "Zig",
@@ -225,26 +335,40 @@
       "paradigm": "Imperative",
       "domain": "Systems programming",
       "features": {
-        "parametric_polymorphism": 2,
-        "ad_hoc_polymorphism": 0,
-        "algebraic_data_types": 1,
-        "pattern_matching": 1,
+        "parametric_polymorphism": 4,
+        "ad_hoc_polymorphism": 1,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
         "ownership_lifetime": 0,
-        "dependent_types": 1,
+        "dependent_types": 3,
         "gadts": 0,
         "higher_kinded_types": 0,
         "effect_system": 0,
         "refinement_types": 0,
         "gradual_typing": 0,
-        "type_inference": 1,
-        "structural_typing": 0,
+        "type_inference": 2,
+        "structural_typing": 1,
         "flow_sensitive_typing": 0
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "comptime generics — types as first-class values at compile time; very powerful",
+        "ad_hoc_polymorphism": "No trait/interface system; duck-typed generics via comptime",
+        "algebraic_data_types": "Tagged unions and error sets; limited compared to Rust enums",
+        "pattern_matching": "switch on tagged unions with exhaustiveness; simpler than Rust match",
+        "dependent_types": "comptime provides value-dependent types; e.g., [N]u8 where N is comptime",
+        "type_inference": "Type inference in local contexts; explicit types required on boundaries"
       },
       "feature_timeline": {
         "parametric_polymorphism": 2016,
         "algebraic_data_types": 2016,
         "pattern_matching": 2016,
         "dependent_types": 2016
+      },
+      "popularity": {
+        "tiobe_rank": 48,
+        "github_stars_rank": 15,
+        "stackoverflow_loved_pct": 72,
+        "notes": "Growing fast in systems/game dev; backed by Zig Software Foundation"
       }
     },
     {
@@ -253,20 +377,31 @@
       "paradigm": "Functional",
       "domain": "Academic / Research",
       "features": {
-        "parametric_polymorphism": 2,
-        "ad_hoc_polymorphism": 2,
-        "algebraic_data_types": 2,
-        "pattern_matching": 2,
-        "ownership_lifetime": 1,
-        "dependent_types": 2,
-        "gadts": 2,
-        "higher_kinded_types": 2,
-        "effect_system": 2,
-        "refinement_types": 2,
+        "parametric_polymorphism": 5,
+        "ad_hoc_polymorphism": 5,
+        "algebraic_data_types": 5,
+        "pattern_matching": 5,
+        "ownership_lifetime": 2,
+        "dependent_types": 5,
+        "gadts": 5,
+        "higher_kinded_types": 5,
+        "effect_system": 5,
+        "refinement_types": 5,
         "gradual_typing": 0,
-        "type_inference": 2,
+        "type_inference": 4,
         "structural_typing": 0,
         "flow_sensitive_typing": 0
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Full dependent types subsume parametric polymorphism",
+        "ad_hoc_polymorphism": "Interfaces (Idris' typeclass equivalent) with full dependent type support",
+        "dependent_types": "Full spectrum dependent types — the defining feature of Idris",
+        "gadts": "Naturally expressible via dependent types",
+        "higher_kinded_types": "Full HKT as consequence of dependent type system",
+        "effect_system": "Algebraic effect handlers built into the language (Idris 2)",
+        "refinement_types": "Dependent types subsume refinement types",
+        "ownership_lifetime": "Quantitative Type Theory (QTT) in Idris 2 tracks resource usage",
+        "type_inference": "Good inference but dependent types often need annotations"
       },
       "feature_timeline": {
         "parametric_polymorphism": 2011,
@@ -277,6 +412,12 @@
         "gadts": 2011,
         "higher_kinded_types": 2011,
         "effect_system": 2011
+      },
+      "popularity": {
+        "tiobe_rank": 100,
+        "github_stars_rank": 85,
+        "stackoverflow_loved_pct": 70,
+        "notes": "Primary showcase for full dependent types in a practical language"
       }
     },
     {
@@ -285,20 +426,31 @@
       "paradigm": "Functional",
       "domain": "Academic / Industry",
       "features": {
-        "parametric_polymorphism": 2,
-        "ad_hoc_polymorphism": 1,
-        "algebraic_data_types": 2,
-        "pattern_matching": 2,
+        "parametric_polymorphism": 5,
+        "ad_hoc_polymorphism": 2,
+        "algebraic_data_types": 5,
+        "pattern_matching": 5,
         "ownership_lifetime": 0,
         "dependent_types": 0,
-        "gadts": 2,
-        "higher_kinded_types": 1,
-        "effect_system": 2,
+        "gadts": 5,
+        "higher_kinded_types": 3,
+        "effect_system": 4,
         "refinement_types": 0,
         "gradual_typing": 0,
-        "type_inference": 2,
-        "structural_typing": 1,
+        "type_inference": 5,
+        "structural_typing": 3,
         "flow_sensitive_typing": 0
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Full parametric polymorphism with value restriction",
+        "ad_hoc_polymorphism": "No typeclasses; modular implicits proposed; first-class modules partially fill the gap",
+        "algebraic_data_types": "Canonical ML-style ADTs; polymorphic variants add flexibility",
+        "pattern_matching": "Reference implementation — exhaustive, nested, or-patterns, as-patterns",
+        "gadts": "Full GADT support since OCaml 4.00",
+        "higher_kinded_types": "Functors (module-level) provide HKT; not value-level like Haskell",
+        "effect_system": "OCaml 5 added multicore with algebraic effect handlers (perform/match)",
+        "type_inference": "Full Hindley-Milner; handles complex cases without annotations",
+        "structural_typing": "Polymorphic variants, object types, row polymorphism"
       },
       "feature_timeline": {
         "parametric_polymorphism": 1996,
@@ -306,6 +458,12 @@
         "pattern_matching": 1996,
         "gadts": 2012,
         "effect_system": 2024
+      },
+      "popularity": {
+        "tiobe_rank": 40,
+        "github_stars_rank": 30,
+        "stackoverflow_loved_pct": 56,
+        "notes": "Used in finance (Jane Street), formal verification (Coq compiler)"
       }
     },
     {
@@ -314,20 +472,29 @@
       "paradigm": "Multi-paradigm",
       "domain": "Mobile / General",
       "features": {
-        "parametric_polymorphism": 2,
-        "ad_hoc_polymorphism": 2,
-        "algebraic_data_types": 2,
-        "pattern_matching": 2,
-        "ownership_lifetime": 1,
+        "parametric_polymorphism": 4,
+        "ad_hoc_polymorphism": 4,
+        "algebraic_data_types": 5,
+        "pattern_matching": 5,
+        "ownership_lifetime": 2,
         "dependent_types": 0,
         "gadts": 0,
         "higher_kinded_types": 0,
         "effect_system": 0,
         "refinement_types": 0,
         "gradual_typing": 0,
-        "type_inference": 2,
+        "type_inference": 4,
         "structural_typing": 0,
-        "flow_sensitive_typing": 1
+        "flow_sensitive_typing": 3
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Generics with associated types, where clauses, opaque types; some limitations vs Rust",
+        "ad_hoc_polymorphism": "Protocols with associated types, protocol extensions; strong but no HKT",
+        "algebraic_data_types": "Enums with associated values are excellent ADTs",
+        "pattern_matching": "Exhaustive switch with value binding, where clauses, tuple/enum patterns",
+        "ownership_lifetime": "Ownership manifesto partially implemented; ~Copyable, consuming/borrowing in Swift 5.9+",
+        "type_inference": "Strong bidirectional inference; occasional need for explicit types in closures",
+        "flow_sensitive_typing": "Optional binding (if let), guard let narrow types"
       },
       "feature_timeline": {
         "parametric_polymorphism": 2014,
@@ -335,6 +502,12 @@
         "algebraic_data_types": 2014,
         "pattern_matching": 2014,
         "ownership_lifetime": 2022
+      },
+      "popularity": {
+        "tiobe_rank": 12,
+        "github_stars_rank": 11,
+        "stackoverflow_loved_pct": 60,
+        "notes": "Primary language for Apple platforms; growing server-side adoption"
       }
     },
     {
@@ -343,10 +516,10 @@
       "paradigm": "Object-oriented",
       "domain": "Enterprise / General",
       "features": {
-        "parametric_polymorphism": 2,
-        "ad_hoc_polymorphism": 1,
-        "algebraic_data_types": 1,
-        "pattern_matching": 1,
+        "parametric_polymorphism": 3,
+        "ad_hoc_polymorphism": 2,
+        "algebraic_data_types": 3,
+        "pattern_matching": 3,
         "ownership_lifetime": 0,
         "dependent_types": 0,
         "gadts": 0,
@@ -354,15 +527,29 @@
         "effect_system": 0,
         "refinement_types": 0,
         "gradual_typing": 0,
-        "type_inference": 1,
+        "type_inference": 2,
         "structural_typing": 0,
-        "flow_sensitive_typing": 1
+        "flow_sensitive_typing": 2
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Type erasure limits runtime generics; wildcards add complexity but reduce power",
+        "ad_hoc_polymorphism": "Interfaces with default methods; no typeclass dispatch",
+        "algebraic_data_types": "Sealed classes + records (Java 17+); still more verbose than ML-family",
+        "pattern_matching": "Pattern matching for switch/instanceof (Java 21); record patterns, guards",
+        "type_inference": "var (Java 10) for local variables only; diamond operator",
+        "flow_sensitive_typing": "instanceof pattern matching narrows types; limited scope"
       },
       "feature_timeline": {
         "parametric_polymorphism": 2004,
         "pattern_matching": 2021,
         "algebraic_data_types": 2020,
         "flow_sensitive_typing": 2020
+      },
+      "popularity": {
+        "tiobe_rank": 3,
+        "github_stars_rank": 4,
+        "stackoverflow_loved_pct": 45,
+        "notes": "Enterprise standard; massive ecosystem; modernizing with Project Amber/Valhalla"
       }
     },
     {
@@ -371,26 +558,43 @@
       "paradigm": "Multi-paradigm",
       "domain": "Systems / General",
       "features": {
-        "parametric_polymorphism": 2,
-        "ad_hoc_polymorphism": 1,
-        "algebraic_data_types": 1,
-        "pattern_matching": 0,
-        "ownership_lifetime": 1,
-        "dependent_types": 0,
+        "parametric_polymorphism": 4,
+        "ad_hoc_polymorphism": 3,
+        "algebraic_data_types": 2,
+        "pattern_matching": 1,
+        "ownership_lifetime": 2,
+        "dependent_types": 1,
         "gadts": 0,
-        "higher_kinded_types": 1,
+        "higher_kinded_types": 3,
         "effect_system": 0,
         "refinement_types": 0,
         "gradual_typing": 0,
-        "type_inference": 1,
-        "structural_typing": 0,
+        "type_inference": 3,
+        "structural_typing": 1,
         "flow_sensitive_typing": 0
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Templates are very powerful (Turing-complete); concepts (C++20) add constraints",
+        "ad_hoc_polymorphism": "Concepts, SFINAE, overloading provide ad-hoc polymorphism; verbose compared to traits",
+        "algebraic_data_types": "std::variant + std::visit; much more verbose than native ADTs",
+        "pattern_matching": "No native pattern matching; structured bindings (C++17) are minimal",
+        "ownership_lifetime": "RAII, unique_ptr, move semantics; no compiler-enforced borrows",
+        "dependent_types": "Non-type template parameters give very limited value-dependent types",
+        "higher_kinded_types": "Template template parameters; powerful but syntax-heavy",
+        "type_inference": "auto, decltype, CTAD (C++17); strong but not Hindley-Milner",
+        "structural_typing": "Duck typing in templates (pre-concepts); not in the nominal type system"
       },
       "feature_timeline": {
         "parametric_polymorphism": 1998,
         "algebraic_data_types": 2017,
         "type_inference": 2011,
         "higher_kinded_types": 1998
+      },
+      "popularity": {
+        "tiobe_rank": 4,
+        "github_stars_rank": 6,
+        "stackoverflow_loved_pct": 48,
+        "notes": "Performance-critical domains; game engines, embedded, HPC"
       }
     },
     {
@@ -399,26 +603,42 @@
       "paradigm": "Multi-paradigm",
       "domain": "General / Data science",
       "features": {
-        "parametric_polymorphism": 1,
-        "ad_hoc_polymorphism": 1,
-        "algebraic_data_types": 1,
-        "pattern_matching": 1,
+        "parametric_polymorphism": 2,
+        "ad_hoc_polymorphism": 2,
+        "algebraic_data_types": 2,
+        "pattern_matching": 2,
         "ownership_lifetime": 0,
         "dependent_types": 0,
         "gadts": 0,
         "higher_kinded_types": 0,
         "effect_system": 0,
         "refinement_types": 0,
-        "gradual_typing": 2,
-        "type_inference": 1,
-        "structural_typing": 1,
-        "flow_sensitive_typing": 1
+        "gradual_typing": 4,
+        "type_inference": 2,
+        "structural_typing": 3,
+        "flow_sensitive_typing": 2
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "typing.Generic, TypeVar; annotations only — not enforced at runtime",
+        "ad_hoc_polymorphism": "Protocol classes (PEP 544), ABC; type checker enforced only",
+        "algebraic_data_types": "Union types, dataclasses; match statement (3.10) but no exhaustiveness enforcement",
+        "pattern_matching": "Structural pattern matching (PEP 634, Python 3.10); no exhaustiveness",
+        "gradual_typing": "PEP 484 type hints + mypy/pyright; Optional is default, very gradual",
+        "type_inference": "Pyright/mypy infer locally; runtime is dynamically typed",
+        "structural_typing": "Protocol (PEP 544) provides structural subtyping in type checkers",
+        "flow_sensitive_typing": "Pyright narrows types via isinstance/is None checks"
       },
       "feature_timeline": {
         "gradual_typing": 2015,
         "pattern_matching": 2021,
         "algebraic_data_types": 2021,
         "parametric_polymorphism": 2015
+      },
+      "popularity": {
+        "tiobe_rank": 1,
+        "github_stars_rank": 1,
+        "stackoverflow_loved_pct": 65,
+        "notes": "#1 language overall; dominates data science, ML, scripting"
       }
     },
     {
@@ -427,26 +647,41 @@
       "paradigm": "Multi-paradigm",
       "domain": "Enterprise / Game dev",
       "features": {
-        "parametric_polymorphism": 2,
-        "ad_hoc_polymorphism": 1,
-        "algebraic_data_types": 1,
-        "pattern_matching": 2,
-        "ownership_lifetime": 0,
+        "parametric_polymorphism": 4,
+        "ad_hoc_polymorphism": 3,
+        "algebraic_data_types": 3,
+        "pattern_matching": 4,
+        "ownership_lifetime": 1,
         "dependent_types": 0,
         "gadts": 0,
         "higher_kinded_types": 0,
         "effect_system": 0,
         "refinement_types": 0,
         "gradual_typing": 0,
-        "type_inference": 1,
+        "type_inference": 3,
         "structural_typing": 0,
-        "flow_sensitive_typing": 1
+        "flow_sensitive_typing": 3
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Reified generics (unlike Java); constraints, covariance/contravariance",
+        "ad_hoc_polymorphism": "Interfaces, default interface methods; no typeclasses but static abstract members help",
+        "algebraic_data_types": "Records, discriminated unions via pattern matching; not as native as F#",
+        "pattern_matching": "Comprehensive patterns (C# 8-12): type, positional, property, list, relational patterns",
+        "ownership_lifetime": "ref struct, Span<T> provide limited stack-only / lifetime semantics",
+        "type_inference": "var for locals; target-typed new; no inference on return types",
+        "flow_sensitive_typing": "Nullable reference types (C# 8) + pattern matching narrow types"
       },
       "feature_timeline": {
         "parametric_polymorphism": 2005,
         "type_inference": 2007,
         "pattern_matching": 2017,
         "algebraic_data_types": 2020
+      },
+      "popularity": {
+        "tiobe_rank": 5,
+        "github_stars_rank": 9,
+        "stackoverflow_loved_pct": 63,
+        "notes": "Unity game engine; .NET ecosystem; rapid modernization"
       }
     },
     {
@@ -455,10 +690,10 @@
       "paradigm": "Functional",
       "domain": "General / Data",
       "features": {
-        "parametric_polymorphism": 2,
-        "ad_hoc_polymorphism": 1,
-        "algebraic_data_types": 2,
-        "pattern_matching": 2,
+        "parametric_polymorphism": 4,
+        "ad_hoc_polymorphism": 2,
+        "algebraic_data_types": 5,
+        "pattern_matching": 5,
         "ownership_lifetime": 0,
         "dependent_types": 0,
         "gadts": 0,
@@ -466,14 +701,27 @@
         "effect_system": 0,
         "refinement_types": 0,
         "gradual_typing": 0,
-        "type_inference": 2,
+        "type_inference": 5,
         "structural_typing": 0,
         "flow_sensitive_typing": 0
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Good generics via .NET; automatic generalization; some CLR limitations",
+        "ad_hoc_polymorphism": "SRTPs (statically resolved type parameters); more limited than typeclasses",
+        "algebraic_data_types": "Discriminated unions are first-class and idiomatic",
+        "pattern_matching": "Exhaustive, nested, active patterns provide extensible matching",
+        "type_inference": "Hindley-Milner based; very strong — rarely need annotations"
       },
       "feature_timeline": {
         "parametric_polymorphism": 2005,
         "algebraic_data_types": 2005,
         "pattern_matching": 2005
+      },
+      "popularity": {
+        "tiobe_rank": 42,
+        "github_stars_rank": 35,
+        "stackoverflow_loved_pct": 60,
+        "notes": "ML on .NET; strong in finance, data processing"
       }
     },
     {
@@ -482,25 +730,421 @@
       "paradigm": "Functional",
       "domain": "Web frontend",
       "features": {
-        "parametric_polymorphism": 2,
-        "ad_hoc_polymorphism": 1,
-        "algebraic_data_types": 2,
-        "pattern_matching": 2,
+        "parametric_polymorphism": 4,
+        "ad_hoc_polymorphism": 2,
+        "algebraic_data_types": 5,
+        "pattern_matching": 5,
         "ownership_lifetime": 0,
         "dependent_types": 0,
         "gadts": 0,
         "higher_kinded_types": 0,
-        "effect_system": 1,
+        "effect_system": 3,
         "refinement_types": 0,
         "gradual_typing": 0,
-        "type_inference": 2,
+        "type_inference": 5,
         "structural_typing": 0,
         "flow_sensitive_typing": 0
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Full parametric polymorphism; constrained by lack of typeclasses",
+        "ad_hoc_polymorphism": "No typeclasses; number/comparable/appendable magic constraints",
+        "algebraic_data_types": "Custom types (tagged unions) are the primary abstraction",
+        "pattern_matching": "Exhaustive case expressions; compiler guarantees completeness",
+        "effect_system": "Commands and Subscriptions model effects; managed by runtime, not algebraic",
+        "type_inference": "Full Hindley-Milner; famous for helpful error messages"
       },
       "feature_timeline": {
         "parametric_polymorphism": 2012,
         "algebraic_data_types": 2012,
         "pattern_matching": 2012
+      },
+      "popularity": {
+        "tiobe_rank": 90,
+        "github_stars_rank": 50,
+        "stackoverflow_loved_pct": 55,
+        "notes": "Pioneered 'The Elm Architecture' (TEA) adopted by Redux, etc."
+      }
+    },
+    {
+      "name": "Dart",
+      "year": 2011,
+      "paradigm": "Multi-paradigm",
+      "domain": "Mobile / Web",
+      "features": {
+        "parametric_polymorphism": 3,
+        "ad_hoc_polymorphism": 2,
+        "algebraic_data_types": 2,
+        "pattern_matching": 3,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 3,
+        "type_inference": 3,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 4
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Reified generics; constraints via extends; no variance annotations",
+        "ad_hoc_polymorphism": "Abstract classes/interfaces; no typeclasses",
+        "algebraic_data_types": "Sealed classes (Dart 3.0); exhaustive switch on sealed hierarchies",
+        "pattern_matching": "Patterns in switch/if-case (Dart 3.0); destructuring, guards, exhaustiveness",
+        "gradual_typing": "Originally optionally typed; now sound null safety; some dynamic remains",
+        "type_inference": "Local inference; var, final; return types sometimes inferred",
+        "flow_sensitive_typing": "Promotion via null checks, is/is! checks; very usable"
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 2011,
+        "gradual_typing": 2011,
+        "pattern_matching": 2023,
+        "algebraic_data_types": 2023,
+        "flow_sensitive_typing": 2021
+      },
+      "popularity": {
+        "tiobe_rank": 18,
+        "github_stars_rank": 14,
+        "stackoverflow_loved_pct": 52,
+        "notes": "Flutter framework; Google-backed; strong mobile cross-platform presence"
+      }
+    },
+    {
+      "name": "Julia",
+      "year": 2012,
+      "paradigm": "Multi-paradigm",
+      "domain": "Scientific / Data science",
+      "features": {
+        "parametric_polymorphism": 4,
+        "ad_hoc_polymorphism": 5,
+        "algebraic_data_types": 1,
+        "pattern_matching": 1,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 3,
+        "type_inference": 3,
+        "structural_typing": 1,
+        "flow_sensitive_typing": 0
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Parametric types with type parameters; abstract types hierarchy",
+        "ad_hoc_polymorphism": "Multiple dispatch is Julia's core — function dispatch on all argument types; best-in-class",
+        "algebraic_data_types": "No native sum types; can encode via abstract types + structs",
+        "pattern_matching": "No native pattern matching; MLStyle.jl library provides it",
+        "gradual_typing": "Optional type annotations; untyped code runs dynamically with JIT",
+        "type_inference": "JIT compiler performs aggressive type inference; annotations optional",
+        "structural_typing": "Duck typing at runtime; abstract type hierarchy is nominal"
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 2012,
+        "ad_hoc_polymorphism": 2012,
+        "gradual_typing": 2012
+      },
+      "popularity": {
+        "tiobe_rank": 28,
+        "github_stars_rank": 25,
+        "stackoverflow_loved_pct": 55,
+        "notes": "Scientific computing; aims to solve 'two-language problem'; used in climate/physics research"
+      }
+    },
+    {
+      "name": "Nim",
+      "year": 2008,
+      "paradigm": "Multi-paradigm",
+      "domain": "Systems / General",
+      "features": {
+        "parametric_polymorphism": 4,
+        "ad_hoc_polymorphism": 3,
+        "algebraic_data_types": 3,
+        "pattern_matching": 2,
+        "ownership_lifetime": 2,
+        "dependent_types": 1,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 3,
+        "refinement_types": 1,
+        "gradual_typing": 0,
+        "type_inference": 3,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Generics with type constraints; concepts provide type-level predicates",
+        "ad_hoc_polymorphism": "Method overloading + concepts; UFCS (universal function call syntax)",
+        "algebraic_data_types": "Object variants (variant + of); less ergonomic than Rust/Haskell",
+        "pattern_matching": "Case statements on object variants; not as expressive as ML-family",
+        "ownership_lifetime": "ORC/ARC memory management (Nim 2.0); --mm:orc; not borrow checker",
+        "dependent_types": "Static[T] for compile-time values; very limited",
+        "effect_system": "Effect tracking via .raises, .tags pragmas; checked exceptions style",
+        "refinement_types": "range types (e.g., range[0..100]) provide basic refinement",
+        "type_inference": "Local type inference; proc signatures need annotations"
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 2008,
+        "algebraic_data_types": 2008,
+        "effect_system": 2020,
+        "ownership_lifetime": 2021
+      },
+      "popularity": {
+        "tiobe_rank": 55,
+        "github_stars_rank": 40,
+        "stackoverflow_loved_pct": 54,
+        "notes": "Python-like syntax with C-like performance; compiles to C/JS"
+      }
+    },
+    {
+      "name": "PureScript",
+      "year": 2013,
+      "paradigm": "Functional",
+      "domain": "Web development",
+      "features": {
+        "parametric_polymorphism": 5,
+        "ad_hoc_polymorphism": 5,
+        "algebraic_data_types": 5,
+        "pattern_matching": 5,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 5,
+        "effect_system": 4,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "type_inference": 4,
+        "structural_typing": 2,
+        "flow_sensitive_typing": 0
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Full parametric polymorphism with rank-N types",
+        "ad_hoc_polymorphism": "Haskell-style type classes with multi-param, functional dependencies",
+        "algebraic_data_types": "Haskell-style data declarations",
+        "pattern_matching": "Exhaustive, nested; very similar to Haskell",
+        "higher_kinded_types": "First-class HKT; critical for its Monad/Functor ecosystem",
+        "effect_system": "Row-typed effects track side effects precisely",
+        "type_inference": "Strong inference; needs annotations on top-level definitions",
+        "structural_typing": "Row polymorphism for records; extensible records"
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 2013,
+        "ad_hoc_polymorphism": 2013,
+        "algebraic_data_types": 2013,
+        "pattern_matching": 2013,
+        "higher_kinded_types": 2013,
+        "effect_system": 2013
+      },
+      "popularity": {
+        "tiobe_rank": 95,
+        "github_stars_rank": 55,
+        "stackoverflow_loved_pct": 60,
+        "notes": "Haskell for the browser; compiles to JavaScript; strong type safety for web"
+      }
+    },
+    {
+      "name": "Gleam",
+      "year": 2019,
+      "paradigm": "Functional",
+      "domain": "Web / Distributed",
+      "features": {
+        "parametric_polymorphism": 4,
+        "ad_hoc_polymorphism": 0,
+        "algebraic_data_types": 5,
+        "pattern_matching": 5,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "type_inference": 5,
+        "structural_typing": 0,
+        "flow_sensitive_typing": 0
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Generics with type parameters; no constraints/bounds (by design, simplicity)",
+        "ad_hoc_polymorphism": "No typeclasses, no interfaces — intentionally minimal; use module pattern",
+        "algebraic_data_types": "Custom types with constructors; idiomatic and well-integrated",
+        "pattern_matching": "Exhaustive case expressions; the primary control flow mechanism",
+        "type_inference": "Full Hindley-Milner; zero annotations needed",
+        "flow_sensitive_typing": "No — types are immutable throughout scope"
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 2019,
+        "algebraic_data_types": 2019,
+        "pattern_matching": 2019,
+        "type_inference": 2019
+      },
+      "popularity": {
+        "tiobe_rank": 80,
+        "github_stars_rank": 35,
+        "stackoverflow_loved_pct": 75,
+        "notes": "Runs on BEAM (Erlang VM); designed for building reliable concurrent systems"
+      }
+    },
+    {
+      "name": "Roc",
+      "year": 2020,
+      "paradigm": "Functional",
+      "domain": "General / Application",
+      "features": {
+        "parametric_polymorphism": 4,
+        "ad_hoc_polymorphism": 3,
+        "algebraic_data_types": 5,
+        "pattern_matching": 5,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 3,
+        "refinement_types": 0,
+        "gradual_typing": 0,
+        "type_inference": 5,
+        "structural_typing": 4,
+        "flow_sensitive_typing": 0
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Generic types with abilities (Roc's trait-like mechanism)",
+        "ad_hoc_polymorphism": "Abilities (like typeclasses but simpler); limited compared to Haskell",
+        "algebraic_data_types": "Tag unions as primary data modeling tool",
+        "pattern_matching": "Exhaustive when-is expressions; the core control flow",
+        "effect_system": "Task-based effect tracking; platform/application split manages IO",
+        "type_inference": "Full Hindley-Milner; no annotations required",
+        "structural_typing": "Open tag unions + records are structurally typed"
+      },
+      "feature_timeline": {
+        "parametric_polymorphism": 2020,
+        "ad_hoc_polymorphism": 2020,
+        "algebraic_data_types": 2020,
+        "pattern_matching": 2020,
+        "type_inference": 2020,
+        "effect_system": 2020
+      },
+      "popularity": {
+        "tiobe_rank": 100,
+        "github_stars_rank": 42,
+        "stackoverflow_loved_pct": 72,
+        "notes": "Spiritual successor to Elm; designed by Richard Feldman; pre-1.0"
+      }
+    },
+    {
+      "name": "Elixir",
+      "year": 2011,
+      "paradigm": "Functional",
+      "domain": "Web / Distributed",
+      "features": {
+        "parametric_polymorphism": 0,
+        "ad_hoc_polymorphism": 3,
+        "algebraic_data_types": 0,
+        "pattern_matching": 5,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 2,
+        "type_inference": 1,
+        "structural_typing": 2,
+        "flow_sensitive_typing": 0
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Dynamically typed — no static generics",
+        "ad_hoc_polymorphism": "Protocols provide runtime dispatch on data type; well-designed but dynamic",
+        "pattern_matching": "Best-in-class for dynamic language — function heads, case, with; pervasive idiom",
+        "gradual_typing": "Typespecs for documentation; Dialyzer for success typing; not enforced",
+        "type_inference": "Dialyzer does type analysis but not full static inference",
+        "structural_typing": "Protocols dispatch on structure; maps are structurally matched"
+      },
+      "feature_timeline": {
+        "ad_hoc_polymorphism": 2014,
+        "pattern_matching": 2011
+      },
+      "popularity": {
+        "tiobe_rank": 33,
+        "github_stars_rank": 20,
+        "stackoverflow_loved_pct": 68,
+        "notes": "Built on BEAM VM; Phoenix framework; strong in real-time web apps"
+      }
+    },
+    {
+      "name": "Ruby",
+      "year": 1995,
+      "paradigm": "Multi-paradigm",
+      "domain": "Web / Scripting",
+      "features": {
+        "parametric_polymorphism": 0,
+        "ad_hoc_polymorphism": 1,
+        "algebraic_data_types": 0,
+        "pattern_matching": 2,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 2,
+        "type_inference": 0,
+        "structural_typing": 2,
+        "flow_sensitive_typing": 0
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Dynamically typed — no static generics",
+        "ad_hoc_polymorphism": "Duck typing via respond_to?; no formal protocol/interface system",
+        "pattern_matching": "Pattern matching in case/in (Ruby 3.0+); structural patterns, pin operator",
+        "gradual_typing": "RBS type signatures + Steep/Sorbet type checkers; growing adoption",
+        "structural_typing": "Duck typing is de facto structural typing at runtime",
+        "flow_sensitive_typing": "No static flow analysis"
+      },
+      "feature_timeline": {
+        "pattern_matching": 2020,
+        "gradual_typing": 2020
+      },
+      "popularity": {
+        "tiobe_rank": 16,
+        "github_stars_rank": 13,
+        "stackoverflow_loved_pct": 45,
+        "notes": "Rails framework; strong in startups/web; RBS bringing gradual types"
+      }
+    },
+    {
+      "name": "Clojure",
+      "year": 2007,
+      "paradigm": "Functional",
+      "domain": "General / Data",
+      "features": {
+        "parametric_polymorphism": 0,
+        "ad_hoc_polymorphism": 4,
+        "algebraic_data_types": 0,
+        "pattern_matching": 1,
+        "ownership_lifetime": 0,
+        "dependent_types": 0,
+        "gadts": 0,
+        "higher_kinded_types": 0,
+        "effect_system": 0,
+        "refinement_types": 0,
+        "gradual_typing": 2,
+        "type_inference": 0,
+        "structural_typing": 2,
+        "flow_sensitive_typing": 0
+      },
+      "scoring_rationale": {
+        "parametric_polymorphism": "Dynamically typed; no static generics",
+        "ad_hoc_polymorphism": "Multimethods + protocols; very flexible runtime dispatch, well-designed",
+        "pattern_matching": "core.match library; not built-in language feature",
+        "gradual_typing": "core.typed (Typed Clojure) for optional static typing; limited adoption",
+        "structural_typing": "Maps/records are structurally matched; spec for runtime validation"
+      },
+      "feature_timeline": {
+        "ad_hoc_polymorphism": 2007
+      },
+      "popularity": {
+        "tiobe_rank": 38,
+        "github_stars_rank": 28,
+        "stackoverflow_loved_pct": 55,
+        "notes": "Lisp on JVM; immutable data structures; strong in data processing"
       }
     }
   ]
