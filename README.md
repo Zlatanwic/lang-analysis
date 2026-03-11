@@ -114,6 +114,41 @@ cd frontend
 pnpm run preview
 ```
 
+## Deploy To GitHub Pages
+
+This repository is configured to deploy through GitHub Actions with the workflow in [`.github/workflows/deploy-github-pages.yml`](/e:/lang_analysis/.github/workflows/deploy-github-pages.yml).
+
+### What the workflow does
+
+1. Checks out the repository
+2. Sets up Python and Node.js
+3. Generates `frontend/public/dashboard-data.json`
+4. Installs frontend dependencies with `pnpm`
+5. Runs `pnpm run check`
+6. Builds the Vue app with the correct GitHub Pages `base` path
+7. Uploads `frontend/dist`
+8. Deploys the build to GitHub Pages
+
+### One-time GitHub repository setup
+
+In your GitHub repository:
+
+1. Open `Settings`
+2. Open `Pages`
+3. Set `Source` to `GitHub Actions`
+
+After that, every push to `main` will trigger a deployment.
+
+### Expected Pages URL
+
+For this repository remote, the site URL should be:
+
+```text
+https://zlatanwic.github.io/lang-analysis/
+```
+
+That URL is inferred from the current remote repository name `Zlatanwic/lang-analysis`.
+
 ## Data Flow
 
 The project uses a simple two-step flow:
@@ -163,6 +198,18 @@ Try:
 cd frontend
 pnpm approve-builds
 pnpm rebuild esbuild
+pnpm run build
+```
+
+### GitHub Pages deploy succeeds but assets 404
+
+The Vite config now computes the correct repository subpath during GitHub Actions builds.
+
+If you ever deploy this app under a different path, set a custom base explicitly:
+
+```powershell
+cd frontend
+$env:VITE_BASE_PATH='/your-repo-name/'
 pnpm run build
 ```
 
