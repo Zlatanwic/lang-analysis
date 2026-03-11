@@ -394,6 +394,225 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
   .pop-metric-btn:hover { border-color: var(--accent); color: var(--text); }
   .pop-metric-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
+  /* Additional visualization panels */
+  #diffusion-chart,
+  #cluster-chart,
+  #lineage-chart {
+    width: 100%;
+    height: 640px;
+  }
+  .viz-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .control-label {
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .control-select,
+  .control-button {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: rgba(15,17,23,0.8);
+    color: var(--text);
+    min-height: 40px;
+    padding: 0 14px;
+    font-size: 0.82rem;
+    transition: border-color 0.18s ease, transform 0.18s ease;
+  }
+  .control-button {
+    cursor: pointer;
+  }
+  .control-select:focus,
+  .control-button:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(108,140,255,0.18);
+  }
+  .control-button:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .control-range {
+    accent-color: var(--accent);
+    min-width: 180px;
+  }
+  .control-note {
+    color: var(--text-dim);
+    font-size: 0.76rem;
+    max-width: 560px;
+  }
+  .mini-dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .mini-dashboard-card {
+    border: 1px solid rgba(108,140,255,0.14);
+    border-radius: 14px;
+    background: rgba(15,17,23,0.52);
+    padding: 12px 14px;
+  }
+  .mini-dashboard-card strong {
+    display: block;
+    color: var(--text);
+    font-size: 0.92rem;
+    margin-bottom: 4px;
+  }
+  .mini-dashboard-card span {
+    color: var(--text-dim);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+  .legend-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .legend-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 30px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
+    font-size: 0.72rem;
+  }
+  .legend-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    display: inline-block;
+    flex: 0 0 auto;
+  }
+  .recommendation-hero {
+    grid-column: 1 / -1;
+    border: 1px solid rgba(108,140,255,0.18);
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(108,140,255,0.18), rgba(15,17,23,0.72));
+    padding: 14px 16px;
+  }
+  .recommendation-hero strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 4px;
+  }
+  .recommendation-hero span {
+    color: var(--text-dim);
+    font-size: 0.76rem;
+    line-height: 1.45;
+  }
+  .feature-filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .feature-toggle {
+    border: 1px solid rgba(108,140,255,0.14);
+    border-radius: 12px;
+    background: rgba(15,17,23,0.52);
+    color: var(--text);
+    padding: 12px 12px 10px;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+  }
+  .feature-toggle:hover {
+    border-color: rgba(108,140,255,0.4);
+    transform: translateY(-1px);
+  }
+  .feature-toggle.active {
+    background: rgba(108,140,255,0.16);
+    border-color: rgba(108,140,255,0.48);
+  }
+  .feature-toggle strong {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .feature-toggle small {
+    display: block;
+    color: var(--text-dim);
+    font-size: 0.68rem;
+    line-height: 1.35;
+  }
+  .recommendation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .recommendation-card {
+    border: 1px solid rgba(108,140,255,0.14);
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(108,140,255,0.1), rgba(15,17,23,0.76));
+    padding: 16px;
+  }
+  .recommendation-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .recommendation-head h3 {
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+  .recommendation-score {
+    min-width: 56px;
+    padding: 6px 8px;
+    border-radius: 10px;
+    background: rgba(108,140,255,0.18);
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .recommendation-meta,
+  .recommendation-empty {
+    color: var(--text-dim);
+    font-size: 0.74rem;
+    line-height: 1.45;
+  }
+  .recommendation-section {
+    margin-top: 10px;
+  }
+  .recommendation-section strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.76rem;
+  }
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .mini-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 24px;
+    padding: 0 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
+    font-size: 0.68rem;
+  }
+  .mini-pill.missing {
+    background: rgba(255,108,140,0.14);
+    color: #ffb6c5;
+  }
+  .mini-pill.match {
+    background: rgba(108,255,160,0.14);
+    color: #b7ffd0;
+  }
+
   /* Tooltip */
   .tooltip {
     position: fixed;
@@ -434,6 +653,16 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
     .lang-title { font-size: 0.7rem; }
     .lang-meta { font-size: 0.58rem; }
     .feat-index-legend { grid-template-columns: 1fr; }
+    #diffusion-chart,
+    #cluster-chart,
+    #lineage-chart,
+    #timeline-chart,
+    #popularity-chart { height: 520px; }
+    .control-note { max-width: 100%; }
+    .control-range { min-width: 120px; width: 100%; }
+    .mini-dashboard-grid { grid-template-columns: 1fr; }
+    .feature-filter-grid,
+    .recommendation-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -441,13 +670,17 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
 
 <div class="header">
   <h1>Programming Language Type System Knowledge Graph</h1>
-  <p>An interactive exploration of type system features across <strong>25</strong> programming languages — featuring 0-5 fine-grained scoring, popularity analysis, and scoring rationale.</p>
+  <p>An interactive exploration of type system features across <strong>26</strong> programming languages — featuring 0-5 fine-grained scoring, diffusion paths, clustering, lineage analysis, and guided language recommendations.</p>
 </div>
 
 <div class="tabs">
   <div class="tab active" data-panel="heatmap">Feature Matrix</div>
   <div class="tab" data-panel="radar">Radar Comparison</div>
   <div class="tab" data-panel="timeline">Feature Timeline</div>
+  <div class="tab" data-panel="diffusion">Feature Diffusion</div>
+  <div class="tab" data-panel="clusters">Domain Clusters</div>
+  <div class="tab" data-panel="lineage">Lineage Graph</div>
+  <div class="tab" data-panel="recommender">Feature Recommender</div>
   <div class="tab" data-panel="network">Similarity Network</div>
   <div class="tab" data-panel="popularity">Popularity Analysis</div>
 </div>
@@ -458,7 +691,7 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
 <div class="panel active" id="panel-heatmap">
   <div class="card">
     <h2>Type System Feature Matrix</h2>
-    <p class="desc">Rows sorted by total type system complexity score. Scoring: 0 (not supported) to 5 (full/reference implementation). Click cells to see scoring rationale.</p>
+    <p class="desc">Rows sorted by total type system complexity score. Scoring: 0 (not supported) to 5 (full/reference implementation). Hover cells to inspect the full rationale without expanding the grid.</p>
     <div class="score-legend" id="score-legend"></div>
     <div id="heatmap-container"></div>
   </div>
@@ -506,6 +739,83 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
   </div>
 </div>
 
+<!-- Panel 6: Diffusion -->
+<div class="panel" id="panel-diffusion">
+  <div class="card">
+    <h2>Feature Diffusion Path</h2>
+    <p class="desc">Track how one type-system idea propagates across languages over time. Use Play to animate the adoption path, or switch features to compare different diffusion patterns.</p>
+    <div class="viz-toolbar">
+      <label class="control-label" for="diffusion-feature-select">Feature</label>
+      <select id="diffusion-feature-select" class="control-select"></select>
+      <button id="diffusion-play-btn" class="control-button" type="button">Play</button>
+      <label class="control-label" for="diffusion-progress">Progress</label>
+      <input id="diffusion-progress" class="control-range" type="range" min="1" max="1" value="1">
+      <span id="diffusion-progress-label" class="control-note">1 / 1</span>
+      <span class="control-note">Chronological reveal from first recorded adoption to later mainstream uptake.</span>
+    </div>
+    <div id="diffusion-summary" class="mini-dashboard-grid"></div>
+    <div id="diffusion-chart"></div>
+  </div>
+</div>
+
+<!-- Panel 7: Clusters -->
+<div class="panel" id="panel-clusters">
+  <div class="card">
+    <h2>Domain Cluster Analysis</h2>
+    <p class="desc">Languages are projected into 2D from their feature vectors and clustered with k-means. Color shows cluster membership, while symbol shape preserves the top-level domain group.</p>
+    <div class="viz-toolbar">
+      <button id="cluster-label-toggle" class="control-button" type="button">Hide labels</button>
+      <span class="control-note">Use the label toggle when you want a cleaner scatterplot for shape-level reading instead of point-level inspection.</span>
+    </div>
+    <div id="cluster-summary" class="mini-dashboard-grid"></div>
+    <div id="cluster-chart"></div>
+    <div id="cluster-legend" class="legend-row"></div>
+  </div>
+</div>
+
+<!-- Panel 8: Lineage -->
+<div class="panel" id="panel-lineage">
+  <div class="card">
+    <h2>Language Influence Lineage</h2>
+    <p class="desc">A directed influence graph connecting roots, descendants, and cross-ecosystem ideas. This view emphasizes conceptual inheritance rather than strict implementation compatibility.</p>
+    <div class="viz-toolbar">
+      <label class="control-label" for="lineage-focus-select">Focus language</label>
+      <select id="lineage-focus-select" class="control-select">
+        <option value="__all__">Show all</option>
+      </select>
+      <button id="lineage-reset-btn" class="control-button" type="button">Reset focus</button>
+      <span class="control-note">Focus mode highlights the local neighborhood so influence paths are easier to read in dense regions.</span>
+    </div>
+    <div id="lineage-summary" class="mini-dashboard-grid"></div>
+    <div id="lineage-chart"></div>
+  </div>
+</div>
+
+<!-- Panel 9: Recommender -->
+<div class="panel" id="panel-recommender">
+  <div class="card">
+    <h2>Interactive Feature Recommender</h2>
+    <p class="desc">Pick the type-system capabilities you need and set a minimum acceptable score. The configurator ranks languages by fit and shows which requirements are still missing.</p>
+    <div class="viz-toolbar recommender-toolbar">
+      <label class="control-label" for="recommender-threshold">Minimum score</label>
+      <select id="recommender-threshold" class="control-select">
+        <option value="2">2 / 5</option>
+        <option value="3" selected>3 / 5</option>
+        <option value="4">4 / 5</option>
+      </select>
+      <label class="control-label" for="recommender-domain-filter">Domain</label>
+      <select id="recommender-domain-filter" class="control-select">
+        <option value="__all__">All domains</option>
+      </select>
+      <button id="recommender-clear-btn" class="control-button" type="button">Clear filters</button>
+      <span class="control-note">Recommendation score balances hard matches, partial coverage, and overall language complexity.</span>
+    </div>
+    <div id="recommender-summary" class="mini-dashboard-grid"></div>
+    <div id="recommender-features" class="feature-filter-grid"></div>
+    <div id="recommender-results" class="recommendation-grid"></div>
+  </div>
+</div>
+
 <script>
 // ====== DATA (injected by Python) ======
 const DATA = __DASHBOARD_DATA__;
@@ -521,6 +831,10 @@ tabs.forEach(tab => {
     document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
     if (tab.dataset.panel === 'network') initNetwork();
     if (tab.dataset.panel === 'timeline') initTimeline();
+    if (tab.dataset.panel === 'diffusion') initDiffusion();
+    if (tab.dataset.panel === 'clusters') initClusters();
+    if (tab.dataset.panel === 'lineage') initLineage();
+    if (tab.dataset.panel === 'recommender') initRecommender();
     if (tab.dataset.panel === 'radar') initRadar();
     if (tab.dataset.panel === 'popularity') initPopularity();
   });
@@ -577,6 +891,26 @@ const paradigmColors = {
   'Multi-paradigm': '#6c8cff',
   'Imperative': '#ffa06c',
   'Object-oriented': '#c96cff',
+};
+const domainGroupSymbols = {
+  'Systems': 'diamond',
+  'Web': 'roundRect',
+  'Academic': 'triangle',
+  'Enterprise': 'rect',
+  'General': 'circle',
+  'Mobile': 'pin',
+  'Scientific': 'arrow',
+};
+const clusterPalette = ['#6c8cff', '#ff8b6c', '#6cffa0', '#c96cff'];
+const domainGroups = [...new Set(DATA.heatmap.map(lang => lang.domain.split(' / ')[0]))].sort();
+const domainGroupColors = {
+  'Academic': '#ffdb6c',
+  'Enterprise': '#6c8cff',
+  'General': '#9aa4bf',
+  'Mobile': '#ff8b6c',
+  'Scientific': '#6cffa0',
+  'Systems': '#ff6c8c',
+  'Web': '#6cffe0',
 };
 
 // ====== SCORING LEGEND ======
@@ -798,7 +1132,433 @@ function initTimeline() {
   });
 }
 
-// ====== 4. NETWORK (D3 force) ======
+// ====== 4. FEATURE DIFFUSION ======
+let diffusionChart = null;
+let diffusionFeatureKey = null;
+let diffusionRevealCount = 0;
+let diffusionTimer = null;
+
+function renderDiffusionSummary(featureData, visibleEvents) {
+  const container = document.getElementById('diffusion-summary');
+  if (!container) return;
+  const origin = featureData.events[0];
+  const latest = visibleEvents[visibleEvents.length - 1] || origin;
+  const domainSpread = [...new Set(visibleEvents.map(event => event.domain_group))];
+  container.innerHTML = `
+    <div class="mini-dashboard-card">
+      <strong>Origin</strong>
+      <span>${origin.language} (${origin.year})<br>${origin.domain}</span>
+    </div>
+    <div class="mini-dashboard-card">
+      <strong>Latest visible</strong>
+      <span>${latest.language} (${latest.year})<br>Score ${latest.score}/5</span>
+    </div>
+    <div class="mini-dashboard-card">
+      <strong>Coverage</strong>
+      <span>${visibleEvents.length} of ${featureData.events.length} adoptions revealed<br>${domainSpread.join(', ') || 'No domains yet'}</span>
+    </div>
+  `;
+}
+
+function stopDiffusionAnimation() {
+  if (diffusionTimer) {
+    window.clearInterval(diffusionTimer);
+    diffusionTimer = null;
+  }
+  const btn = document.getElementById('diffusion-play-btn');
+  if (btn) btn.textContent = 'Play';
+}
+
+function renderDiffusion(featureKey, revealCount = null) {
+  if (!diffusionChart) return;
+  const featureData = DATA.diffusion.features[featureKey];
+  if (!featureData) return;
+
+  const events = featureData.events;
+  const visibleCount = revealCount == null ? events.length : revealCount;
+  const visibleEvents = events.slice(0, visibleCount);
+  const categories = events.map(event => event.language);
+  const latest = visibleEvents[visibleEvents.length - 1];
+  const progress = document.getElementById('diffusion-progress');
+  const progressLabel = document.getElementById('diffusion-progress-label');
+  if (progress) {
+    progress.max = String(events.length);
+    progress.value = String(Math.max(1, visibleEvents.length));
+  }
+  if (progressLabel) {
+    progressLabel.textContent = `${visibleEvents.length} / ${events.length}`;
+  }
+  renderDiffusionSummary(featureData, visibleEvents);
+
+  diffusionChart.setOption({
+    title: {
+      text: featureData.label,
+      left: 12,
+      top: 10,
+      textStyle: { color: '#e1e4ed', fontSize: 14, fontWeight: 700 },
+      subtext: latest ? `Visible adoptions: ${visibleEvents.length}/${events.length} / Latest reveal: ${latest.language} (${latest.year})` : 'No adoption data',
+      subtextStyle: { color: '#8b8fa3', fontSize: 11 },
+    },
+    tooltip: {
+      trigger: 'item',
+      formatter: params => {
+        const event = params.data && params.data.meta ? params.data.meta : params.data;
+        if (!event) return '';
+        return `<b>${event.language}</b><br>${featureData.label}<br>Year: ${event.year}<br>Score: ${event.score}/5<br>Domain: ${event.domain}`;
+      },
+    },
+    grid: { left: 120, right: 40, top: 70, bottom: 50 },
+    xAxis: {
+      type: 'value',
+      min: Math.min(...events.map(event => event.year)) - 1,
+      max: Math.max(...events.map(event => event.year)) + 1,
+      axisLabel: { color: '#8b8fa3' },
+      splitLine: { lineStyle: { color: '#2a2d3a' } },
+    },
+    yAxis: {
+      type: 'category',
+      data: categories,
+      axisLabel: { color: '#e1e4ed', fontSize: 11 },
+      splitLine: { lineStyle: { color: '#1f2233' } },
+    },
+    series: [
+      {
+        type: 'line',
+        data: visibleEvents.map(event => ({
+          value: [event.year, event.language],
+          meta: event,
+        })),
+        smooth: false,
+        symbol: 'circle',
+        symbolSize: 10,
+        lineStyle: { color: '#6c8cff', width: 3 },
+        itemStyle: { color: '#6c8cff' },
+      },
+      {
+        type: 'effectScatter',
+        data: latest ? [{
+          value: [latest.year, latest.language],
+          meta: latest,
+        }] : [],
+        rippleEffect: { scale: 3, brushType: 'stroke' },
+        symbolSize: 16,
+        itemStyle: { color: '#ff6c8c' },
+        z: 10,
+      },
+    ],
+    animationDuration: 500,
+  }, true);
+}
+
+function initDiffusion() {
+  if (!diffusionChart) {
+    diffusionChart = echarts.init(document.getElementById('diffusion-chart'));
+    window.addEventListener('resize', () => diffusionChart && diffusionChart.resize());
+
+    const select = document.getElementById('diffusion-feature-select');
+    const features = Object.entries(DATA.diffusion.features);
+    features.forEach(([featureKey, featureValue]) => {
+      const option = document.createElement('option');
+      option.value = featureKey;
+      option.textContent = featureValue.label;
+      select.appendChild(option);
+    });
+
+    diffusionFeatureKey = DATA.diffusion.default_feature;
+    select.value = diffusionFeatureKey;
+    select.addEventListener('change', () => {
+      stopDiffusionAnimation();
+      diffusionFeatureKey = select.value;
+      diffusionRevealCount = DATA.diffusion.features[diffusionFeatureKey].events.length;
+      renderDiffusion(diffusionFeatureKey, diffusionRevealCount);
+    });
+
+    document.getElementById('diffusion-play-btn').addEventListener('click', () => {
+      const total = DATA.diffusion.features[diffusionFeatureKey].events.length;
+      if (diffusionTimer) {
+        stopDiffusionAnimation();
+        return;
+      }
+      diffusionRevealCount = 1;
+      renderDiffusion(diffusionFeatureKey, diffusionRevealCount);
+      document.getElementById('diffusion-play-btn').textContent = 'Pause';
+      diffusionTimer = window.setInterval(() => {
+        diffusionRevealCount += 1;
+        renderDiffusion(diffusionFeatureKey, diffusionRevealCount);
+        if (diffusionRevealCount >= total) {
+          stopDiffusionAnimation();
+        }
+      }, 850);
+    });
+
+    document.getElementById('diffusion-progress').addEventListener('input', event => {
+      stopDiffusionAnimation();
+      diffusionRevealCount = Number(event.target.value);
+      renderDiffusion(diffusionFeatureKey, diffusionRevealCount);
+    });
+  }
+
+  diffusionFeatureKey = diffusionFeatureKey || DATA.diffusion.default_feature;
+  diffusionRevealCount = DATA.diffusion.features[diffusionFeatureKey].events.length;
+  renderDiffusion(diffusionFeatureKey, diffusionRevealCount);
+}
+
+// ====== 5. DOMAIN CLUSTERS ======
+let clusterChart = null;
+let clusterLabelsVisible = true;
+
+function renderClusterMeta() {
+  const summary = document.getElementById('cluster-summary');
+  const legend = document.getElementById('cluster-legend');
+  if (summary) {
+    const groups = [0, 1, 2].map(clusterIndex => {
+      const clusterPoints = DATA.clusters.points.filter(point => point.cluster === clusterIndex);
+      const dominantDomain = clusterPoints.reduce((acc, point) => {
+        acc[point.domain_group] = (acc[point.domain_group] || 0) + 1;
+        return acc;
+      }, {});
+      const topDomain = Object.entries(dominantDomain).sort((a, b) => b[1] - a[1])[0];
+      return `
+        <div class="mini-dashboard-card">
+          <strong>${DATA.clusters.cluster_labels[String(clusterIndex)] || `Cluster ${clusterIndex + 1}`}</strong>
+          <span>${clusterPoints.length} languages<br>Dominant domain: ${topDomain ? topDomain[0] : 'N/A'}</span>
+        </div>
+      `;
+    });
+    summary.innerHTML = groups.join('');
+  }
+  if (legend) {
+    legend.innerHTML = domainGroups.map(group => `
+      <span class="legend-chip">
+        <span class="legend-swatch" style="background:${domainGroupColors[group] || '#8892b0'}"></span>
+        ${group} domain
+      </span>
+    `).join('');
+  }
+}
+
+function initClusters() {
+  if (!clusterChart) {
+    clusterChart = echarts.init(document.getElementById('cluster-chart'));
+    window.addEventListener('resize', () => clusterChart && clusterChart.resize());
+    document.getElementById('cluster-label-toggle').addEventListener('click', () => {
+      clusterLabelsVisible = !clusterLabelsVisible;
+      document.getElementById('cluster-label-toggle').textContent = clusterLabelsVisible ? 'Hide labels' : 'Show labels';
+      initClusters();
+    });
+  }
+
+  renderClusterMeta();
+  const points = DATA.clusters.points;
+  const series = [0, 1, 2].map(clusterIndex => ({
+    name: DATA.clusters.cluster_labels[String(clusterIndex)] || `Cluster ${clusterIndex + 1}`,
+    type: 'scatter',
+    data: points
+      .filter(point => point.cluster === clusterIndex)
+      .map(point => ({
+        value: [point.x, point.y, point.complexity],
+        name: point.name,
+        domain: point.domain,
+        domain_group: point.domain_group,
+        cluster_label: point.cluster_label,
+        paradigm: point.paradigm,
+        symbol: domainGroupSymbols[point.domain_group] || 'circle',
+        symbolSize: Math.max(12, point.complexity / 2),
+        itemStyle: { color: clusterPalette[clusterIndex % clusterPalette.length] },
+      })),
+    emphasis: { focus: 'series' },
+    label: {
+      show: clusterLabelsVisible,
+      formatter: params => params.data.name,
+      position: 'top',
+      color: '#aeb6d1',
+      fontSize: 10,
+    },
+  }));
+
+  clusterChart.setOption({
+    tooltip: {
+      formatter: params => `<b>${params.data.name}</b><br>${params.data.cluster_label}<br>Domain: ${params.data.domain}<br>Paradigm: ${params.data.paradigm}<br>Complexity: ${params.data.value[2]}`,
+    },
+    legend: {
+      bottom: 0,
+      textStyle: { color: '#8b8fa3' },
+    },
+    grid: { left: 60, right: 30, top: 30, bottom: 70 },
+    xAxis: {
+      type: 'value',
+      name: 'Principal Component 1',
+      axisLabel: { color: '#8b8fa3' },
+      splitLine: { lineStyle: { color: '#2a2d3a' } },
+    },
+    yAxis: {
+      type: 'value',
+      name: 'Principal Component 2',
+      axisLabel: { color: '#8b8fa3' },
+      splitLine: { lineStyle: { color: '#2a2d3a' } },
+    },
+    series,
+  }, true);
+}
+
+// ====== 6. LINEAGE GRAPH ======
+let lineageChart = null;
+let lineageFocus = '__all__';
+
+function renderLineageSummary(focusName) {
+  const summary = document.getElementById('lineage-summary');
+  if (!summary) return;
+
+  if (focusName === '__all__') {
+    const rootCount = DATA.lineage.nodes.filter(node => node.virtual).length;
+    summary.innerHTML = `
+      <div class="mini-dashboard-card">
+        <strong>Roots</strong>
+        <span>${rootCount} virtual lineage anchors</span>
+      </div>
+      <div class="mini-dashboard-card">
+        <strong>Influence edges</strong>
+        <span>${DATA.lineage.edges.length} directed relationships in the current map</span>
+      </div>
+      <div class="mini-dashboard-card">
+        <strong>How to read</strong>
+        <span>Select a language to highlight only its immediate upstream and downstream influences.</span>
+      </div>
+    `;
+    return;
+  }
+
+  const incoming = DATA.lineage.edges.filter(edge => edge.target === focusName);
+  const outgoing = DATA.lineage.edges.filter(edge => edge.source === focusName);
+  summary.innerHTML = `
+    <div class="mini-dashboard-card">
+      <strong>Focused language</strong>
+      <span>${focusName}</span>
+    </div>
+    <div class="mini-dashboard-card">
+      <strong>Influenced by</strong>
+      <span>${incoming.length ? incoming.map(edge => edge.source).join(', ') : 'No incoming links in the current map'}</span>
+    </div>
+    <div class="mini-dashboard-card">
+      <strong>Influenced</strong>
+      <span>${outgoing.length ? outgoing.map(edge => edge.target).join(', ') : 'No outgoing links in the current map'}</span>
+    </div>
+  `;
+}
+
+function renderLineage() {
+  if (!lineageChart) return;
+  const categories = [
+    ...new Set(DATA.lineage.nodes.map(node => node.virtual ? 'Root lineage' : node.domain_group)),
+  ].map(name => ({ name }));
+  const highlighted = new Set();
+  if (lineageFocus !== '__all__') {
+    highlighted.add(lineageFocus);
+    DATA.lineage.edges.forEach(edge => {
+      if (edge.source === lineageFocus || edge.target === lineageFocus) {
+        highlighted.add(edge.source);
+        highlighted.add(edge.target);
+      }
+    });
+  }
+  renderLineageSummary(lineageFocus);
+
+  lineageChart.setOption({
+    tooltip: {
+      formatter: params => {
+        if (params.dataType === 'edge') {
+          return `<b>${params.data.source}</b> -> <b>${params.data.target}</b><br>${params.data.reason}`;
+        }
+        const node = params.data;
+        return `<b>${node.name}</b><br>${node.virtual ? 'Virtual lineage root' : `${node.paradigm} / ${node.domain}`}<br>Year: ${node.year}`;
+      },
+    },
+    legend: {
+      bottom: 0,
+      textStyle: { color: '#8b8fa3' },
+    },
+    series: [{
+      type: 'graph',
+      layout: 'force',
+      roam: true,
+      draggable: true,
+      force: {
+        repulsion: 220,
+        edgeLength: 140,
+        gravity: 0.08,
+      },
+      label: {
+        show: true,
+        color: '#e1e4ed',
+        fontSize: 11,
+      },
+      categories,
+      edgeSymbol: ['none', 'arrow'],
+      edgeSymbolSize: [0, 10],
+      lineStyle: {
+        color: '#5e6788',
+        width: 1.6,
+        curveness: 0.14,
+        opacity: 0.75,
+      },
+      data: DATA.lineage.nodes.map(node => {
+        const active = lineageFocus === '__all__' || highlighted.has(node.name);
+        return {
+          ...node,
+          category: categories.findIndex(category => category.name === (node.virtual ? 'Root lineage' : node.domain_group)),
+          symbolSize: node.virtual ? 34 : Math.max(20, Math.min(46, node.complexity)),
+          itemStyle: {
+            color: node.virtual ? '#ffdb6c' : (paradigmColors[node.paradigm] || '#6c8cff'),
+            opacity: active ? (node.virtual ? 0.96 : 0.9) : 0.18,
+          },
+          label: { opacity: active ? 1 : 0.22 },
+        };
+      }),
+      links: DATA.lineage.edges.map(edge => {
+        const active = lineageFocus === '__all__' || edge.source === lineageFocus || edge.target === lineageFocus;
+        return {
+          ...edge,
+          lineStyle: {
+            color: active ? '#7e96ff' : '#4c5370',
+            opacity: active ? 0.92 : 0.12,
+            width: active ? 2.4 : 1.2,
+            curveness: 0.14,
+          },
+        };
+      }),
+    }],
+  }, true);
+}
+
+function initLineage() {
+  if (!lineageChart) {
+    lineageChart = echarts.init(document.getElementById('lineage-chart'));
+    window.addEventListener('resize', () => lineageChart && lineageChart.resize());
+    const focusSelect = document.getElementById('lineage-focus-select');
+    DATA.lineage.nodes
+      .filter(node => !node.virtual)
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .forEach(node => {
+        const option = document.createElement('option');
+        option.value = node.name;
+        option.textContent = node.name;
+        focusSelect.appendChild(option);
+      });
+    focusSelect.addEventListener('change', event => {
+      lineageFocus = event.target.value;
+      renderLineage();
+    });
+    document.getElementById('lineage-reset-btn').addEventListener('click', () => {
+      lineageFocus = '__all__';
+      focusSelect.value = '__all__';
+      renderLineage();
+    });
+  }
+
+  renderLineage();
+}
+
+// ====== 7. NETWORK (D3 force) ======
 let networkInited = false;
 function initNetwork() {
   if (networkInited) return;
@@ -867,7 +1627,157 @@ function initNetwork() {
   });
 }
 
-// ====== 5. POPULARITY ANALYSIS ======
+// ====== 8. RECOMMENDER ======
+let recommenderReady = false;
+const selectedRecommenderFeatures = new Set();
+
+function renderRecommendations() {
+  const container = document.getElementById('recommender-results');
+  const summary = document.getElementById('recommender-summary');
+  const threshold = Number(document.getElementById('recommender-threshold').value);
+  const domainFilter = document.getElementById('recommender-domain-filter').value;
+  const selected = Array.from(selectedRecommenderFeatures);
+  const shortLabels = DATA.feature_short_labels || {};
+  const domainFiltered = DATA.heatmap.filter(lang => {
+    const group = lang.domain.split(' / ')[0];
+    return domainFilter === '__all__' || group === domainFilter;
+  });
+
+  if (!selected.length) {
+    const topByComplexity = [...domainFiltered].slice(0, 6);
+    if (summary) {
+      summary.innerHTML = `
+        <div class="recommendation-hero">
+          <strong>Start by choosing capabilities</strong>
+          <span>${domainFilter === '__all__' ? 'All domain groups are currently visible.' : `${domainFilter} languages are currently visible.`} Once you pick features, the recommender will score hard matches and surface trade-offs.</span>
+        </div>
+      `;
+    }
+    container.innerHTML = topByComplexity.map(lang => `
+      <div class="recommendation-card">
+        <div class="recommendation-head">
+          <div>
+            <h3>${lang.name}</h3>
+            <div class="recommendation-meta">${lang.year} / ${lang.paradigm} / ${lang.domain}</div>
+          </div>
+          <div class="recommendation-score">${lang.complexity}</div>
+        </div>
+        <div class="recommendation-empty">Select one or more features above to turn this into a constraint-based recommender. Until then, this view shows the most feature-rich languages in the dataset.</div>
+      </div>
+    `).join('');
+    return;
+  }
+
+  const ranked = domainFiltered.map(lang => {
+    const matched = [];
+    const missing = [];
+    let score = 0;
+    selected.forEach(feature => {
+      const index = DATA.features.indexOf(feature);
+      const value = lang.scores[index];
+      if (value >= threshold) {
+        matched.push({ feature, value });
+        score += 10 + value;
+      } else {
+        missing.push({ feature, value });
+        score += value;
+      }
+    });
+    score += lang.complexity / 10;
+    return { lang, matched, missing, score };
+  }).sort((a, b) => {
+    if (b.matched.length !== a.matched.length) return b.matched.length - a.matched.length;
+    if (b.score !== a.score) return b.score - a.score;
+    return b.lang.complexity - a.lang.complexity;
+  });
+  const best = ranked[0];
+  if (summary) {
+    summary.innerHTML = `
+      <div class="recommendation-hero">
+        <strong>${best ? `Best current match: ${best.lang.name}` : 'No matching languages in this slice'}</strong>
+        <span>${best ? `${best.matched.length} of ${selected.length} selected capabilities meet the ${threshold}/5 threshold${domainFilter === '__all__' ? '' : ` within the ${domainFilter} slice`}.` : 'Try widening the domain filter or lowering the threshold.'}</span>
+      </div>
+      <div class="mini-dashboard-card">
+        <strong>Selected features</strong>
+        <span>${selected.map(feature => shortLabels[feature] || DATA.feature_labels[feature]).join(', ')}</span>
+      </div>
+      <div class="mini-dashboard-card">
+        <strong>Threshold</strong>
+        <span>${threshold} / 5 minimum acceptable implementation depth</span>
+      </div>
+      <div class="mini-dashboard-card">
+        <strong>Domain filter</strong>
+        <span>${domainFilter === '__all__' ? 'All domain groups' : domainFilter}</span>
+      </div>
+    `;
+  }
+
+  container.innerHTML = ranked.slice(0, 8).map(({ lang, matched, missing, score }) => `
+    <div class="recommendation-card">
+      <div class="recommendation-head">
+        <div>
+          <h3>${lang.name}</h3>
+          <div class="recommendation-meta">${lang.year} / ${lang.paradigm} / ${lang.domain}</div>
+        </div>
+        <div class="recommendation-score">${matched.length}/${selected.length}</div>
+      </div>
+      <div class="recommendation-meta">Recommendation score: ${score.toFixed(1)} / Total complexity: ${lang.complexity}</div>
+      <div class="recommendation-section">
+        <strong>Matches</strong>
+        <div class="pill-row">${matched.length ? matched.map(item => `<span class="mini-pill match">${shortLabels[item.feature] || DATA.feature_labels[item.feature]} ${item.value}/5</span>`).join('') : '<span class="recommendation-empty">No features meet the threshold yet.</span>'}</div>
+      </div>
+      <div class="recommendation-section">
+        <strong>Missing or weak</strong>
+        <div class="pill-row">${missing.length ? missing.map(item => `<span class="mini-pill missing">${shortLabels[item.feature] || DATA.feature_labels[item.feature]} ${item.value}/5</span>`).join('') : '<span class="mini-pill match">All selected requirements are covered</span>'}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function initRecommender() {
+  if (!recommenderReady) {
+    recommenderReady = true;
+    const featureContainer = document.getElementById('recommender-features');
+    const domainFilter = document.getElementById('recommender-domain-filter');
+    domainGroups.forEach(group => {
+      const option = document.createElement('option');
+      option.value = group;
+      option.textContent = group;
+      domainFilter.appendChild(option);
+    });
+    DATA.features.forEach(feature => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'feature-toggle';
+      button.innerHTML = `<strong>${DATA.feature_short_labels[feature] || DATA.feature_labels[feature]}</strong><small>${DATA.feature_labels[feature]}</small>`;
+      button.addEventListener('click', () => {
+        if (selectedRecommenderFeatures.has(feature)) {
+          selectedRecommenderFeatures.delete(feature);
+          button.classList.remove('active');
+        } else {
+          selectedRecommenderFeatures.add(feature);
+          button.classList.add('active');
+        }
+        renderRecommendations();
+      });
+      featureContainer.appendChild(button);
+    });
+
+    document.getElementById('recommender-threshold').addEventListener('change', renderRecommendations);
+    document.getElementById('recommender-domain-filter').addEventListener('change', renderRecommendations);
+    document.getElementById('recommender-clear-btn').addEventListener('click', () => {
+      selectedRecommenderFeatures.clear();
+      document.querySelectorAll('.feature-toggle').forEach(button => button.classList.remove('active'));
+      document.getElementById('recommender-domain-filter').value = '__all__';
+      document.getElementById('recommender-threshold').value = '3';
+      renderRecommendations();
+    });
+  }
+
+  renderRecommendations();
+}
+
+// ====== 9. POPULARITY ANALYSIS ======
 let popChart = null;
 let currentMetric = 'tiobe_rank';
 

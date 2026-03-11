@@ -147,6 +147,290 @@ def build_popularity_data(data: dict) -> list[dict]:
     return result
 
 
+def get_domain_group(domain: str) -> str:
+    """Collapse detailed domains into a top-level category."""
+    return domain.split(" / ")[0].strip()
+
+
+def build_feature_diffusion(data: dict) -> dict:
+    """Build chronological adoption paths for each feature."""
+    labels = get_feature_labels(data)
+    features = get_feature_names(data)
+    diffusion = {}
+    for feature in features:
+        events = []
+        for lang in data["languages"]:
+            year = lang.get("feature_timeline", {}).get(feature)
+            score = lang["features"].get(feature, 0)
+            if year is None and score <= 0:
+                continue
+            events.append({
+                "language": lang["name"],
+                "year": year or lang["year"],
+                "score": score,
+                "paradigm": lang["paradigm"],
+                "domain": lang["domain"],
+                "domain_group": get_domain_group(lang["domain"]),
+            })
+        events.sort(key=lambda item: (item["year"], item["language"]))
+        diffusion[feature] = {
+            "label": labels.get(feature, feature),
+            "events": events,
+        }
+    return {
+        "default_feature": "pattern_matching" if "pattern_matching" in diffusion else features[0],
+        "features": diffusion,
+    }
+
+
+def build_language_lineage(data: dict) -> dict:
+    """Build a directed language influence graph with a few virtual roots."""
+    languages = {lang["name"]: lang for lang in data["languages"]}
+    virtual_nodes = {
+        "ML": {
+            "name": "ML",
+            "year": 1973,
+            "paradigm": "Functional",
+            "domain": "Academic / Research",
+            "domain_group": "Academic",
+            "complexity": 0,
+            "virtual": True,
+        },
+        "Lisp": {
+            "name": "Lisp",
+            "year": 1958,
+            "paradigm": "Functional",
+            "domain": "Academic / General",
+            "domain_group": "Academic",
+            "complexity": 0,
+            "virtual": True,
+        },
+        "Erlang": {
+            "name": "Erlang",
+            "year": 1986,
+            "paradigm": "Functional",
+            "domain": "Web / Distributed",
+            "domain_group": "Web",
+            "complexity": 0,
+            "virtual": True,
+        },
+        "JavaScript": {
+            "name": "JavaScript",
+            "year": 1995,
+            "paradigm": "Multi-paradigm",
+            "domain": "Web development",
+            "domain_group": "Web",
+            "complexity": 0,
+            "virtual": True,
+        },
+    }
+
+    influence_edges = [
+        ("ML", "OCaml", "Module system and pattern matching"),
+        ("ML", "Haskell", "Typed FP lineage and Hindley-Milner"),
+        ("OCaml", "F#", "ML family on .NET"),
+        ("OCaml", "Rust", "Enums and pattern matching ergonomics"),
+        ("Haskell", "PureScript", "Type classes and HKT for the web"),
+        ("Haskell", "Elm", "Typed FP frontend simplification"),
+        ("Haskell", "Idris", "Dependent type research lineage"),
+        ("Haskell", "Roc", "Elm-like UX with stronger FP roots"),
+        ("Haskell", "Rust", "Traits, ADTs, and expressive type design"),
+        ("Java", "C#", ".NET response to Java-style OO"),
+        ("Java", "Scala", "JVM platform and enterprise interop"),
+        ("Java", "Kotlin", "Pragmatic JVM evolution"),
+        ("C#", "F#", "Functional language on the CLR"),
+        ("C", "C++", "Systems performance and syntax lineage"),
+        ("C", "Go", "Compiled systems simplicity"),
+        ("C", "Rust", "Systems programming baseline"),
+        ("C", "Zig", "Manual control and low-level portability"),
+        ("C", "Nim", "C interoperability and systems focus"),
+        ("C++", "Rust", "Safety and zero-cost abstractions reaction"),
+        ("JavaScript", "TypeScript", "Gradual typing for the JS ecosystem"),
+        ("Erlang", "Elixir", "BEAM runtime and distributed model"),
+        ("Lisp", "Clojure", "Modern Lisp on the JVM"),
+        ("Ruby", "Elixir", "Developer-friendly web ergonomics"),
+    ]
+
+    nodes = []
+    for name, lang in languages.items():
+        nodes.append({
+            "name": name,
+            "year": lang["year"],
+            "paradigm": lang["paradigm"],
+            "domain": lang["domain"],
+            "domain_group": get_domain_group(lang["domain"]),
+            "complexity": compute_type_complexity_score(lang),
+            "virtual": False,
+        })
+    nodes.extend(virtual_nodes.values())
+
+    return {
+        "nodes": nodes,
+        "edges": [
+            {"source": source, "target": target, "reason": reason}
+            for source, target, reason in influence_edges
+            if source in virtual_nodes or source in languages
+            if target in virtual_nodes or target in languages
+        ],
+    }
+
+
+def _dot(a: list[float], b: list[float]) -> float:
+    return sum(x * y for x, y in zip(a, b))
+
+
+def _normalize(vector: list[float]) -> list[float]:
+    norm = math.sqrt(sum(value * value for value in vector))
+    if norm == 0:
+        return vector[:]
+    return [value / norm for value in vector]
+
+
+def _mat_vec(matrix: list[list[float]], vector: list[float]) -> list[float]:
+    return [_dot(row, vector) for row in matrix]
+
+
+def _power_iteration(matrix: list[list[float]], iterations: int = 64) -> tuple[float, list[float]]:
+    size = len(matrix)
+    vector = _normalize([1.0 + (idx * 0.07) for idx in range(size)])
+    for _ in range(iterations):
+        vector = _normalize(_mat_vec(matrix, vector))
+    eigenvalue = _dot(vector, _mat_vec(matrix, vector))
+    return eigenvalue, vector
+
+
+def _deflate(matrix: list[list[float]], eigenvalue: float, eigenvector: list[float]) -> list[list[float]]:
+    size = len(matrix)
+    return [
+        [
+            matrix[row][col] - eigenvalue * eigenvector[row] * eigenvector[col]
+            for col in range(size)
+        ]
+        for row in range(size)
+    ]
+
+
+def _project_pca_2d(vectors: list[list[float]]) -> tuple[list[tuple[float, float]], list[list[float]]]:
+    if not vectors:
+        return [], []
+
+    dimension = len(vectors[0])
+    count = len(vectors)
+    means = [
+        sum(vector[idx] for vector in vectors) / count
+        for idx in range(dimension)
+    ]
+    centered = [
+        [vector[idx] - means[idx] for idx in range(dimension)]
+        for vector in vectors
+    ]
+
+    covariance = []
+    denom = max(count - 1, 1)
+    for row in range(dimension):
+        covariance_row = []
+        for col in range(dimension):
+            covariance_row.append(
+                sum(vector[row] * vector[col] for vector in centered) / denom
+            )
+        covariance.append(covariance_row)
+
+    eigenvalue_1, eigenvector_1 = _power_iteration(covariance)
+    covariance_2 = _deflate(covariance, eigenvalue_1, eigenvector_1)
+    _, eigenvector_2 = _power_iteration(covariance_2)
+
+    projections = [
+        (_dot(vector, eigenvector_1), _dot(vector, eigenvector_2))
+        for vector in centered
+    ]
+    return projections, centered
+
+
+def _kmeans(points: list[list[float]], k: int = 3, iterations: int = 24) -> tuple[list[int], list[list[float]]]:
+    if not points:
+        return [], []
+
+    k = min(k, len(points))
+    centroids = [point[:] for point in points[:k]]
+    assignments = [0] * len(points)
+
+    for _ in range(iterations):
+        updated = False
+        for idx, point in enumerate(points):
+            distances = [
+                sum((value - centroid[dim]) ** 2 for dim, value in enumerate(point))
+                for centroid in centroids
+            ]
+            cluster = min(range(k), key=lambda cluster_idx: distances[cluster_idx])
+            if assignments[idx] != cluster:
+                assignments[idx] = cluster
+                updated = True
+
+        grouped: list[list[list[float]]] = [[] for _ in range(k)]
+        for assignment, point in zip(assignments, points):
+            grouped[assignment].append(point)
+
+        new_centroids = []
+        for cluster_idx, group in enumerate(grouped):
+            if not group:
+                new_centroids.append(centroids[cluster_idx])
+                continue
+            new_centroids.append([
+                sum(point[dim] for point in group) / len(group)
+                for dim in range(len(group[0]))
+            ])
+        centroids = new_centroids
+
+        if not updated:
+            break
+
+    return assignments, centroids
+
+
+def build_domain_clusters(data: dict) -> dict:
+    """Project languages into 2D and cluster them by type-feature profile."""
+    languages = data["languages"]
+    features = get_feature_names(data)
+    raw_vectors = [
+        [lang["features"].get(feature, 0) for feature in features]
+        for lang in languages
+    ]
+    projections, centered_vectors = _project_pca_2d(raw_vectors)
+    assignments, _ = _kmeans(centered_vectors, k=3)
+
+    cluster_domain_votes: dict[int, dict[str, int]] = {}
+    for assignment, lang in zip(assignments, languages):
+        cluster_domain_votes.setdefault(assignment, {})
+        group = get_domain_group(lang["domain"])
+        cluster_domain_votes[assignment][group] = cluster_domain_votes[assignment].get(group, 0) + 1
+
+    cluster_labels = {}
+    for assignment, votes in cluster_domain_votes.items():
+        dominant_group = max(votes.items(), key=lambda item: item[1])[0]
+        cluster_labels[assignment] = f"Cluster {assignment + 1} / {dominant_group}-leaning"
+
+    points = []
+    for idx, lang in enumerate(languages):
+        x, y = projections[idx]
+        cluster = assignments[idx]
+        points.append({
+            "name": lang["name"],
+            "x": round(x, 3),
+            "y": round(y, 3),
+            "cluster": cluster,
+            "cluster_label": cluster_labels[cluster],
+            "domain": lang["domain"],
+            "domain_group": get_domain_group(lang["domain"]),
+            "paradigm": lang["paradigm"],
+            "complexity": compute_type_complexity_score(lang),
+        })
+
+    return {
+        "cluster_labels": cluster_labels,
+        "points": points,
+    }
+
+
 def prepare_dashboard_data(data: dict) -> dict:
     """Prepare all data needed by the frontend dashboard."""
     features = get_feature_names(data)
@@ -187,6 +471,11 @@ def prepare_dashboard_data(data: dict) -> dict:
     # Popularity
     popularity = build_popularity_data(data)
 
+    # Diffusion, lineage, and clustering
+    diffusion = build_feature_diffusion(data)
+    lineage = build_language_lineage(data)
+    clusters = build_domain_clusters(data)
+
     return {
         "features": features,
         "feature_labels": labels,
@@ -200,4 +489,7 @@ def prepare_dashboard_data(data: dict) -> dict:
         "network": {"nodes": nodes, "edges": edges},
         "timeline": timeline,
         "popularity": popularity,
+        "diffusion": diffusion,
+        "lineage": lineage,
+        "clusters": clusters,
     }
