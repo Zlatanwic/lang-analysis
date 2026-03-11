@@ -9,7 +9,7 @@ def load_data(path: str | None = None) -> dict:
     """Load the language type system dataset."""
     if path is None:
         path = str(Path(__file__).parent.parent / "data" / "languages.json")
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         return json.load(f)
 
 
