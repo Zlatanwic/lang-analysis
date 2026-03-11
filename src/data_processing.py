@@ -23,6 +23,11 @@ def get_feature_labels(data: dict) -> dict[str, str]:
     return data["metadata"]["features"]
 
 
+def get_scoring_scale(data: dict) -> dict[str, str]:
+    """Return the scoring scale descriptions."""
+    return data["metadata"]["scoring"]
+
+
 def get_feature_vectors(data: dict) -> dict[str, list[int]]:
     """Return {language_name: [feature_scores]} dict."""
     features = get_feature_names(data)
@@ -78,6 +83,13 @@ def compute_type_complexity_score(lang: dict) -> int:
     return sum(lang["features"].values())
 
 
+def max_possible_score(data: dict) -> int:
+    """Maximum possible complexity score (num_features * max_score)."""
+    num_features = len(get_feature_names(data))
+    max_score = max(int(k) for k in data["metadata"]["scoring"].keys())
+    return num_features * max_score
+
+
 def build_timeline_events(data: dict) -> list[dict]:
     """Build a flat list of (year, language, feature) events for the timeline."""
     labels = get_feature_labels(data)
@@ -94,10 +106,33 @@ def build_timeline_events(data: dict) -> list[dict]:
     return events
 
 
+def build_popularity_data(data: dict) -> list[dict]:
+    """Extract popularity data for the complexity-vs-popularity analysis."""
+    result = []
+    for lang in data["languages"]:
+        pop = lang.get("popularity", {})
+        if not pop:
+            continue
+        complexity = compute_type_complexity_score(lang)
+        result.append({
+            "name": lang["name"],
+            "paradigm": lang["paradigm"],
+            "domain": lang["domain"],
+            "complexity": complexity,
+            "tiobe_rank": pop.get("tiobe_rank"),
+            "github_stars_rank": pop.get("github_stars_rank"),
+            "stackoverflow_loved_pct": pop.get("stackoverflow_loved_pct"),
+            "notes": pop.get("notes", ""),
+        })
+    return result
+
+
 def prepare_dashboard_data(data: dict) -> dict:
     """Prepare all data needed by the frontend dashboard."""
     features = get_feature_names(data)
     labels = get_feature_labels(data)
+    scoring = get_scoring_scale(data)
+    max_score = max(int(k) for k in scoring.keys())
 
     # Heatmap data
     heatmap_languages = []
@@ -109,6 +144,7 @@ def prepare_dashboard_data(data: dict) -> dict:
             "domain": lang["domain"],
             "scores": [lang["features"].get(f, 0) for f in features],
             "complexity": compute_type_complexity_score(lang),
+            "rationale": lang.get("scoring_rationale", {}),
         })
     heatmap_languages.sort(key=lambda x: -x["complexity"])
 
@@ -127,10 +163,16 @@ def prepare_dashboard_data(data: dict) -> dict:
     # Timeline
     timeline = build_timeline_events(data)
 
+    # Popularity
+    popularity = build_popularity_data(data)
+
     return {
         "features": features,
         "feature_labels": labels,
+        "scoring": scoring,
+        "max_score": max_score,
         "heatmap": heatmap_languages,
         "network": {"nodes": nodes, "edges": edges},
         "timeline": timeline,
+        "popularity": popularity,
     }
