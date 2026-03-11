@@ -57,6 +57,15 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: pnpm run build
 
+      - name: Copy generated dashboard data into Pages artifact
+        run: cp frontend/public/dashboard-data.json frontend/dist/dashboard-data.json
+
+      - name: Verify generated Pages artifact
+        run: |
+          test -f frontend/public/dashboard-data.json
+          test -f frontend/dist/dashboard-data.json
+          test -f frontend/dist/index.html
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
