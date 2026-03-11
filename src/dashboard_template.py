@@ -66,42 +66,46 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
 
   /* Heatmap */
   #heatmap-container { overflow-x: auto; }
-  .heatmap-table { border-collapse: collapse; min-width: 800px; }
+  .heatmap-table { border-collapse: separate; border-spacing: 2px; }
   .heatmap-table th, .heatmap-table td {
-    padding: 4px 2px;
-    text-align: center;
-    font-size: 0.72rem;
-    border: 1px solid var(--border);
+    padding: 0; text-align: center; font-size: 0.7rem; border: none;
   }
   .heatmap-table thead th {
-    color: var(--text-dim); font-weight: 500;
-    height: 120px; width: 40px; min-width: 40px; max-width: 40px;
-    vertical-align: bottom; padding-bottom: 8px; position: relative;
+    color: var(--text-dim); font-weight: 600; font-size: 0.65rem;
+    width: 34px; min-width: 34px; padding: 4px 0; cursor: default;
   }
-  .heatmap-table thead th .rot-header {
-    display: block; transform: rotate(-55deg); transform-origin: bottom left;
-    white-space: nowrap; position: absolute; bottom: 10px; left: 50%;
-    font-size: 0.7rem;
-  }
-  .heatmap-table th.lang-name,
-  .heatmap-table th.score-col {
-    height: auto; width: auto; min-width: auto; max-width: none;
-    vertical-align: middle; padding: 6px 8px;
-  }
-  .heatmap-table th.lang-name { text-align: left; min-width: 110px; }
-  .heatmap-table th.score-col { min-width: 70px; }
+  .heatmap-table thead th:hover { color: var(--accent); }
+  .heatmap-table th.lang-name { text-align: left; width: auto; min-width: 120px; padding-left: 8px; font-size: 0.75rem; }
+  .heatmap-table th.score-col { width: auto; min-width: 56px; font-size: 0.7rem; }
   .heatmap-table td.lang-name {
-    text-align: left; padding-left: 10px; font-weight: 600;
+    text-align: left; padding: 2px 8px; font-weight: 600; font-size: 0.75rem;
     white-space: nowrap; position: sticky; left: 0; background: var(--card); z-index: 1;
   }
-  .heatmap-table td.feat-cell { padding: 3px 1px; }
   .heatmap-cell {
-    width: 32px; height: 32px; display: block; margin: 0 auto;
-    border-radius: 4px; transition: transform 0.15s; cursor: pointer;
-    line-height: 32px; text-align: center; font-size: 0.65rem;
-    color: rgba(255,255,255,0.5);
+    width: 34px; height: 28px; display: block; margin: 0 auto;
+    border-radius: 5px; transition: all 0.15s; cursor: pointer;
+    line-height: 28px; text-align: center; font-size: 0.7rem;
+    color: rgba(255,255,255,0.45); font-weight: 600;
   }
-  .heatmap-cell:hover { transform: scale(1.2); color: rgba(255,255,255,0.9); }
+  .heatmap-cell:hover { transform: scale(1.15); color: #fff; box-shadow: 0 0 8px rgba(108,140,255,0.5); }
+  .heatmap-score-td { padding: 2px 6px !important; }
+  .heatmap-score-bar {
+    display: inline-flex; align-items: center; gap: 4px; font-size: 0.72rem; font-weight: 600;
+  }
+  /* Feature index legend */
+  .feat-index-legend {
+    display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 14px;
+    font-size: 0.72rem; color: var(--text-dim); padding: 10px 0;
+    border-top: 1px solid var(--border);
+  }
+  .feat-index-legend span { white-space: nowrap; }
+  .feat-index-legend .feat-idx {
+    display: inline-block; width: 18px; height: 18px; line-height: 18px;
+    text-align: center; border-radius: 4px; font-size: 0.6rem; font-weight: 700;
+    background: rgba(108,140,255,0.15); color: var(--accent); margin-right: 3px;
+  }
+  /* Column highlight on hover */
+  .heatmap-table td.col-hover { background: rgba(108,140,255,0.06); }
 
   /* Scoring legend */
   .score-legend {
@@ -319,29 +323,57 @@ const paradigmColors = {
   const labels = DATA.feature_labels;
   const langs = DATA.heatmap;
   const totalMax = features.length * maxScore;
+
+  // Build table — headers are just column indices (1-based)
   let html = '<table class="heatmap-table"><thead><tr><th class="lang-name">Language</th>';
-  features.forEach(f => {
-    const short = labels[f].split('/')[0].split('(')[0].trim();
-    html += `<th title="${labels[f]}"><span class="rot-header">${short}</span></th>`;
+  features.forEach((f, i) => {
+    html += `<th data-col="${i}" title="${labels[f]}" `
+          + `onmouseenter="showTip(event,'<b>#${i+1}</b> ${labels[f]}')" `
+          + `onmouseleave="hideTip()">${i+1}</th>`;
   });
-  html += '<th class="score-col">Score</th></tr></thead><tbody>';
+  html += '<th class="score-col">Total</th></tr></thead><tbody>';
+
   langs.forEach(lang => {
-    html += `<tr><td class="lang-name">${lang.name} <span style="color:var(--text-dim);font-size:0.65rem">(${lang.year})</span></td>`;
+    html += `<tr><td class="lang-name">${lang.name} <span style="color:var(--text-dim);font-size:0.6rem">${lang.year}</span></td>`;
     lang.scores.forEach((s, i) => {
       const fl = labels[features[i]];
       const rationale = lang.rationale && lang.rationale[features[i]]
         ? '<br><em style="color:#aab">' + lang.rationale[features[i]] + '</em>'
         : '';
-      html += `<td class="feat-cell"><span class="heatmap-cell" style="background:${scoreColor(s)}" `
+      html += `<td data-col="${i}"><span class="heatmap-cell" style="background:${scoreColor(s)}" `
             + `onmouseenter="showTip(event,'<b>${lang.name}</b> &mdash; ${fl}<br>Score: ${s}/5 (${scoreLabel(s)})${rationale}')" `
             + `onmouseleave="hideTip()">${s}</span></td>`;
     });
     const pct = Math.round(lang.complexity / totalMax * 100);
-    html += `<td><span class="complexity-bar" style="width:${pct}px"></span> ${lang.complexity}</td>`;
+    html += `<td class="heatmap-score-td"><span class="heatmap-score-bar">`
+          + `<span class="complexity-bar" style="width:${pct}px"></span>${lang.complexity}</span></td>`;
     html += '</tr>';
   });
   html += '</tbody></table>';
+
+  // Feature index legend below table
+  html += '<div class="feat-index-legend">';
+  features.forEach((f, i) => {
+    html += `<span><span class="feat-idx">${i+1}</span>${labels[f]}</span>`;
+  });
+  html += '</div>';
+
   document.getElementById('heatmap-container').innerHTML = html;
+
+  // Column highlight on hover
+  const table = document.querySelector('.heatmap-table');
+  table.addEventListener('mouseover', e => {
+    const td = e.target.closest('[data-col]');
+    if (!td) return;
+    const col = td.dataset.col;
+    table.querySelectorAll('[data-col="'+col+'"]').forEach(c => c.classList.add('col-hover'));
+  });
+  table.addEventListener('mouseout', e => {
+    const td = e.target.closest('[data-col]');
+    if (!td) return;
+    const col = td.dataset.col;
+    table.querySelectorAll('[data-col="'+col+'"]').forEach(c => c.classList.remove('col-hover'));
+  });
 })();
 
 // ====== 2. RADAR CHART ======
