@@ -37,21 +37,21 @@ const chartOption = computed<EChartsOption>(() => {
     legend: {
       type: 'scroll',
       bottom: 0,
-      textStyle: { color: '#98a4c6', fontSize: 10 },
+      textStyle: { color: '#3A5A47', fontSize: 10 },
     },
     grid: { left: 120, right: 30, top: 24, bottom: 80 },
     xAxis: {
       type: 'value',
       min: 1985,
       max: 2026,
-      axisLabel: { color: '#98a4c6' },
-      splitLine: { lineStyle: { color: '#27314b' } },
+      axisLabel: { color: '#3A5A47' },
+      splitLine: { lineStyle: { color: '#C4C2B6' } },
     },
     yAxis: {
       type: 'category',
       data: languages,
-      axisLabel: { color: '#edf2ff', fontSize: 11 },
-      splitLine: { lineStyle: { color: '#182033' } },
+      axisLabel: { color: '#1D3124', fontSize: 11 },
+      splitLine: { lineStyle: { color: '#D4D2C6' } },
     },
     series,
   } as EChartsOption

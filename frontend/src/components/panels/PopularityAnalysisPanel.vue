@@ -29,8 +29,8 @@ const chartOption = computed<EChartsOption>(() => ({
     name: '类型复杂度',
     nameLocation: 'middle',
     nameGap: 34,
-    axisLabel: { color: '#98a4c6' },
-    splitLine: { lineStyle: { color: '#27314b' } },
+    axisLabel: { color: '#3A5A47' },
+    splitLine: { lineStyle: { color: '#C4C2B6' } },
   },
   yAxis: {
     type: 'value',
@@ -38,8 +38,8 @@ const chartOption = computed<EChartsOption>(() => ({
     nameLocation: 'middle',
     nameGap: 52,
     inverse: metricConfig[metric.value].invert,
-    axisLabel: { color: '#98a4c6' },
-    splitLine: { lineStyle: { color: '#27314b' } },
+    axisLabel: { color: '#3A5A47' },
+    splitLine: { lineStyle: { color: '#C4C2B6' } },
   },
   series: [
     {
@@ -55,7 +55,7 @@ const chartOption = computed<EChartsOption>(() => ({
         show: true,
         formatter: (params: any) => params.data.name,
         position: 'right',
-        color: '#98a4c6',
+        color: '#3A5A47',
         fontSize: 10,
       },
     },

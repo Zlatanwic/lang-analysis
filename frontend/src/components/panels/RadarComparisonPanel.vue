@@ -38,7 +38,7 @@ const chartOption = computed<EChartsOption>(() => {
     tooltip: { trigger: 'item' },
     legend: {
       bottom: 0,
-      textStyle: { color: '#98a4c6' },
+      textStyle: { color: '#3A5A47' },
       data: selected.value,
     },
     radar: {
@@ -46,10 +46,10 @@ const chartOption = computed<EChartsOption>(() => {
         name: props.data.feature_short_labels[feature],
         max: props.data.max_score,
       })),
-      axisName: { color: '#98a4c6', fontSize: 11 },
-      splitArea: { areaStyle: { color: ['#151b2a', '#101522'] } },
-      splitLine: { lineStyle: { color: '#27314b' } },
-      axisLine: { lineStyle: { color: '#27314b' } },
+      axisName: { color: '#3A5A47', fontSize: 11 },
+      splitArea: { areaStyle: { color: ['#E8E6DC', '#D4D2C6'] } },
+      splitLine: { lineStyle: { color: '#C4C2B6' } },
+      axisLine: { lineStyle: { color: '#C4C2B6' } },
     },
     series: [{ type: 'radar', data: series }],
   }

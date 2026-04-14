@@ -31,20 +31,20 @@ const chartOption = computed<EChartsOption>(() => {
     },
     legend: {
       bottom: 0,
-      textStyle: { color: '#98a4c6' },
+      textStyle: { color: '#3A5A47' },
     },
     grid: { left: 62, right: 30, top: 24, bottom: 70 },
     xAxis: {
       type: 'value',
       name: '主成分 1',
-      axisLabel: { color: '#98a4c6' },
-      splitLine: { lineStyle: { color: '#27314b' } },
+      axisLabel: { color: '#3A5A47' },
+      splitLine: { lineStyle: { color: '#C4C2B6' } },
     },
     yAxis: {
       type: 'value',
       name: '主成分 2',
-      axisLabel: { color: '#98a4c6' },
-      splitLine: { lineStyle: { color: '#27314b' } },
+      axisLabel: { color: '#3A5A47' },
+      splitLine: { lineStyle: { color: '#C4C2B6' } },
     },
     series: clusters.map((cluster) => ({
       name: clusterLabels[String(cluster)] ?? `聚类 ${cluster + 1}`,
@@ -53,7 +53,7 @@ const chartOption = computed<EChartsOption>(() => {
         show: showLabels.value,
         formatter: (params: any) => params.data.name,
         position: 'top',
-        color: '#c7d0ea',
+        color: '#3D5142',
         fontSize: 10,
       },
       data: filteredPoints.value
@@ -126,7 +126,7 @@ function resetDomains() {
         >
           <span
             style="width: 10px; height: 10px; border-radius: 999px; display: inline-block"
-            :style="{ background: domainGroupColors[group] ?? '#98a4c6', opacity: domainFilter?.includes(group) ? 0.3 : 1 }"
+            :style="{ background: domainGroupColors[group] ?? '#3A5A47', opacity: domainFilter?.includes(group) ? 0.3 : 1 }"
           />
           {{ group }}
         </button>

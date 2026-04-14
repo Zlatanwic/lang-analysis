@@ -63,15 +63,15 @@ const chartOption = computed<EChartsOption>(() => ({
   xAxis: {
     type: 'category',
     data: props.data.arms_race.years.map(String),
-    axisLabel: { color: '#98a4c6' },
-    axisLine: { lineStyle: { color: '#27314b' } },
+    axisLabel: { color: '#3A5A47' },
+    axisLine: { lineStyle: { color: '#C4C2B6' } },
   },
   yAxis: [
     {
       type: 'value',
       name: '新特性引入',
       axisLabel: { color: '#98a4c6' },
-      splitLine: { lineStyle: { color: '#27314b' } },
+      splitLine: { lineStyle: { color: '#C4C2B6' } },
     },
     {
       type: 'value',

@@ -46,11 +46,11 @@ const chartOption = computed<EChartsOption>(() => {
       text: featureData.value.label,
       left: 12,
       top: 10,
-      textStyle: { color: '#edf2ff', fontSize: 14 },
+      textStyle: { color: '#1D3124', fontSize: 14 },
       subtext: lastEvent
         ? `可见 ${visibleEvents.value.length}/${events.length} - 最新揭示 ${lastEvent.language} (${lastEvent.year})`
         : '尚无可见事件',
-      subtextStyle: { color: '#98a4c6' },
+      subtextStyle: { color: '#3A5A47' },
     },
     tooltip: {
       formatter: (params: any) => {
@@ -63,14 +63,14 @@ const chartOption = computed<EChartsOption>(() => {
       type: 'value',
       min: Math.min(...events.map((event) => event.year)) - 1,
       max: Math.max(...events.map((event) => event.year)) + 1,
-      axisLabel: { color: '#98a4c6' },
-      splitLine: { lineStyle: { color: '#27314b' } },
+      axisLabel: { color: '#3A5A47' },
+      splitLine: { lineStyle: { color: '#C4C2B6' } },
     },
     yAxis: {
       type: 'category',
       data: events.map((event) => event.language),
-      axisLabel: { color: '#edf2ff', fontSize: 11 },
-      splitLine: { lineStyle: { color: '#182033' } },
+      axisLabel: { color: '#1D3124', fontSize: 11 },
+      splitLine: { lineStyle: { color: '#D4D2C6' } },
     },
     series: [
       {
