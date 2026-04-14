@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, shallowRef, ref, watch } from 'vue'
 import type { EChartsOption } from 'echarts'
 import PanelCard from '../PanelCard.vue'
 import EChartPanel from '../EChartPanel.vue'
@@ -21,7 +21,7 @@ const filteredEdges = computed(() => {
   return props.data.network.edges.filter((edge) => edge.similarity >= similarityThreshold.value)
 })
 
-const chartOption = ref<EChartsOption>({} as EChartsOption)
+const chartOption = shallowRef<EChartsOption>({} as EChartsOption)
 
 function updateChart() {
   chartOption.value = {
