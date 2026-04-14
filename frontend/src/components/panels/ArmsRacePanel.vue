@@ -44,9 +44,9 @@ const chartOption = computed<EChartsOption>(() => ({
     formatter: (params: any) => {
       const points = Array.isArray(params) ? params : [params]
       const year = points[0]?.axisValueLabel ?? ''
-      const yearly = points.find((point: any) => point.seriesName === 'Annual additions')?.data ?? 0
-      const moving = points.find((point: any) => point.seriesName === '5-year average')?.data ?? 0
-      const cumulative = points.find((point: any) => point.seriesName === 'Cumulative total')?.data ?? 0
+      const yearly = points.find((point: any) => point.seriesName === '年度新增')?.data ?? 0
+      const moving = points.find((point: any) => point.seriesName === '5年移动平均')?.data ?? 0
+      const cumulative = points.find((point: any) => point.seriesName === '累计总数')?.data ?? 0
       return [
         `<b>${year}</b>`,
         `年度新增：${yearly}`,

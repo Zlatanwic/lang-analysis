@@ -11,12 +11,18 @@ const props = defineProps<{
 }>()
 
 const showLabels = ref(true)
+const domainFilter = ref<string[]>()
 
 const domainGroups = computed(() => [...new Set(props.data.clusters.points.map((point) => point.domain_group))])
 const clusterLabels = props.data.clusters.cluster_labels as Record<string, string>
 
+const filteredPoints = computed(() => {
+  if (!domainFilter.value || domainFilter.value.length === 0) return props.data.clusters.points
+  return props.data.clusters.points.filter((point) => !domainFilter.value!.includes(point.domain_group))
+})
+
 const chartOption = computed<EChartsOption>(() => {
-  const clusters = [...new Set(props.data.clusters.points.map((point) => point.cluster))].sort((a, b) => a - b)
+  const clusters = [...new Set(filteredPoints.value.map((point) => point.cluster))].sort((a, b) => a - b)
 
   return {
     tooltip: {
@@ -50,7 +56,7 @@ const chartOption = computed<EChartsOption>(() => {
         color: '#c7d0ea',
         fontSize: 10,
       },
-      data: props.data.clusters.points
+      data: filteredPoints.value
         .filter((point) => point.cluster === cluster)
         .map((point) => ({
           value: [point.x, point.y, point.complexity],
@@ -64,6 +70,23 @@ const chartOption = computed<EChartsOption>(() => {
     })),
   } as EChartsOption
 })
+
+function toggleDomain(domain: string) {
+  if (!domainFilter.value) {
+    // Nothing hidden yet - hide this domain
+    domainFilter.value = [domain]
+  } else if (domainFilter.value.includes(domain)) {
+    // This domain is hidden - show it
+    domainFilter.value = domainFilter.value.filter((d) => d !== domain)
+  } else {
+    // This domain is visible - hide it
+    domainFilter.value = [...domainFilter.value, domain]
+  }
+}
+
+function resetDomains() {
+  domainFilter.value = undefined
+}
 </script>
 
 <template>
@@ -76,6 +99,9 @@ const chartOption = computed<EChartsOption>(() => {
       <button class="ghost-button" @click="showLabels = !showLabels">
         {{ showLabels ? '隐藏标签' : '显示标签' }}
       </button>
+      <button class="ghost-button" @click="resetDomains">
+        重置领域
+      </button>
     </template>
 
     <div class="stack">
@@ -86,22 +112,24 @@ const chartOption = computed<EChartsOption>(() => {
           class="mini-card"
         >
           <strong>{{ clusterLabels[String(cluster)] }}</strong>
-          <span>{{ data.clusters.points.filter((point) => point.cluster === cluster).length }} 种语言</span>
+          <span>{{ filteredPoints.filter((point) => point.cluster === cluster).length }} 种语言</span>
         </div>
       </div>
 
       <div class="legend-row">
-        <span
+        <button
           v-for="group in domainGroups"
           :key="group"
-          class="legend-chip"
+          class="legend-chip clickable"
+          :class="{ inactive: domainFilter?.includes(group) }"
+          @click="toggleDomain(group)"
         >
           <span
             style="width: 10px; height: 10px; border-radius: 999px; display: inline-block"
-            :style="{ background: domainGroupColors[group] ?? '#98a4c6' }"
+            :style="{ background: domainGroupColors[group] ?? '#98a4c6', opacity: domainFilter?.includes(group) ? 0.3 : 1 }"
           />
           {{ group }}
-        </span>
+        </button>
       </div>
 
       <EChartPanel :option="chartOption" />

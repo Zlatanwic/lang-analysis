@@ -631,6 +631,21 @@ a {
   font-size: 0.86rem;
 }
 
+.legend-chip.clickable {
+  cursor: pointer;
+  transition: opacity 0.15s;
+  border: none;
+  font: inherit;
+}
+
+.legend-chip.clickable:hover {
+  opacity: 0.8;
+}
+
+.legend-chip.inactive {
+  opacity: 0.4;
+}
+
 .recommendation-tag.match {
   color: var(--accent-3);
 }
