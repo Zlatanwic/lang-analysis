@@ -1,0 +1,197 @@
+{
+  "id": "2026-04-03-164507",
+  "generated_at": "2026-04-03T08:45:07.3065115Z",
+  "language": "zh",
+  "pages": [
+    {
+      "slug": "1-xiang-mu-gai-lan",
+      "title": "项目概览",
+      "file": "1-xiang-mu-gai-lan.md",
+      "section": "快速入门",
+      "level": "Beginner"
+    },
+    {
+      "slug": "2-kuai-su-qi-dong-zhi-nan",
+      "title": "快速启动指南",
+      "file": "2-kuai-su-qi-dong-zhi-nan.md",
+      "section": "快速入门",
+      "level": "Beginner"
+    },
+    {
+      "slug": "3-xiang-mu-jia-gou-she-ji",
+      "title": "项目架构设计",
+      "file": "3-xiang-mu-jia-gou-she-ji.md",
+      "section": "深度解析",
+      "level": "Beginner"
+    },
+    {
+      "slug": "4-python-shu-ju-chu-li-guan-dao",
+      "title": "Python 数据处理管道",
+      "file": "4-python-shu-ju-chu-li-guan-dao.md",
+      "section": "深度解析",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "5-vue-3-qian-duan-zu-jian-jia-gou",
+      "title": "Vue 3 前端组件架构",
+      "file": "5-vue-3-qian-duan-zu-jian-jia-gou.md",
+      "section": "深度解析",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "6-shu-ju-jie-gou-yu-lei-xing-ding-yi",
+      "title": "数据结构与类型定义",
+      "file": "6-shu-ju-jie-gou-yu-lei-xing-ding-yi.md",
+      "section": "深度解析",
+      "group": "数据类型定义",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "7-dashboarddata-jie-kou-xiang-jie",
+      "title": "DashboardData 接口详解",
+      "file": "7-dashboarddata-jie-kou-xiang-jie.md",
+      "section": "深度解析",
+      "group": "数据类型定义",
+      "level": "Advanced"
+    },
+    {
+      "slug": "8-xiang-si-du-ji-suan-suan-fa",
+      "title": "相似度计算算法",
+      "file": "8-xiang-si-du-ji-suan-suan-fa.md",
+      "section": "深度解析",
+      "group": "核心算法模块",
+      "level": "Advanced"
+    },
+    {
+      "slug": "9-pca-jiang-wei-yu-ju-lei-suan-fa",
+      "title": "PCA 降维与聚类算法",
+      "file": "9-pca-jiang-wei-yu-ju-lei-suan-fa.md",
+      "section": "深度解析",
+      "group": "核心算法模块",
+      "level": "Advanced"
+    },
+    {
+      "slug": "10-gong-neng-mian-ban-dao-hang",
+      "title": "功能面板导航",
+      "file": "10-gong-neng-mian-ban-dao-hang.md",
+      "section": "仪表板功能面板",
+      "level": "Beginner"
+    },
+    {
+      "slug": "11-feature-matrix-te-xing-ju-zhen",
+      "title": "Feature Matrix 特性矩阵",
+      "file": "11-feature-matrix-te-xing-ju-zhen.md",
+      "section": "仪表板功能面板",
+      "group": "分析与可视化面板",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "12-radar-lei-da-tu-dui-bi",
+      "title": "Radar 雷达图对比",
+      "file": "12-radar-lei-da-tu-dui-bi.md",
+      "section": "仪表板功能面板",
+      "group": "分析与可视化面板",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "13-feature-co-occurrence-te-xing-gong-xian",
+      "title": "Feature Co-occurrence 特性共现",
+      "file": "13-feature-co-occurrence-te-xing-gong-xian.md",
+      "section": "仪表板功能面板",
+      "group": "分析与可视化面板",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "14-timeline-shi-jian-xian",
+      "title": "Timeline 时间线",
+      "file": "14-timeline-shi-jian-xian.md",
+      "section": "仪表板功能面板",
+      "group": "分析与可视化面板",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "15-arms-race-index-jun-bei-jing-sai-zhi-shu",
+      "title": "Arms Race Index 军备竞赛指数",
+      "file": "15-arms-race-index-jun-bei-jing-sai-zhi-shu.md",
+      "section": "仪表板功能面板",
+      "group": "高级分析面板",
+      "level": "Advanced"
+    },
+    {
+      "slug": "16-similarity-network-xiang-si-xing-wang-luo",
+      "title": "Similarity Network 相似性网络",
+      "file": "16-similarity-network-xiang-si-xing-wang-luo.md",
+      "section": "仪表板功能面板",
+      "group": "高级分析面板",
+      "level": "Advanced"
+    },
+    {
+      "slug": "17-feature-diffusion-te-xing-kuo-san",
+      "title": "Feature Diffusion 特性扩散",
+      "file": "17-feature-diffusion-te-xing-kuo-san.md",
+      "section": "仪表板功能面板",
+      "group": "高级分析面板",
+      "level": "Advanced"
+    },
+    {
+      "slug": "18-domain-clusters-ling-yu-ju-lei",
+      "title": "Domain Clusters 领域聚类",
+      "file": "18-domain-clusters-ling-yu-ju-lei.md",
+      "section": "仪表板功能面板",
+      "group": "高级分析面板",
+      "level": "Advanced"
+    },
+    {
+      "slug": "19-lineage-graph-pu-xi-tu",
+      "title": "Lineage Graph 谱系图",
+      "file": "19-lineage-graph-pu-xi-tu.md",
+      "section": "仪表板功能面板",
+      "group": "交互与推荐功能",
+      "level": "Advanced"
+    },
+    {
+      "slug": "20-popularity-liu-xing-du-fen-xi",
+      "title": "Popularity 流行度分析",
+      "file": "20-popularity-liu-xing-du-fen-xi.md",
+      "section": "仪表板功能面板",
+      "group": "交互与推荐功能",
+      "level": "Advanced"
+    },
+    {
+      "slug": "21-feature-recommender-yu-yan-tui-jian-qi",
+      "title": "Feature Recommender 语言推荐器",
+      "file": "21-feature-recommender-yu-yan-tui-jian-qi.md",
+      "section": "仪表板功能面板",
+      "group": "交互与推荐功能",
+      "level": "Advanced"
+    },
+    {
+      "slug": "22-14ge-lei-xing-xi-tong-te-xing-shuo-ming",
+      "title": "14个类型系统特性说明",
+      "file": "22-14ge-lei-xing-xi-tong-te-xing-shuo-ming.md",
+      "section": "类型系统特性",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "23-ping-fen-mo-xing-yu-biao-zhun",
+      "title": "评分模型与标准",
+      "file": "23-ping-fen-mo-xing-yu-biao-zhun.md",
+      "section": "类型系统特性",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "24-github-pages-bu-shu-liu-cheng",
+      "title": "GitHub Pages 部署流程",
+      "file": "24-github-pages-bu-shu-liu-cheng.md",
+      "section": "部署与维护",
+      "level": "Beginner"
+    },
+    {
+      "slug": "25-shu-ju-geng-xin-yu-wei-hu",
+      "title": "数据更新与维护",
+      "file": "25-shu-ju-geng-xin-yu-wei-hu.md",
+      "section": "部署与维护",
+      "level": "Intermediate"
+    }
+  ]
+}

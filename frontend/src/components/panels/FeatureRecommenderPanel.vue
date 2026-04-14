@@ -70,13 +70,13 @@ function reset() {
 
 <template>
   <PanelCard
-    eyebrow="Configure"
-    title="Interactive Feature Recommender"
-    description="Turn the dataset into a configuration tool: select the capabilities you care about and surface the closest language matches."
+    eyebrow="配置"
+    title="交互式特性推荐器"
+    description="将数据集转换为配置工具：选择您关心的特性，并呈现最匹配的语言。"
   >
     <template #actions>
       <select v-model="domainFilter" class="control">
-        <option value="__all__">All domain groups</option>
+        <option value="__all__">所有领域组</option>
         <option
           v-for="group in domainGroups"
           :key="group"
@@ -86,34 +86,34 @@ function reset() {
         </option>
       </select>
       <label class="tag">
-        Min score
+        最低评分
         <input v-model="threshold" type="range" min="1" max="5" />
         {{ threshold }}
       </label>
       <button class="ghost-button" @click="reset">
-        Clear
+        清空
       </button>
     </template>
 
     <div class="stack">
       <div class="mini-grid">
         <div class="mini-card">
-          <strong>{{ best ? `Best match: ${best.language.name}` : 'Choose features to start' }}</strong>
+          <strong>{{ best ? `最佳匹配：${best.language.name}` : '选择特性开始' }}</strong>
           <span>
             {{
               best
-                ? `${best.matched.length} of ${selectedFeatures.length || 1} selected requirements meet the threshold.`
-                : 'Without selected features this panel behaves like a ranked browser.'
+                ? `${best.matched.length} / ${selectedFeatures.length || 1} 个所选需求满足阈值。`
+                : '未选择特性时，此面板的行为类似于排名浏览器。'
             }}
           </span>
         </div>
         <div class="mini-card">
-          <strong>Selected features</strong>
-          <span>{{ selectedFeatures.length ? selectedFeatures.map((feature) => data.feature_short_labels[feature]).join(', ') : 'None yet' }}</span>
+          <strong>已选特性</strong>
+          <span>{{ selectedFeatures.length ? selectedFeatures.map((feature) => data.feature_short_labels[feature]).join(', ') : '尚无' }}</span>
         </div>
         <div class="mini-card">
-          <strong>Visible slice</strong>
-          <span>{{ domainFilter === '__all__' ? 'All domain groups' : domainFilter }}</span>
+          <strong>可见切片</strong>
+          <span>{{ domainFilter === '__all__' ? '所有领域组' : domainFilter }}</span>
         </div>
       </div>
 
@@ -134,7 +134,7 @@ function reset() {
         v-if="!selectedFeatures.length"
         class="empty-state"
       >
-        Pick one or more features above to turn this into a hard-filter recommender instead of a passive ranking.
+        在上方选择一个或多个特性，将其转换为硬过滤推荐器，而非被动排名。
       </div>
 
       <div class="recommendation-grid">
@@ -153,12 +153,12 @@ function reset() {
             <strong>{{ entry.matched.length }}/{{ selectedFeatures.length || 1 }}</strong>
           </div>
           <div class="recommendation-meta">
-            Recommendation score: {{ entry.score.toFixed(1) }} / Total complexity: {{ entry.language.complexity }}
+            推荐评分：{{ entry.score.toFixed(1) }} / 总复杂度：{{ entry.language.complexity }}
           </div>
 
           <div class="stack" style="margin-top: 12px;">
             <div>
-              <strong>Matches</strong>
+              <strong>匹配</strong>
               <div class="recommendation-tags" style="margin-top: 8px;">
                 <span
                   v-for="feature in entry.matched"
@@ -171,13 +171,13 @@ function reset() {
                   v-if="!entry.matched.length"
                   class="recommendation-tag missing"
                 >
-                  No features meet the threshold yet
+                  尚无特性满足阈值
                 </span>
               </div>
             </div>
 
             <div>
-              <strong>Missing or weak</strong>
+              <strong>缺失或薄弱</strong>
               <div class="recommendation-tags" style="margin-top: 8px;">
                 <span
                   v-for="feature in entry.missing"
@@ -190,7 +190,7 @@ function reset() {
                   v-if="!entry.missing.length"
                   class="recommendation-tag match"
                 >
-                  All selected requirements are covered
+                  所有所选需求均已覆盖
                 </span>
               </div>
             </div>

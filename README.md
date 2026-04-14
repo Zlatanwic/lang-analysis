@@ -1,4 +1,4 @@
-# Lang Analysis Dashboard
+﻿# Lang Analysis Dashboard
 
 [![Deploy GitHub Pages](https://github.com/Zlatanwic/lang-analysis/actions/workflows/deploy-github-pages.yml/badge.svg)](https://github.com/Zlatanwic/lang-analysis/actions/workflows/deploy-github-pages.yml)
 [Live Site](https://zlatanwic.github.io/lang-analysis/)
@@ -15,6 +15,8 @@ The dashboard is built around a single generated data bundle:
 - Python transforms that data in [`src/data_processing.py`](/e:/lang_analysis/src/data_processing.py)
 - The generated bundle is written to [`frontend/public/dashboard-data.json`](/e:/lang_analysis/frontend/public/dashboard-data.json)
 - The Vue app in [`frontend/`](/e:/lang_analysis/frontend/) reads that JSON and renders the dashboard
+
+更详细的数据集说明、类型系统特性词典、语言画像以及每个 dashboard panel 的解读，请参见 [`docs/dashboard-handbook.md`](/e:/lang_analysis/docs/dashboard-handbook.md)。
 
 This repository no longer supports the old standalone HTML template path. Vue is now the only frontend implementation.
 

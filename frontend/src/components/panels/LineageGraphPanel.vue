@@ -31,7 +31,7 @@ const incoming = computed(() => props.data.lineage.edges.filter((edge) => edge.t
 const outgoing = computed(() => props.data.lineage.edges.filter((edge) => edge.source === focus.value))
 
 const chartOption = computed<EChartsOption>(() => {
-  const categories = [...new Set(props.data.lineage.nodes.map((node) => (node.virtual ? 'Root lineage' : node.domain_group)))]
+  const categories = [...new Set(props.data.lineage.nodes.map((node) => (node.virtual ? '谱系根源' : node.domain_group)))]
 
   return {
     tooltip: {
@@ -39,7 +39,7 @@ const chartOption = computed<EChartsOption>(() => {
         if (params.dataType === 'edge') {
           return `<b>${params.data.source}</b> -> <b>${params.data.target}</b><br>${params.data.reason}`
         }
-        return `<b>${params.data.name}</b><br>${params.data.virtual ? 'Virtual lineage root' : `${params.data.paradigm} / ${params.data.domain}`}<br>Year: ${params.data.year}`
+        return `<b>${params.data.name}</b><br>${params.data.virtual ? '虚拟谱系根源' : `${params.data.paradigm} / ${params.data.domain}`}<br>年份：${params.data.year}`
       },
     },
     legend: {
@@ -86,13 +86,13 @@ const chartOption = computed<EChartsOption>(() => {
 
 <template>
   <PanelCard
-    eyebrow="Lineage"
-    title="Language Evolution Lineage"
-    description="Directed influence map showing how ideas moved across families, runtimes, and programming eras."
+    eyebrow="谱系"
+    title="语言演化谱系"
+    description="有向影响图，展示思想如何在语言家族、运行时和编程时代中传播。"
   >
     <template #actions>
       <select v-model="focus" class="control">
-        <option value="__all__">All languages</option>
+        <option value="__all__">所有语言</option>
         <option
           v-for="node in data.lineage.nodes.filter((item) => !item.virtual).sort((a, b) => a.name.localeCompare(b.name))"
           :key="node.name"
@@ -102,23 +102,23 @@ const chartOption = computed<EChartsOption>(() => {
         </option>
       </select>
       <button class="ghost-button" @click="focus = '__all__'">
-        Reset
+        重置
       </button>
     </template>
 
     <div class="stack">
       <div class="mini-grid">
         <div class="mini-card">
-          <strong>{{ focus === '__all__' ? 'Roots' : 'Focused language' }}</strong>
-          <span>{{ focus === '__all__' ? `${data.lineage.nodes.filter((node) => node.virtual).length} virtual lineage anchors` : focus }}</span>
+          <strong>{{ focus === '__all__' ? '根源' : '聚焦语言' }}</strong>
+          <span>{{ focus === '__all__' ? `${data.lineage.nodes.filter((node) => node.virtual).length} 个虚拟谱系锚点` : focus }}</span>
         </div>
         <div class="mini-card">
-          <strong>Influenced by</strong>
-          <span>{{ focus === '__all__' ? `${data.lineage.edges.length} total directed edges` : (incoming.map((edge) => edge.source).join(', ') || 'No incoming edges in current map') }}</span>
+          <strong>受影响于</strong>
+          <span>{{ focus === '__all__' ? `${data.lineage.edges.length} 条有向边` : (incoming.map((edge) => edge.source).join(', ') || '当前图中无入边') }}</span>
         </div>
         <div class="mini-card">
-          <strong>Influenced</strong>
-          <span>{{ focus === '__all__' ? 'Select a language to inspect local ancestry and descendants.' : (outgoing.map((edge) => edge.target).join(', ') || 'No outgoing edges in current map') }}</span>
+          <strong>影响</strong>
+          <span>{{ focus === '__all__' ? '选择一种语言以检查本地祖先和后代。' : (outgoing.map((edge) => edge.target).join(', ') || '当前图中无出边') }}</span>
         </div>
       </div>
 

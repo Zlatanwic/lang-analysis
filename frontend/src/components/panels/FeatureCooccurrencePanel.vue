@@ -32,11 +32,11 @@ const chartOption = computed<EChartsOption>(() => ({
       const xFeature = props.data.cooccurrence.features[data.value[0]]
       const yFeature = props.data.cooccurrence.features[data.value[1]]
       return [
-        `<b>${props.data.feature_labels[xFeature]}</b> × <b>${props.data.feature_labels[yFeature]}</b>`,
-        `Correlation: ${Number(data.value[2]).toFixed(2)}`,
-        `Shared languages: ${data.cooccurrence}`,
-        `${props.data.feature_short_labels[xFeature]} support: ${data.support_x}`,
-        `${props.data.feature_short_labels[yFeature]} support: ${data.support_y}`,
+        `<b>${props.data.feature_labels[xFeature]}</b> x <b>${props.data.feature_labels[yFeature]}</b>`,
+        `相关性：${Number(data.value[2]).toFixed(2)}`,
+        `共同语言：${data.cooccurrence}`,
+        `${props.data.feature_short_labels[xFeature]} 支持度：${data.support_x}`,
+        `${props.data.feature_short_labels[yFeature]} 支持度：${data.support_y}`,
       ].join('<br>')
     },
   },
@@ -67,7 +67,7 @@ const chartOption = computed<EChartsOption>(() => ({
   },
   series: [
     {
-      name: 'Feature correlation',
+      name: '特性相关性',
       type: 'heatmap',
       data: props.data.cooccurrence.cells.map((cell) => ({
         value: [cell.x_index, cell.y_index, cell.correlation],
@@ -90,9 +90,9 @@ const chartOption = computed<EChartsOption>(() => ({
 
 <template>
   <PanelCard
-    eyebrow="Correlate"
-    title="Feature Co-occurrence Matrix"
-    description="Correlation is computed from the 0-5 feature scores across languages, while the tooltip also shows how many languages contain both features at all."
+    eyebrow="关联"
+    title="特性共现矩阵"
+    description="相关性根据语言间 0-5 的特性评分计算，悬停提示还显示有多少语言同时包含两种特性。"
   >
     <div class="stack">
       <div class="mini-grid">
@@ -105,20 +105,20 @@ const chartOption = computed<EChartsOption>(() => ({
             {{ data.feature_short_labels[pair.feature_a] }} + {{ data.feature_short_labels[pair.feature_b] }}
           </strong>
           <span>
-            {{ pair.label_a }} and {{ pair.label_b }} move together with correlation {{ pair.correlation.toFixed(2) }}
-            across {{ pair.cooccurrence }} shared languages.
+            {{ pair.label_a }} 和 {{ pair.label_b }} 协同变化，相关性为 {{ pair.correlation.toFixed(2) }}，
+            跨越 {{ pair.cooccurrence }} 种共同语言。
           </span>
         </div>
       </div>
 
       <div v-if="mostCommonFeature" class="legend-row">
         <span class="legend-chip">
-          Broadest feature:
+          最广泛特性：
           <strong>{{ mostCommonFeature.short }}</strong>
-          in {{ mostCommonFeature.count }} languages
+          存在于 {{ mostCommonFeature.count }} 种语言中
         </span>
         <span class="legend-chip">
-          Use the diagonal to read raw support, then scan off-diagonal blocks for strong pairings.
+          使用对角线读取原始支持度，然后扫描非对角线块以发现强配对。
         </span>
       </div>
 

@@ -60,9 +60,9 @@ const chartOption = computed<EChartsOption>(() => {
 
 <template>
   <PanelCard
-    eyebrow="Sequence"
-    title="Feature Timeline"
-    description="Track when individual capabilities first appeared in each language, grouped by feature family."
+    eyebrow="序列"
+    title="特性时间线"
+    description="追踪各语言中个别特性首次出现的时间，按特性家族分组。"
   >
     <EChartPanel :option="chartOption" />
   </PanelCard>

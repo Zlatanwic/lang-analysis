@@ -21,7 +21,7 @@ const chartOption = computed<EChartsOption>(() => {
   return {
     tooltip: {
       formatter: (params: any) =>
-        `<b>${params.data.name}</b><br>${params.data.cluster_label}<br>${params.data.domain}<br>Complexity: ${params.data.value?.[2]}`,
+        `<b>${params.data.name}</b><br>${params.data.cluster_label}<br>${params.data.domain}<br>复杂度：${params.data.value?.[2]}`,
     },
     legend: {
       bottom: 0,
@@ -30,18 +30,18 @@ const chartOption = computed<EChartsOption>(() => {
     grid: { left: 62, right: 30, top: 24, bottom: 70 },
     xAxis: {
       type: 'value',
-      name: 'Principal Component 1',
+      name: '主成分 1',
       axisLabel: { color: '#98a4c6' },
       splitLine: { lineStyle: { color: '#27314b' } },
     },
     yAxis: {
       type: 'value',
-      name: 'Principal Component 2',
+      name: '主成分 2',
       axisLabel: { color: '#98a4c6' },
       splitLine: { lineStyle: { color: '#27314b' } },
     },
     series: clusters.map((cluster) => ({
-      name: clusterLabels[String(cluster)] ?? `Cluster ${cluster + 1}`,
+      name: clusterLabels[String(cluster)] ?? `聚类 ${cluster + 1}`,
       type: 'scatter',
       label: {
         show: showLabels.value,
@@ -68,13 +68,13 @@ const chartOption = computed<EChartsOption>(() => {
 
 <template>
   <PanelCard
-    eyebrow="Cluster"
-    title="Domain Clusters"
-    description="K-means groups languages by the full feature vector, then PCA compresses the space into a readable scatter plot."
+    eyebrow="聚类"
+    title="领域聚类"
+    description="K-means 根据完整特征向量对语言进行分组，然后通过 PCA 将空间压缩成可读的散点图。"
   >
     <template #actions>
       <button class="ghost-button" @click="showLabels = !showLabels">
-        {{ showLabels ? 'Hide labels' : 'Show labels' }}
+        {{ showLabels ? '隐藏标签' : '显示标签' }}
       </button>
     </template>
 
@@ -86,7 +86,7 @@ const chartOption = computed<EChartsOption>(() => {
           class="mini-card"
         >
           <strong>{{ clusterLabels[String(cluster)] }}</strong>
-          <span>{{ data.clusters.points.filter((point) => point.cluster === cluster).length }} languages</span>
+          <span>{{ data.clusters.points.filter((point) => point.cluster === cluster).length }} 种语言</span>
         </div>
       </div>
 

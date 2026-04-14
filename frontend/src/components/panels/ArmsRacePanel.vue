@@ -49,9 +49,9 @@ const chartOption = computed<EChartsOption>(() => ({
       const cumulative = points.find((point: any) => point.seriesName === 'Cumulative total')?.data ?? 0
       return [
         `<b>${year}</b>`,
-        `Annual additions: ${yearly}`,
-        `5-year average: ${moving}`,
-        `Cumulative total: ${cumulative}`,
+        `年度新增：${yearly}`,
+        `5年移动平均：${moving}`,
+        `累计总数：${cumulative}`,
       ].join('<br>')
     },
   },
@@ -69,27 +69,27 @@ const chartOption = computed<EChartsOption>(() => ({
   yAxis: [
     {
       type: 'value',
-      name: 'New feature arrivals',
+      name: '新特性引入',
       axisLabel: { color: '#98a4c6' },
       splitLine: { lineStyle: { color: '#27314b' } },
     },
     {
       type: 'value',
-      name: 'Cumulative total',
+      name: '累计总数',
       axisLabel: { color: '#98a4c6' },
       splitLine: { show: false },
     },
   ],
   series: [
     {
-      name: 'Annual additions',
+      name: '年度新增',
       type: 'bar',
       data: props.data.arms_race.yearly_counts,
       itemStyle: { color: '#ffcf7a', borderRadius: [8, 8, 0, 0] },
       emphasis: { itemStyle: { color: '#ffd88e' } },
     },
     {
-      name: '5-year average',
+      name: '5年移动平均',
       type: 'line',
       smooth: true,
       symbol: 'circle',
@@ -99,7 +99,7 @@ const chartOption = computed<EChartsOption>(() => ({
       itemStyle: { color: '#6fe0b7' },
     },
     {
-      name: 'Cumulative total',
+      name: '累计总数',
       type: 'line',
       yAxisIndex: 1,
       smooth: true,
@@ -114,29 +114,29 @@ const chartOption = computed<EChartsOption>(() => ({
 
 <template>
   <PanelCard
-    eyebrow="Accelerate"
-    title="Type-System Arms Race Index"
-    description="Counts every recorded feature arrival by year, then layers yearly bursts, trailing momentum, and cumulative buildup into one acceleration view."
+    eyebrow="加速"
+    title="类型系统军备竞赛指数"
+    description="统计每年记录的所有特性引入，然后将年度爆发、持续势能和累积增长叠加成一个加速视图。"
   >
     <div class="stack">
       <div class="mini-grid">
         <div class="mini-card">
           <strong>{{ data.arms_race.total_events }}</strong>
-          <span>Total feature arrivals recorded across all language timelines.</span>
+          <span>所有语言时间线中记录的特性引入总数。</span>
         </div>
         <div class="mini-card">
           <strong>{{ data.arms_race.peak_year ?? 'n/a' }}</strong>
-          <span>Peak burst year with {{ data.arms_race.peak_count }} newly logged feature arrivals.</span>
+          <span>峰值年份，新增记录的特性引入数为 {{ data.arms_race.peak_count }}。</span>
         </div>
         <div class="mini-card">
           <strong>{{ recentAverage }}</strong>
-          <span>Average annual arrivals across the most recent 5 years in the series.</span>
+          <span>序列最近5年的平均年度引入量。</span>
         </div>
         <div class="mini-card">
           <strong>{{ momentumRatio }}</strong>
           <span>
-            Recent momentum versus the early era. Latest year-over-year delta:
-            {{ latestAcceleration >= 0 ? '+' : '' }}{{ latestAcceleration }}.
+            近期势能与早期相比。最新的年度变化：
+            {{ latestAcceleration >= 0 ? '+' : '' }}{{ latestAcceleration }}。
           </span>
         </div>
       </div>

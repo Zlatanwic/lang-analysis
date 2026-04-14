@@ -17,17 +17,17 @@ import FeatureRecommenderPanel from './components/panels/FeatureRecommenderPanel
 const { data, error, isFetching } = useDashboardData()
 
 const tabs = [
-  { key: 'matrix', label: 'Feature Matrix', kicker: 'Compare', summary: 'Dense scorecard for deep side-by-side language comparison.' },
-  { key: 'cooccurrence', label: 'Feature Co-occurrence', kicker: 'Correlate', summary: 'See which capabilities consistently reinforce each other across the language set.' },
-  { key: 'radar', label: 'Radar', kicker: 'Shape', summary: 'Contrast overall type-system profiles across a small hand-picked set.' },
-  { key: 'timeline', label: 'Timeline', kicker: 'Sequence', summary: 'See when specific capabilities appeared and how feature eras overlapped.' },
-  { key: 'arms-race', label: 'Arms Race Index', kicker: 'Accelerate', summary: 'Aggregate yearly feature arrivals to reveal how fast type-system complexity compounds.' },
-  { key: 'network', label: 'Similarity Network', kicker: 'Map', summary: 'Reveal language neighborhoods based on shared feature vectors.' },
-  { key: 'popularity', label: 'Popularity', kicker: 'Signal', summary: 'Balance type complexity against ecosystem interest and visibility.' },
-  { key: 'diffusion', label: 'Feature Diffusion', kicker: 'Trace', summary: 'Follow one capability as it spreads across domains and families.' },
-  { key: 'clusters', label: 'Domain Clusters', kicker: 'Cluster', summary: 'Project feature profiles into groups that expose hidden affinities.' },
-  { key: 'lineage', label: 'Lineage Graph', kicker: 'Lineage', summary: 'Track influence paths between research roots and modern languages.' },
-  { key: 'recommender', label: 'Recommender', kicker: 'Configure', summary: 'Turn the dataset into a language chooser driven by actual constraints.' },
+  { key: 'matrix', label: '特性矩阵', kicker: '对比', summary: '用于深入对比编程语言的密集计分卡。' },
+  { key: 'cooccurrence', label: '特性共现', kicker: '关联', summary: '查看哪些特性在语言集合中始终相互强化。' },
+  { key: 'radar', label: '雷达图', kicker: '轮廓', summary: '对比精选小集合的整体类型系统特征。' },
+  { key: 'timeline', label: '时间线', kicker: '序列', summary: '查看特定特性何时出现以及特性时代如何重叠。' },
+  { key: 'arms-race', label: '军备竞赛指数', kicker: '加速', summary: '汇总年度特性引入情况，揭示类型系统复杂度的累积速度。' },
+  { key: 'network', label: '相似性网络', kicker: '映射', summary: '基于共享特性向量揭示语言亲疏关系。' },
+  { key: 'popularity', label: '流行度', kicker: '信号', summary: '平衡类型复杂度与生态系统关注度和可见度。' },
+  { key: 'diffusion', label: '特性扩散', kicker: '追溯', summary: '追踪单一特性如何跨越领域和语言家族传播。' },
+  { key: 'clusters', label: '领域聚类', kicker: '聚类', summary: '将特性配置文件投射到可揭示隐藏亲和性的分组中。' },
+  { key: 'lineage', label: '谱系图', kicker: '谱系', summary: '追踪从研究根源到现代语言的影响路径。' },
+  { key: 'recommender', label: '推荐器', kicker: '配置', summary: '将数据集转换为由实际约束驱动的语言选择器。' },
 ] as const
 
 const activeTab = useLocalStorage<(typeof tabs)[number]['key']>('dashboard-active-tab', 'matrix')
@@ -36,10 +36,10 @@ const activeTabMeta = computed(() => tabs.find((tab) => tab.key === activeTab.va
 const topStats = computed(() => {
   if (!data.value) return []
   return [
-    { label: 'Languages', value: data.value.heatmap.length },
-    { label: 'Feature dimensions', value: data.value.features.length },
-    { label: 'Similarity edges', value: data.value.network.edges.length },
-    { label: 'Lineage links', value: data.value.lineage.edges.length },
+    { label: '语言', value: data.value.heatmap.length },
+    { label: '特性维度', value: data.value.features.length },
+    { label: '相似性边', value: data.value.network.edges.length },
+    { label: '谱系链接', value: data.value.lineage.edges.length },
   ]
 })
 </script>
@@ -47,18 +47,18 @@ const topStats = computed(() => {
 <template>
   <main class="app-shell">
     <section class="hero">
-      <span class="hero-eyebrow">Vue dashboard refactor</span>
+      <span class="hero-eyebrow">Vue 仪表盘重构</span>
       <div class="hero-grid">
         <div class="hero-copy">
-          <h1>Programming Language Type System Knowledge Graph</h1>
+          <h1>编程语言类型系统知识图谱</h1>
           <p>
-            Explore how advanced type-system capabilities cluster, diffuse, and shape language design through a Vue-driven analytical dashboard.
+            通过 Vue 驱动的分析仪表盘，探索高级类型系统特性如何聚集、扩散并塑造语言设计。
           </p>
 
           <div class="hero-support">
-            <span class="info-pill">Vue 3 interface</span>
-            <span class="info-pill">Python data pipeline</span>
-            <span class="info-pill">GitHub Pages deployed</span>
+            <span class="info-pill">Vue 3 界面</span>
+            <span class="info-pill">Python 数据管道</span>
+            <span class="info-pill">GitHub Pages 部署</span>
           </div>
 
           <div class="top-stats">
@@ -75,14 +75,14 @@ const topStats = computed(() => {
 
         <aside class="hero-side">
           <div class="hero-focus-card">
-            <span class="hero-focus-kicker">Current lens</span>
+            <span class="hero-focus-kicker">当前视角</span>
             <strong>{{ activeTabMeta.label }}</strong>
             <p>{{ activeTabMeta.summary }}</p>
           </div>
           <div class="hero-focus-card subtle">
-            <span class="hero-focus-kicker">Reading mode</span>
+            <span class="hero-focus-kicker">阅读模式</span>
             <strong>{{ activeTabMeta.kicker }}</strong>
-            <p>Each panel is tuned for a different analysis style, from dense comparison to exploratory graph reading.</p>
+            <p>每个面板都针对不同的分析风格进行了调优，从密集对比到探索性图表阅读。</p>
           </div>
         </aside>
       </div>
@@ -110,10 +110,10 @@ const topStats = computed(() => {
     </section>
 
     <div v-if="isFetching && !data" class="loading">
-      Loading dashboard data...
+      正在加载仪表盘数据...
     </div>
     <div v-else-if="error" class="error">
-      Failed to load <code>dashboard-data.json</code>. Run <code>python main.py --json-output frontend/public/dashboard-data.json</code> and refresh.
+      加载 <code>dashboard-data.json</code> 失败。请运行 <code>python main.py --json-output frontend/public/dashboard-data.json</code> 并刷新。
     </div>
     <template v-else-if="data">
       <FeatureMatrixPanel v-if="activeTab === 'matrix'" :data="data" />

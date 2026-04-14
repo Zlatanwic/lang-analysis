@@ -48,14 +48,14 @@ const chartOption = computed<EChartsOption>(() => {
       top: 10,
       textStyle: { color: '#edf2ff', fontSize: 14 },
       subtext: lastEvent
-        ? `Visible ${visibleEvents.value.length}/${events.length} - latest reveal ${lastEvent.language} (${lastEvent.year})`
-        : 'No visible events yet',
+        ? `可见 ${visibleEvents.value.length}/${events.length} - 最新揭示 ${lastEvent.language} (${lastEvent.year})`
+        : '尚无可见事件',
       subtextStyle: { color: '#98a4c6' },
     },
     tooltip: {
       formatter: (params: any) => {
         const event = params.data.meta
-        return `<b>${event.language}</b><br>Year: ${event.year}<br>Score: ${event.score}/5<br>Domain: ${event.domain}`
+        return `<b>${event.language}</b><br>年份：${event.year}<br>评分：${event.score}/5<br>领域：${event.domain}`
       },
     },
     grid: { left: 120, right: 36, top: 72, bottom: 56 },
@@ -99,9 +99,9 @@ const chartOption = computed<EChartsOption>(() => {
 
 <template>
   <PanelCard
-    eyebrow="Trace"
-    title="Feature Diffusion"
-    description="Pick a capability and scrub through its adoption path, from earliest lineage roots to later mainstream uptake."
+    eyebrow="追溯"
+    title="特性扩散"
+    description="选择一个特性并浏览其采用路径，从最早的谱系根源到后期的主流采用。"
   >
     <template #actions>
       <select v-model="selectedFeature" class="control" @change="onFeatureChange">
@@ -114,29 +114,29 @@ const chartOption = computed<EChartsOption>(() => {
         </option>
       </select>
       <button class="ghost-button" @click="togglePlay">
-        {{ isActive ? 'Pause' : 'Play' }}
+        {{ isActive ? '暂停' : '播放' }}
       </button>
     </template>
 
     <div class="stack">
       <div class="mini-grid">
         <div class="mini-card">
-          <strong>Origin</strong>
+          <strong>起源</strong>
           <span>{{ featureData.events[0]?.language }} ({{ featureData.events[0]?.year }})</span>
         </div>
         <div class="mini-card">
-          <strong>Coverage</strong>
-          <span>{{ visibleEvents.length }} of {{ featureData.events.length }} visible</span>
+          <strong>覆盖</strong>
+          <span>可见 {{ visibleEvents.length }} / {{ featureData.events.length }}</span>
         </div>
         <div class="mini-card">
-          <strong>Domain spread</strong>
-          <span>{{ [...new Set(visibleEvents.map((event) => event.domain_group))].join(', ') || 'No domains yet' }}</span>
+          <strong>领域分布</strong>
+          <span>{{ [...new Set(visibleEvents.map((event) => event.domain_group))].join(', ') || '尚无领域数据' }}</span>
         </div>
       </div>
 
       <div class="toolbar">
         <div class="toolbar-copy">
-          Progress is interactive, so you can either play the adoption path or drag directly to a specific reveal step.
+          进度是交互式的，您可以播放采用路径或直接拖动到特定揭示步骤。
         </div>
         <div class="toolbar-group">
           <input

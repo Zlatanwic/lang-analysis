@@ -18,9 +18,9 @@ const chartOption = computed<EChartsOption>(() => ({
   tooltip: {
     formatter: (params: any) => {
       if (params.dataType === 'edge') {
-        return `<b>${params.data.source}</b> - <b>${params.data.target}</b><br>Similarity: ${params.data.value}`
+        return `<b>${params.data.source}</b> - <b>${params.data.target}</b><br>相似度：${params.data.value}`
       }
-      return `<b>${params.data.name}</b><br>${params.data.paradigm}<br>${params.data.domain}<br>Complexity: ${params.data.complexity}`
+      return `<b>${params.data.name}</b><br>${params.data.paradigm}<br>${params.data.domain}<br>复杂度：${params.data.complexity}`
     },
   },
   legend: {
@@ -71,9 +71,9 @@ const chartOption = computed<EChartsOption>(() => ({
 
 <template>
   <PanelCard
-    eyebrow="Map"
-    title="Similarity Network"
-    description="Force-directed view of languages that cluster together once you compare their feature profiles."
+    eyebrow="映射"
+    title="相似性网络"
+    description="一旦比较语言间的特性配置文件，就会聚类的力导向视图。"
   >
     <EChartPanel :option="chartOption" />
   </PanelCard>

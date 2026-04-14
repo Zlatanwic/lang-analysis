@@ -13,20 +13,20 @@ const props = defineProps<{
 const metric = ref<'tiobe_rank' | 'github_stars_rank' | 'stackoverflow_loved_pct'>('tiobe_rank')
 
 const metricConfig = {
-  tiobe_rank: { name: 'TIOBE Rank', invert: true, axisLabel: 'Rank (lower is better)' },
-  github_stars_rank: { name: 'GitHub Stars Rank', invert: true, axisLabel: 'Rank (lower is better)' },
-  stackoverflow_loved_pct: { name: 'Stack Overflow Loved %', invert: false, axisLabel: 'Loved % (higher is better)' },
+  tiobe_rank: { name: 'TIOBE 排名', invert: true, axisLabel: '排名（越低越好）' },
+  github_stars_rank: { name: 'GitHub Stars 排名', invert: true, axisLabel: '排名（越低越好）' },
+  stackoverflow_loved_pct: { name: 'Stack Overflow 喜爱度 %', invert: false, axisLabel: '喜爱度 %（越高越好）' },
 }
 
 const chartOption = computed<EChartsOption>(() => ({
   tooltip: {
     formatter: (params: any) =>
-      `<b>${params.data.name}</b><br>Complexity: ${params.data.value[0]}<br>${metricConfig[metric.value].name}: ${params.data.value[1]}<br><em>${params.data.notes ?? ''}</em>`,
+      `<b>${params.data.name}</b><br>复杂度：${params.data.value[0]}<br>${metricConfig[metric.value].name}：${params.data.value[1]}<br><em>${params.data.notes ?? ''}</em>`,
   },
   grid: { left: 86, right: 40, top: 40, bottom: 70 },
   xAxis: {
     type: 'value',
-    name: 'Type complexity',
+    name: '类型复杂度',
     nameLocation: 'middle',
     nameGap: 34,
     axisLabel: { color: '#98a4c6' },
@@ -65,9 +65,9 @@ const chartOption = computed<EChartsOption>(() => ({
 
 <template>
   <PanelCard
-    eyebrow="Signal"
-    title="Popularity Analysis"
-    description="Cross-check type complexity against external popularity and affinity signals."
+    eyebrow="信号"
+    title="流行度分析"
+    description="将类型复杂度与外部流行度和亲和度信号进行交叉检验。"
   >
     <template #actions>
       <button

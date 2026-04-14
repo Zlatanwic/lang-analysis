@@ -58,9 +58,9 @@ const chartOption = computed<EChartsOption>(() => {
 
 <template>
   <PanelCard
-    eyebrow="Shape"
-    title="Radar Comparison"
-    description="Compare up to four languages across the full type-system surface without losing the compact matrix context."
+    eyebrow="轮廓"
+    title="雷达图对比"
+    description="在完整类型系统表面上对比最多四种语言，同时保持紧凑矩阵的上下文。"
   >
     <div class="stack">
       <div class="chip-list">
