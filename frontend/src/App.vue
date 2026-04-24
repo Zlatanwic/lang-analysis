@@ -47,18 +47,18 @@ const topStats = computed(() => {
 <template>
   <main class="app-shell">
     <section class="hero">
-      <span class="hero-eyebrow">Vue 仪表盘重构</span>
+      <span class="hero-eyebrow">类型系统分析</span>
       <div class="hero-grid">
         <div class="hero-copy">
-          <h1>编程语言类型系统知识图谱</h1>
+          <h1>编程语言<br/>类型系统<br/>知识图谱</h1>
           <p>
-            通过 Vue 驱动的分析仪表盘，探索高级类型系统特性如何聚集、扩散并塑造语言设计。
+            通过交互式分析仪表盘，探索高级类型系统特性如何聚集、扩散并塑造语言设计。
           </p>
 
           <div class="hero-support">
-            <span class="info-pill">Vue 3 界面</span>
+            <span class="info-pill">Vue 3</span>
             <span class="info-pill">Python 数据管道</span>
-            <span class="info-pill">GitHub Pages 部署</span>
+            <span class="info-pill">ECharts 可视化</span>
           </div>
 
           <div class="top-stats">

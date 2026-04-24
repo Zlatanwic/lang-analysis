@@ -19,7 +19,9 @@ function renderChart(option: EChartsOption) {
 
 onMounted(() => {
   if (!root.value) return
-  chart.value = echarts.init(root.value)
+  chart.value = echarts.init(root.value, null, {
+    renderer: 'canvas',
+  })
   renderChart(props.option)
 })
 

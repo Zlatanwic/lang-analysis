@@ -44,7 +44,7 @@ const chartOption = computed<EChartsOption>(() => {
     },
     legend: {
       bottom: 0,
-      textStyle: { color: '#3A5A47' },
+      textStyle: { color: '#454745' },
       data: categories,
     },
     series: [
@@ -56,15 +56,15 @@ const chartOption = computed<EChartsOption>(() => {
         force: { repulsion: 220, edgeLength: 140, gravity: 0.08 },
         edgeSymbol: ['none', 'arrow'],
         edgeSymbolSize: [0, 10],
-        lineStyle: { curveness: 0.14, width: 1.6, color: '#7A9E87', opacity: 0.65 },
-        label: { show: true, color: '#1D3124', fontSize: 11 },
+        lineStyle: { curveness: 0.14, width: 1.6, color: '#868685', opacity: 0.65 },
+        label: { show: true, color: '#0e0f0c', fontSize: 11 },
         categories: categories.map((name) => ({ name })),
         data: props.data.lineage.nodes.map((node) => ({
           ...node,
           category: categories.indexOf(node.virtual ? 'Root lineage' : node.domain_group),
           symbolSize: node.virtual ? 34 : Math.max(20, Math.min(46, node.complexity)),
           itemStyle: {
-            color: node.virtual ? '#E59560' : (paradigmColors[node.paradigm] ?? '#BACEC1'),
+            color: node.virtual ? '#9fe870' : (paradigmColors[node.paradigm] ?? '#e2f6d5'),
             opacity: highlighted.value.has(node.name) ? 0.92 : 0.18,
           },
           label: { opacity: highlighted.value.has(node.name) ? 1 : 0.24 },
@@ -72,7 +72,7 @@ const chartOption = computed<EChartsOption>(() => {
         links: props.data.lineage.edges.map((edge) => ({
           ...edge,
           lineStyle: {
-            color: focus.value === '__all__' || edge.source === focus.value || edge.target === focus.value ? '#E59560' : '#BACEC1',
+            color: focus.value === '__all__' || edge.source === focus.value || edge.target === focus.value ? '#9fe870' : '#e2f6d5',
             opacity: focus.value === '__all__' || edge.source === focus.value || edge.target === focus.value ? 0.92 : 0.12,
             width: focus.value === '__all__' || edge.source === focus.value || edge.target === focus.value ? 2.4 : 1.2,
             curveness: 0.14,

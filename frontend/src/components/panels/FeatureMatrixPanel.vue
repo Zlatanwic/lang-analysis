@@ -17,7 +17,7 @@ const tooltip = reactive({
 
 function colorFor(score: number, max: number) {
   const alpha = 0.16 + (score / Math.max(max, 1)) * 0.8
-  return `rgba(229, 149, 96, ${alpha.toFixed(3)})`
+  return `rgba(159, 232, 112, ${alpha.toFixed(3)})`
 }
 
 function showTooltip(event: MouseEvent, title: string, body: string) {

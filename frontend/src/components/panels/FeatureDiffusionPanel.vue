@@ -46,11 +46,11 @@ const chartOption = computed<EChartsOption>(() => {
       text: featureData.value.label,
       left: 12,
       top: 10,
-      textStyle: { color: '#1D3124', fontSize: 14 },
+      textStyle: { color: '#0e0f0c', fontSize: 14 },
       subtext: lastEvent
         ? `可见 ${visibleEvents.value.length}/${events.length} - 最新揭示 ${lastEvent.language} (${lastEvent.year})`
         : '尚无可见事件',
-      subtextStyle: { color: '#3A5A47' },
+      subtextStyle: { color: '#454745' },
     },
     tooltip: {
       formatter: (params: any) => {
@@ -63,14 +63,14 @@ const chartOption = computed<EChartsOption>(() => {
       type: 'value',
       min: Math.min(...events.map((event) => event.year)) - 1,
       max: Math.max(...events.map((event) => event.year)) + 1,
-      axisLabel: { color: '#3A5A47' },
-      splitLine: { lineStyle: { color: '#C4C2B6' } },
+      axisLabel: { color: '#454745' },
+      splitLine: { lineStyle: { color: '#e8e8e6' } },
     },
     yAxis: {
       type: 'category',
       data: events.map((event) => event.language),
-      axisLabel: { color: '#1D3124', fontSize: 11 },
-      splitLine: { lineStyle: { color: '#D4D2C6' } },
+      axisLabel: { color: '#0e0f0c', fontSize: 11 },
+      splitLine: { lineStyle: { color: '#e8e8e6' } },
     },
     series: [
       {
@@ -80,8 +80,8 @@ const chartOption = computed<EChartsOption>(() => {
           meta: event,
         })),
         symbolSize: 10,
-        lineStyle: { color: '#7e96ff', width: 3 },
-        itemStyle: { color: '#7e96ff' },
+        lineStyle: { color: '#054d28', width: 3 },
+        itemStyle: { color: '#054d28' },
       },
       {
         type: 'effectScatter',
@@ -90,7 +90,7 @@ const chartOption = computed<EChartsOption>(() => {
           : [],
         symbolSize: 16,
         rippleEffect: { scale: 3, brushType: 'stroke' },
-        itemStyle: { color: '#ff8aa1' },
+        itemStyle: { color: '#9fe870' },
       },
     ],
   } as EChartsOption

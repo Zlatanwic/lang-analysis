@@ -1,0 +1,88 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]: 类型系统分析
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - heading "编程语言 类型系统 知识图谱" [level=1] [ref=e8]:
+          - text: 编程语言
+          - text: 类型系统
+          - text: 知识图谱
+        - paragraph [ref=e9]: 通过交互式分析仪表盘，探索高级类型系统特性如何聚集、扩散并塑造语言设计。
+        - generic [ref=e10]:
+          - generic [ref=e11]: Vue 3
+          - generic [ref=e12]: Python 数据管道
+          - generic [ref=e13]: ECharts 可视化
+        - generic [ref=e14]:
+          - generic [ref=e15]:
+            - strong [ref=e16]: "26"
+            - generic [ref=e17]: 语言
+          - generic [ref=e18]:
+            - strong [ref=e19]: "14"
+            - generic [ref=e20]: 特性维度
+          - generic [ref=e21]:
+            - strong [ref=e22]: "179"
+            - generic [ref=e23]: 相似性边
+          - generic [ref=e24]:
+            - strong [ref=e25]: "23"
+            - generic [ref=e26]: 谱系链接
+      - complementary [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]: 当前视角
+          - strong [ref=e30]: 相似性网络
+          - paragraph [ref=e31]: 基于共享特性向量揭示语言亲疏关系。
+        - generic [ref=e32]:
+          - generic [ref=e33]: 阅读模式
+          - strong [ref=e34]: 映射
+          - paragraph [ref=e35]: 每个面板都针对不同的分析风格进行了调优，从密集对比到探索性图表阅读。
+  - generic [ref=e36]:
+    - generic [ref=e37]:
+      - button "对比 特性矩阵" [ref=e38] [cursor=pointer]:
+        - generic [ref=e39]: 对比
+        - generic [ref=e40]: 特性矩阵
+      - button "关联 特性共现" [ref=e41] [cursor=pointer]:
+        - generic [ref=e42]: 关联
+        - generic [ref=e43]: 特性共现
+      - button "轮廓 雷达图" [ref=e44] [cursor=pointer]:
+        - generic [ref=e45]: 轮廓
+        - generic [ref=e46]: 雷达图
+      - button "序列 时间线" [ref=e47] [cursor=pointer]:
+        - generic [ref=e48]: 序列
+        - generic [ref=e49]: 时间线
+      - button "加速 军备竞赛指数" [ref=e50] [cursor=pointer]:
+        - generic [ref=e51]: 加速
+        - generic [ref=e52]: 军备竞赛指数
+      - button "映射 相似性网络" [active] [ref=e53] [cursor=pointer]:
+        - generic [ref=e54]: 映射
+        - generic [ref=e55]: 相似性网络
+      - button "信号 流行度" [ref=e56] [cursor=pointer]:
+        - generic [ref=e57]: 信号
+        - generic [ref=e58]: 流行度
+      - button "追溯 特性扩散" [ref=e59] [cursor=pointer]:
+        - generic [ref=e60]: 追溯
+        - generic [ref=e61]: 特性扩散
+      - button "聚类 领域聚类" [ref=e62] [cursor=pointer]:
+        - generic [ref=e63]: 聚类
+        - generic [ref=e64]: 领域聚类
+      - button "谱系 谱系图" [ref=e65] [cursor=pointer]:
+        - generic [ref=e66]: 谱系
+        - generic [ref=e67]: 谱系图
+      - button "配置 推荐器" [ref=e68] [cursor=pointer]:
+        - generic [ref=e69]: 配置
+        - generic [ref=e70]: 推荐器
+    - generic [ref=e71]:
+      - generic [ref=e72]: 映射
+      - strong [ref=e73]: 相似性网络
+      - paragraph [ref=e74]: 基于共享特性向量揭示语言亲疏关系。
+  - generic [ref=e1154]:
+    - generic [ref=e1155]:
+      - generic [ref=e1156]:
+        - generic [ref=e1157]: 映射
+        - heading "相似性网络" [level=2] [ref=e1158]
+        - paragraph [ref=e1159]: 一旦比较语言间的特性配置文件，就会聚类的力导向视图。
+      - generic [ref=e1161]:
+        - text: 相似度阈值
+        - slider "相似度阈值 0.30" [ref=e1162]: "0.3"
+        - text: "0.30"
+    - generic [ref=e1166]:
+      - strong [ref=e1167]: "179"
+      - text: 条连接 / 179 条总数

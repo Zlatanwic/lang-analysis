@@ -44,14 +44,14 @@ const chartOption = computed<EChartsOption>(() => ({
   xAxis: {
     type: 'category',
     data: shortLabels.value,
-    axisLabel: { color: '#5A7260', rotate: 30, interval: 0 },
-    splitArea: { show: true, areaStyle: { color: ['rgba(232, 230, 220, 0.46)', 'rgba(212, 210, 198, 0.64)'] } },
+    axisLabel: { color: '#454745', rotate: 30, interval: 0 },
+    splitArea: { show: true, areaStyle: { color: ['rgba(245, 245, 244, 0.46)', 'rgba(232, 232, 230, 0.64)'] } },
   },
   yAxis: {
     type: 'category',
     data: shortLabels.value,
-    axisLabel: { color: '#5A7260', interval: 0 },
-    splitArea: { show: true, areaStyle: { color: ['rgba(232, 230, 220, 0.46)', 'rgba(212, 210, 198, 0.64)'] } },
+    axisLabel: { color: '#454745', interval: 0 },
+    splitArea: { show: true, areaStyle: { color: ['rgba(245, 245, 244, 0.46)', 'rgba(232, 232, 230, 0.64)'] } },
   },
   visualMap: {
     min: -1,
@@ -60,9 +60,9 @@ const chartOption = computed<EChartsOption>(() => ({
     orient: 'horizontal',
     left: 'center',
     top: 18,
-    textStyle: { color: '#3A5A47' },
+    textStyle: { color: '#454745' },
     inRange: {
-      color: ['#E59560', '#EBE9E0', '#BACEC1'],
+      color: ['#9fe870', '#f5f5f4', '#e2f6d5'],
     },
   },
   series: [
@@ -77,7 +77,7 @@ const chartOption = computed<EChartsOption>(() => ({
       })),
       emphasis: {
         itemStyle: {
-          borderColor: '#1D3124',
+          borderColor: '#0e0f0c',
           borderWidth: 1,
         },
       },

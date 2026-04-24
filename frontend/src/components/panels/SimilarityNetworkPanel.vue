@@ -35,7 +35,7 @@ function updateChart() {
     },
     legend: {
       bottom: 0,
-      textStyle: { color: '#3A5A47' },
+      textStyle: { color: '#454745' },
       data: [...new Set(props.data.network.nodes.map((node) => node.paradigm))],
     },
     series: [
@@ -49,11 +49,11 @@ function updateChart() {
         lineStyle: {
           width: 1.8,
           opacity: 0.55,
-          color: '#7A9E87',
+          color: '#868685',
         },
         label: {
           show: true,
-          color: '#1D3124',
+          color: '#0e0f0c',
           fontSize: 11,
         },
         data: props.data.network.nodes.map((node) => ({
@@ -70,7 +70,7 @@ function updateChart() {
           value: edge.similarity.toFixed(2),
           lineStyle: {
             width: Math.max(1.4, edge.similarity * 3),
-            color: '#7A9E87',
+            color: '#868685',
             opacity: 0.55,
           },
         })),

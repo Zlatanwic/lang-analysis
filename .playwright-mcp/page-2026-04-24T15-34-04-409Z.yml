@@ -1,0 +1,93 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]: 类型系统分析
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - heading "编程语言 类型系统 知识图谱" [level=1] [ref=e8]:
+          - text: 编程语言
+          - text: 类型系统
+          - text: 知识图谱
+        - paragraph [ref=e9]: 通过交互式分析仪表盘，探索高级类型系统特性如何聚集、扩散并塑造语言设计。
+        - generic [ref=e10]:
+          - generic [ref=e11]: Vue 3
+          - generic [ref=e12]: Python 数据管道
+          - generic [ref=e13]: ECharts 可视化
+        - generic [ref=e14]:
+          - generic [ref=e15]:
+            - strong [ref=e16]: "26"
+            - generic [ref=e17]: 语言
+          - generic [ref=e18]:
+            - strong [ref=e19]: "14"
+            - generic [ref=e20]: 特性维度
+          - generic [ref=e21]:
+            - strong [ref=e22]: "179"
+            - generic [ref=e23]: 相似性边
+          - generic [ref=e24]:
+            - strong [ref=e25]: "23"
+            - generic [ref=e26]: 谱系链接
+      - complementary [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]: 当前视角
+          - strong [ref=e30]: 军备竞赛指数
+          - paragraph [ref=e31]: 汇总年度特性引入情况，揭示类型系统复杂度的累积速度。
+        - generic [ref=e32]:
+          - generic [ref=e33]: 阅读模式
+          - strong [ref=e34]: 加速
+          - paragraph [ref=e35]: 每个面板都针对不同的分析风格进行了调优，从密集对比到探索性图表阅读。
+  - generic [ref=e36]:
+    - generic [ref=e37]:
+      - button "对比 特性矩阵" [ref=e38] [cursor=pointer]:
+        - generic [ref=e39]: 对比
+        - generic [ref=e40]: 特性矩阵
+      - button "关联 特性共现" [ref=e41] [cursor=pointer]:
+        - generic [ref=e42]: 关联
+        - generic [ref=e43]: 特性共现
+      - button "轮廓 雷达图" [ref=e44] [cursor=pointer]:
+        - generic [ref=e45]: 轮廓
+        - generic [ref=e46]: 雷达图
+      - button "序列 时间线" [ref=e47] [cursor=pointer]:
+        - generic [ref=e48]: 序列
+        - generic [ref=e49]: 时间线
+      - button "加速 军备竞赛指数" [active] [ref=e50] [cursor=pointer]:
+        - generic [ref=e51]: 加速
+        - generic [ref=e52]: 军备竞赛指数
+      - button "映射 相似性网络" [ref=e53] [cursor=pointer]:
+        - generic [ref=e54]: 映射
+        - generic [ref=e55]: 相似性网络
+      - button "信号 流行度" [ref=e56] [cursor=pointer]:
+        - generic [ref=e57]: 信号
+        - generic [ref=e58]: 流行度
+      - button "追溯 特性扩散" [ref=e59] [cursor=pointer]:
+        - generic [ref=e60]: 追溯
+        - generic [ref=e61]: 特性扩散
+      - button "聚类 领域聚类" [ref=e62] [cursor=pointer]:
+        - generic [ref=e63]: 聚类
+        - generic [ref=e64]: 领域聚类
+      - button "谱系 谱系图" [ref=e65] [cursor=pointer]:
+        - generic [ref=e66]: 谱系
+        - generic [ref=e67]: 谱系图
+      - button "配置 推荐器" [ref=e68] [cursor=pointer]:
+        - generic [ref=e69]: 配置
+        - generic [ref=e70]: 推荐器
+    - generic [ref=e71]:
+      - generic [ref=e72]: 加速
+      - strong [ref=e73]: 军备竞赛指数
+      - paragraph [ref=e74]: 汇总年度特性引入情况，揭示类型系统复杂度的累积速度。
+  - generic [ref=e1134]:
+    - generic [ref=e1136]:
+      - generic [ref=e1137]: 加速
+      - heading "类型系统军备竞赛指数" [level=2] [ref=e1138]
+      - paragraph [ref=e1139]: 统计每年记录的所有特性引入，然后将年度爆发、持续势能和累积增长叠加成一个加速视图。
+    - generic [ref=e1142]:
+      - generic [ref=e1143]:
+        - strong [ref=e1144]: "105"
+        - text: 所有语言时间线中记录的特性引入总数。
+      - generic [ref=e1145]:
+        - strong [ref=e1146]: "2011"
+        - text: 峰值年份，新增记录的特性引入数为 16。
+      - generic [ref=e1147]:
+        - strong [ref=e1148]: "4.40"
+        - text: 序列最近5年的平均年度引入量。
+      - generic [ref=e1149]:
+        - strong [ref=e1150]: 3.6x
+        - text: 近期势能与早期相比。最新的年度变化： -1。

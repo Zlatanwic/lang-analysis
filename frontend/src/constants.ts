@@ -1,19 +1,19 @@
 export const paradigmColors: Record<string, string> = {
-  Functional: '#6fe0b7',
-  'Multi-paradigm': '#7e96ff',
-  Systems: '#ffcf7a',
-  ObjectOriented: '#ff8aa1',
-  'Object-oriented': '#ff8aa1',
-  Procedural: '#9bd6ff',
+  Functional: '#054d28',
+  'Multi-paradigm': '#163300',
+  Systems: '#868685',
+  ObjectOriented: '#d03238',
+  'Object-oriented': '#d03238',
+  Procedural: '#454745',
 }
 
-export const clusterPalette = ['#7e96ff', '#ff8aa1', '#6fe0b7']
+export const clusterPalette = ['#054d28', '#d03238', '#868685']
 
 export const domainGroupColors: Record<string, string> = {
-  Systems: '#ffcf7a',
-  Web: '#7e96ff',
-  Academic: '#6fe0b7',
-  General: '#ff8aa1',
+  Systems: '#454745',
+  Web: '#054d28',
+  Academic: '#163300',
+  General: '#d03238',
 }
 
 export const domainGroupSymbols: Record<string, string> = {
@@ -24,18 +24,18 @@ export const domainGroupSymbols: Record<string, string> = {
 }
 
 export const featurePalette = [
-  '#7e96ff',
+  '#054d28',
+  '#163300',
+  '#9fe870',
+  '#e2f6d5',
+  '#454745',
+  '#868685',
+  '#d03238',
+  '#ffc091',
+  '#cdffad',
+  '#0e0f0c',
+  '#ffd11a',
   '#ff8aa1',
+  '#7e96ff',
   '#6fe0b7',
-  '#ffcf7a',
-  '#8b7cff',
-  '#ffab5b',
-  '#55d6ff',
-  '#ffa9e0',
-  '#8bffa8',
-  '#b38cff',
-  '#ffd36f',
-  '#ff7f7f',
-  '#71f0ff',
-  '#b3ff7a',
 ]
